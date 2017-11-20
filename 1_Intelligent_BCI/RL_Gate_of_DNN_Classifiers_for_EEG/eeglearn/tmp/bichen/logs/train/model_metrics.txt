@@ -1,0 +1,2 @@
+modeltype:cnn
+Number of parameter by layer:
