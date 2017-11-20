@@ -1,0 +1,5 @@
+Author: Jungbae Park, Sang Wan Lee
+
+Very rough codes for EEG meta-RL Gating. 
+Data & some codes for basic networks are from "Bashivan et al. Learning representations from EEG with deep recurrent-convolutional neural networks, ICLR 2016" https://github.com/pbashivan/EEGLearn
+
