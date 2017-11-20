@@ -1,0 +1,3 @@
+request two-stage markov decision task data from
+
+http://deepbci.korea.ac.kr/opensource/database/
