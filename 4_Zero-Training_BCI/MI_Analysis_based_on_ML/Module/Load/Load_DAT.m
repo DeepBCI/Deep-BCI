@@ -1,4 +1,4 @@
-function [ dat, marker, hdr] = Load_EEG( file, varargin )
+function [ dat, marker, hdr] = Load_DAT( file, varargin )
 %LOAD_ Summary of this function goes here
 %   Detailed explanation goes here
 

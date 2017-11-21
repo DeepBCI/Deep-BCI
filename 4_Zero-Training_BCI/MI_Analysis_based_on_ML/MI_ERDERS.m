@@ -1,8 +1,7 @@
 % Event-related (de)synchronization
 clc
 clear
-PR_BCI('C:\Users\cvpr\Desktop\DeepBCI\github\Center') % Edit the variable BMI if necessary
-Dirt='C:\Users\cvpr\Desktop\DeepBCI\github\Center\Data';
+Dirt='C:\Users\KYJ\Desktop\Center\Data';
 %% Load
 file=fullfile(Dirt, '\MI_demo_tr');
 marker={'1','left';'2','right';'3','foot'};
