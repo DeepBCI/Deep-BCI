@@ -4,8 +4,8 @@
 clear all; clc; 
 
 %% EEG file path
-dataPath = 'D:\StarlabDB_2nd\subject8_dblee\Session1';
-filename = 'ssvep_off';
+dataPath = 'D:\BCICenter\SUBJECT\SESSION';
+filename = 'ssvep';
 
 file = fullfile(dataPath, filename);
 
