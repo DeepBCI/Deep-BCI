@@ -1,0 +1,166 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      --><title>Connected Topoplot</title><meta name="generator" content="MATLAB 7.9"><meta name="date" content="2011-06-07"><meta name="m-file" content="pn_tc_demo"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Connected Topoplot</h1><!--introduction--><p>This is a demonstration of using the topoplot_connect.m function. This function is only slightly modified from the original topoplot.m function which is part of EEGLAB. I have used EEGLAB v6.01b while modifying the topoplot function into topoplot_connect.</p><p>I used the topoplot_connect function while developing a method for isolating transient task-induced  networks in the brain at Cognitive Neuroscience Lab, DUKE-NUS Graduate Medical School. The idea can be summarized visually in the below graphic.</p><p><img vspace="5" hspace="5" src="PLVresult_illustration.png" alt=""> </p><p>If you are interested in learning more, or have comments, suggestions and/or requests for this function, please drop me an email <b>praneeth@mit.edu</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Usage and inputs</a></li><li><a href="#2">Creating the basic display structure (ds.chanPairs)</a></li><li><a href="#4">Specifying the channel locations</a></li><li><a href="#5">We are ready to plot!</a></li><li><a href="#6">Specify connection strength</a></li></ul></div><h2>Usage and inputs<a name="1"></a></h2><p>&gt;&gt; topoplot_connect(ds, EEG.chanlocs);</p><p><b>ds</b> is the display strcture with the folowing fields:</p><div><ul><li><b>ds.chanPairs</b> (required) - N x 2 matrix, with N being the number of connected channel pairs. For example, ds.chanPairs = [7, 12; 13 20]; specifies two connected channel pairs (7, 12) and (13, 20).</li><li><b>ds.connectStrength</b> (optional) - N x 1 matrix, a vector specifying connection strengths. If unspecified, then the connections will be rendered in a color at the center of the current colormap.</li><li><b>ds.connectStrengthLimits</b> (optional) - 1 x 2 matrix specifying minimum and maximum values of connection strengths to display. If it is not specified, then the minimum and maximum values from ds.connectStrength are used.</li></ul></div><p>EEG.chanlocs is a structure specifying channel locations (same as in any other EEGLAB function - A sample is provided with this script).</p><h2>Creating the basic display structure (ds.chanPairs)<a name="2"></a></h2><p>Suppose you have connected channel pairs that you wish to display. I am going to create random channel pairs for illustration using an 'adjacency matrix' representation of the 'graph' of channel pairs that we wish to plot.</p><p>Create the adjacency matrix with random connections. Given 28 channels, total possible connections are 28C2 = 378. I will randomly connect ~10% of the channel pairs.</p><pre class="codeinput">clear <span class="string">ds</span>;
+numChannels = 28;
+a = rand(numChannels, numChannels);
+adjMat = (a - triu(a)) &gt;= 0.9;
+</pre><p>Gather the adjacency matrix values into a Nx2 matrix, where N is the number of connected channel pairs</p><pre class="codeinput">[ds.chanPairs(:, 1) ds.chanPairs(:, 2)] = ind2sub(size(adjMat), find(adjMat));
+</pre><h2>Specifying the channel locations<a name="4"></a></h2><p>Locations of the EEG channels are determiined by the 'chanlocs' structure Once you acquire your EEG dataset and load it into EEGLAB, type chanlocs = EEG.chanlocs; at the command prompt to get the chanlocs strcuture. I am going to load a sample from our acquisition setup. Note that this may work for most setups with the same number of standard channels.</p><pre class="codeinput">load <span class="string">pn_tc_demoData</span>;
+</pre><h2>We are ready to plot!<a name="5"></a></h2><pre class="codeinput">figure;
+colormap(<span class="string">'jet'</span>);
+subplot(1, 2, 1);
+topoplot_connect(ds, sample_chanlocs);
+title(<span class="string">'Connected topoplot'</span>);
+</pre><img vspace="5" hspace="5" src="pn_tc_demo_01.png" alt=""> <h2>Specify connection strength<a name="6"></a></h2><p>Suppose you have a measure of connectivity (such as Phase Locking Value) between channel pairs and you wish to color code the connection strengths. For illustration, I am just going to use the values in the random matrix that was created earlier.</p><pre class="codeinput">ds.connectStrength = a(adjMat);
+subplot(1, 2, 2);
+topoplot_connect(ds, sample_chanlocs);
+title(<span class="string">'With connection strengths'</span>);
+</pre><img vspace="5" hspace="5" src="pn_tc_demo_02.png" alt=""> <p class="footer"><br>
+      Published with MATLAB&reg; 7.9<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Connected Topoplot
+% This is a demonstration of using the topoplot_connect.m function. This
+% function is only slightly modified from the original topoplot.m function
+% which is part of EEGLAB. I have used EEGLAB v6.01b while modifying the
+% topoplot function into topoplot_connect.
+%
+% I used the topoplot_connect function while developing a method for 
+% isolating transient task-induced  networks in the brain at Cognitive 
+% Neuroscience Lab, DUKE-NUS Graduate Medical School. The idea can be
+% summarized visually in the below graphic.
+% 
+% <<PLVresult_illustration.png>>
+%
+% If you are interested in learning more, or have comments, suggestions
+% and/or requests for this function, please drop me an email
+% *praneeth@mit.edu*
+
+%% Usage and inputs
+% >> topoplot_connect(ds, EEG.chanlocs);
+%
+% *ds* is the display strcture with the folowing fields:
+%
+% * *ds.chanPairs* (required) - N x 2 matrix, with N being the number of 
+% connected channel pairs. For example, ds.chanPairs = [7, 12; 13 20]; 
+% specifies two connected channel pairs (7, 12) and (13, 20).
+% * *ds.connectStrength* (optional) - N x 1 matrix, a vector specifying
+% connection strengths. If unspecified, then the connections will be
+% rendered in a color at the center of the current colormap.
+% * *ds.connectStrengthLimits* (optional) - 1 x 2 matrix specifying minimum
+% and maximum values of connection strengths to display. If it is not 
+% specified, then the minimum and maximum values from ds.connectStrength 
+% are used.
+%
+% EEG.chanlocs is a structure specifying channel locations (same as in any
+% other EEGLAB function - A sample is provided with this script).
+%
+
+%% Creating the basic display structure (ds.chanPairs)
+% Suppose you have connected channel pairs that you wish to display. I am
+% going to create random channel pairs for illustration using an 'adjacency
+% matrix' representation of the 'graph' of channel pairs that we wish to
+% plot.
+%
+% Create the adjacency matrix with random connections. Given 28 channels,
+% total possible connections are 28C2 = 378. I will randomly connect ~10%
+% of the channel pairs.
+clear ds;
+numChannels = 28;
+a = rand(numChannels, numChannels);
+adjMat = (a - triu(a)) >= 0.9;
+
+%%
+% Gather the adjacency matrix values into a Nx2 matrix, where N is the
+% number of connected channel pairs
+[ds.chanPairs(:, 1) ds.chanPairs(:, 2)] = ind2sub(size(adjMat), find(adjMat));
+
+%% Specifying the channel locations
+% Locations of the EEG channels are determiined by the 'chanlocs' structure
+% Once you acquire your EEG dataset and load it into EEGLAB, type 
+% chanlocs = EEG.chanlocs; at the command prompt to get the chanlocs
+% strcuture. I am going to load a sample from our acquisition setup. Note
+% that this may work for most setups with the same number of standard
+% channels.
+load pn_tc_demoData;
+
+%% We are ready to plot!
+figure; 
+colormap('jet');
+subplot(1, 2, 1);
+topoplot_connect(ds, sample_chanlocs);
+title('Connected topoplot');
+
+%% Specify connection strength
+% Suppose you have a measure of connectivity (such as Phase Locking Value)
+% between channel pairs and you wish to color code the connection
+% strengths. For illustration, I am just going to use the values in the
+% random matrix that was created earlier.
+
+ds.connectStrength = a(adjMat);
+subplot(1, 2, 2);
+topoplot_connect(ds, sample_chanlocs);
+title('With connection strengths');
+##### SOURCE END #####
+--></body></html>
