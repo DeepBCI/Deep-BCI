@@ -1,3 +1,8 @@
+
+* Programming Language: MATLAB
+* Contact: Kyungho Won (kyunghowon0712@gist.ac.kr)
+
+
 These scripts allow users to understand and modify easily when calculating phase-amplitude coupling (PAC) and corresponding statistics. There are many opensource scripts related to PAC and statistics, but most of them are too complex to read and modify code. The proposed scripts contains various PAC methods, permutation test, and multiple comparison correction methods (Bonferrnoi, cluster, min-max correction). In addition, it contatins example script of using PAC in case of detection and comparing conditions so that users could understand which statistics should be used for each analysis method (e.g. between group/condition, none).
 
 It uses external dependencis: EEGLAB, FieldTrip toolbox, which are most famous EEG processing toolbox. (EEGLAB for drawing scalp topography, FieldTrip for zero-phase lag IIR bandpass filter))
