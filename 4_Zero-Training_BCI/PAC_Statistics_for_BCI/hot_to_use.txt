@@ -15,6 +15,8 @@ e.g. >>help kh_detect_PAC
 [How to use]
 
 1. unzip "external_dependencies.zip"
+2. unzip "kh_subsets.zip"
+3. unzip "samples_comparison/sub01-08.zip" and "samples_comparison/sub09-16"
 2. copy address of eeglab14_1_2b and fieldtrip-20161112
 3. paste into eeglab_path and fieldtrip_path in  ".m"
 4. run "add_dependencies.m"
