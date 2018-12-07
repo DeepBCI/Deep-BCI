@@ -1,3 +1,5 @@
+<Decoding_BCI_task_Program>
+
 *Programming Language: Python
 *Contact: Ga-Young Choi (cgy326@naver.com)
 *Function: This program provides a source code for decoding brain-computer interface (BCI) 
