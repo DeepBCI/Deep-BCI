@@ -31,7 +31,7 @@ toc
 %% excel data processing
 
 tic;
-type=[2,7,8]; % excel ∆ƒ¿œø°º≠ ∞°¡Æø√ column ¡ˆ¡§
+type=[2,7,8]; % excel ÌååÏùºÏóêÏÑú Í∞ÄÏ†∏Ïò¨ column ÏßÄÏ†ï
 %     2: identity code
 %     7: kind of anesthetic
 %     8: dose of anesthetic
@@ -71,12 +71,12 @@ toc
 %% file name check
 kind={'P_','M_'};
 dose={'High_','Medium_','Low_'};
-Ce_name{size(kind,2),size(dose,2)}(10)="abcd"; % ªÁ¿¸«“¥Á
+Ce_name{size(kind,2),size(dose,2)}(10)="abcd"; % ÏÇ¨Ï†ÑÌï†Îãπ
 
 for i_kind=1:size(kind,2)
     for i_dose=1:size(dose,2)
         for i=1:10
-            % EEG »Æ¿Œ
+            % EEG ÌôïÏù∏
             a=strcat(strcat(dir,'EEGData\'),group_final{i_kind,i_dose}(i));
             a=string(a);
             b=group_final{i_kind,i_dose}(i);
@@ -86,7 +86,7 @@ for i_kind=1:size(kind,2)
                 fprintf('%s is wrong\n',b);
             end
             
-            % xls »Æ¿Œ
+            % xls ÌôïÏù∏
          
             if i_kind==1
                 %PPF
@@ -123,7 +123,7 @@ for i_kind=1:size(kind,2)
                 
                 final_name=strcat(...
                     strcat(temp_char(1),temp_char(6:end)),...
-                    '≈Î«’∞·∞˙2');
+                    'ÌÜµÌï©Í≤∞Í≥º2');
                 
                 a=final_dir;
                 a=string(a);
@@ -151,15 +151,15 @@ for i_kind=1:size(kind,2)
         for i=1:10
             fprintf('%s',string(dose(i_dose)));
             fprintf('%s',string(kind(i_kind)));
-            fprintf("%d π¯¬∞ ",i);
+            fprintf("%d Î≤àÏß∏ ",i);
             tic;
-            % File ∞Ê∑Œº≥¡§
+            % File Í≤ΩÎ°úÏÑ§Ï†ï
             BTB.DataDir=strcat(strcat(dir,'EEGData\'),group_final{i_kind,i_dose}(i));
             BTB.filename= group_final{i_kind,i_dose}(i);
             BTB.RawDir=fullfile(BTB.DataDir, BTB.filename);
-            % eeg ¿–±‚
+            % eeg ÏùΩÍ∏∞
             [cnt, mrk_orig, hdr] =file_readBV(BTB.RawDir,'Fs',sampling_frequency);
-            % excel ¿–±‚
+            % excel ÏùΩÍ∏∞
             [num_ce,txt_ce,raw_ce]=xlsread(Ce_name{i_kind,i_dose}(i),'CpCe');
             [num_bis,txt_bis,raw_bis]=xlsread(Ce_name{i_kind,i_dose}(i),'BIS');
             
@@ -205,7 +205,7 @@ for i_kind=1:size(kind,2)
                 'format','int16', ...
                 'resolution', NaN);
             
-            w=warning('query','last'); % ∞Ê∞Ì π´Ω√
+            w=warning('query','last'); % Í≤ΩÍ≥† Î¨¥Ïãú
             warning('off',w.identifier)
 
             toc
