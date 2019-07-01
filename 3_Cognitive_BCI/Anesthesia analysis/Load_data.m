@@ -208,7 +208,7 @@ for i_kind=1:size(kind,2)
             w=warning('query','last'); % 경고 무시
             warning('off',w.identifier)
 
-            toc
+            toc;
         end
     end
 end
