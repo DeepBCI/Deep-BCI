@@ -70,7 +70,7 @@ fprintf('Info processing: ');
 toc
 %% file name check
 kind={'P_','M_'};
-dose={'High_','Medium_','Low_'};
+dose={'High_','Medium_','Low_'}; % set the name for specific dose
 Ce_name{size(kind,2),size(dose,2)}(10)="abcd"; % 사전할당
 
 for i_kind=1:size(kind,2)
