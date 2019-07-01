@@ -1,0 +1,73 @@
+tic;
+clc; close all; clear all;
+
+% 
+dd='C:\Users\SHIN\Desktop\MI_CODE\MI_DATA\190422\twoclasses_32ch\';
+filelist={'khshin_MI_ss1_0_cap', 'khshin_MI_ss1_3_cap', 'khshin_MI_ss1_6_cap', 'khshin_MI_ss1_9_cap'};
+
+%%
+fold=5;
+
+ival = [750 4500];
+% ival= [0 1000; 2000 3000; 4000 5000;];
+% selected_channel= [6 10 11 14 16 19 21 25];
+selected_channel= [1:32];
+
+ 
+%%
+for i = 1:length(filelist)
+    
+    [cnt,mrk,mnt] = eegfile_loadMatlab([dd filelist{i}]);
+
+   %% band pass filtering, order of 5, range of 8-15Hz
+    cnt=proc_filtButter(cnt,2, [8 30]);
+    cnt=proc_selectChannels(cnt,selected_channel);
+    
+   %% cnt to epoch
+    epo=cntToEpo(cnt,mrk,ival);
+    
+   %% declare variables
+    classes=size(epo.className,2);
+    trial=size(epo.x,3)/2/(classes-1);
+    
+    eachClassFold_no=trial/fold;
+    
+   %% CSP - FEATURE EXTRACTION
+    [csp_fv,csp_w,csp_eig]=proc_multicsp(epo, 3);
+    proc=struct('memo','csp_w');
+    
+    proc.train= ['[fv,csp_w]=  proc_multicsp(fv, 3); ' ...
+        'fv= proc_variance(fv); ' ...
+        'fv= proc_logarithm(fv);'];
+    
+    proc.apply= ['fv= proc_linearDerivation(fv, csp_w); ','fv= proc_variance(fv); ' ,'fv= proc_logarithm(fv);'];
+    
+    
+
+   %% CLASSIFIER
+    
+    [C_eeg, loss_eeg_std, out_eeg.out, memo] = xvalidation(epo,'RLDAshrink','proc',proc, 'kfold', 5);
+    Result(i)=1-C_eeg;
+    Result_Std(i)=loss_eeg_std;
+    
+    All_csp_w(:,:,i)=csp_w;
+ 
+   %% Visualization 
+
+    %csp patterns
+    figure('Name', 'CSP Patterns'); 
+    plotCSPatterns(csp_fv, mnt, csp_w, csp_fv.y)
+    
+
+%     class topographies
+%     figure('Name', 'Class Topographies'); 
+%     plotClassTopographies(epo, mnt, ival);
+
+
+%     epoLeft=proc_selectClasses(epo,{'Left'});
+%     epoRight=proc_selectClasses(epo,{'Right'});
+%     epoRest=proc_selectClasses(epo,{'Rest'});
+  
+
+end
+
