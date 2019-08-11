@@ -12,19 +12,13 @@ startup_bbci_toolbox
 clc;
 
 %% set value for data load
-% delete(gcp('nocreate'));
-% parpool('local',4);
-% lastn=maxNumCompThreads(8);
-% fprintf('Previous # of CPU Threeads: %d\n',lastn);
-% lastn=maxNumCompThreads;
-% fprintf('Current # of CPU Threeads: %d\n',lastn);
 
 basic_dir='E:\data_result\';
-Type_filename={'High_P_','Medium_P_','Low_P_';...
-    'High_M_','Medium_M_','Low_M_'};
+Type_filename={'High_P_','Medium_P_','Low_P_';... % there were three groups according to dosage
+    'High_M_','Medium_M_','Low_M_'}; % there were two groups according to the kind of agnets (Midazolam and Propofol)
 Type={'P_Result_','M_Result_'};
-num_agents=size(Type_filename,1);
-num_states=size(Type_filename,2);
+num_agents=size(Type_filename,1); % number of agents
+num_states=size(Type_filename,2); % number of dosage groups
 
 name_part='DataSet_All';
 frequency={'delta','theta','alpha','beta','gamma','raw'};
@@ -51,11 +45,12 @@ for i=1:num_agents
                 
                 tic;
                
-                svmmodel=fitcsvm(XTrain,YTrain','KernelFunction','RBF');
+                svmmodel=fitcsvm(XTrain,YTrain','KernelFunction','RBF'); % change the 'RBF' to 'linear' if you want to run linear SVM
                 time=toc;                
                 calculate_time(time);
                 
                 [YPredicted,score] = predict(svmmodel,XTest);
+                % To know the true positive, true negative, false positive, and false negative
                 pp(k,fold)=0;pn(k,fold)=0;nn(k,fold)=0;np(k,fold)=0;
                  for num=1:30
                      if YTest(num)==categorical({'1'})
@@ -144,5 +139,5 @@ function calculate_time(time)
     min=floor(time/60);
     time=time-min*60;
     sec=floor(time);
-    fprintf('Training Time: %d Ω√∞£ %d ∫– %d √  \n',hour,min,sec);
+    fprintf('Training Time: %d ¬Ω√É¬∞¬£ %d ¬∫√ê %d √É√ä \n',hour,min,sec);
 end
