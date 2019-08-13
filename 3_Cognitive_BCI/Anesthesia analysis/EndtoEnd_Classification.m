@@ -1,10 +1,10 @@
 % EndtoEnd_Classification.m:
 % 
-% EndtoEnd CNNÀ¸·Î High sensitivity groupÀÎÁö Low sensitivity groupÀÎÁö
-% classification ÇÑ´Ù.
+% EndtoEnd CNNìœ¼ë¡œ High sensitivity groupì¸ì§€ Low sensitivity groupì¸ì§€
+% classification í•œë‹¤.
 % 
-% High_P_CNN_Result.mÀ¸·Î ÀúÀå
-% High_M_CNN_Result.mÀ¸·Î ÀúÀå
+% High_P_CNN_Result.mìœ¼ë¡œ ì €ì¥
+% High_M_CNN_Result.mìœ¼ë¡œ ì €ì¥
 % 
 % author: Young-Seok Kweon
 % created: 2019.06.18
@@ -32,18 +32,18 @@ num_ch=size(channel,2);
         
 layers = [imageInputLayer([4000 62 1])
 
-convolution2dLayer([1*10 62],62)
-batchNormalizationLayer
+convolution2dLayer([1*10 62],62) % conv1 layer to integrate the information of channel
+batchNormalizationLayer % To improve performance of layer, use batch normalization
 reluLayer
 
-convolution2dLayer([1*10 1],124)
-batchNormalizationLayer
+convolution2dLayer([1*10 1],124) % conv2 layer to integrate the information of time
+batchNormalizationLayer % To improve performance of layer, use batch normalization
 reluLayer
 
 % averagePooling2dLayer([2 2],'Stride',2)
-maxPooling2dLayer([2 1],'Stride',2)
+maxPooling2dLayer([2 1],'Stride',2) 
 
-fullyConnectedLayer(2)
+fullyConnectedLayer(2) % 2 unit for one which is high sensitivity and the other which is low sensitivity
 softmaxLayer
 classificationLayer];
 
@@ -87,24 +87,24 @@ for state=1:size(Type_filename,2)
         XTrain=X(:,:,:,idx==0);
         
         YVal=Y(idx==1);
-        YVal=categorical(cellstr(num2str(YVal'))); % trainNetwork ÇÔ¼ö¿¡ y´Â categorical·Î µé¾î°¡¾ßÇÔ
+        YVal=categorical(cellstr(num2str(YVal'))); % trainNetwork í•¨ìˆ˜ì— yëŠ” categoricalë¡œ ë“¤ì–´ê°€ì•¼í•¨
         YTrain=Y(idx==0);
-        YTrain=categorical(cellstr(num2str(YTrain'))); % trainNetwork ÇÔ¼ö¿¡ y´Â categorical·Î µé¾î°¡¾ßÇÔ
+        YTrain=categorical(cellstr(num2str(YTrain'))); % trainNetwork í•¨ìˆ˜ì— yëŠ” categoricalë¡œ ë“¤ì–´ê°€ì•¼í•¨
         
-        options = trainingOptions('sgdm', ...
-            'MaxEpochs',30, ...
+        options = trainingOptions('sgdm', ... % training method is stochastic gradient descent method
+            'MaxEpochs',30, ... % maximum numbers of epochs
             'InitialLearnRate',1e-3, ...
             'MiniBatchSize',30,...
-            'Verbose',false);
+            'Verbose',false); % whether show the progress of training
 
-        net = trainNetwork(XTrain,YTrain,layers,options);
+        net = trainNetwork(XTrain,YTrain,layers,options); % training the network
         
         fprintf('\nFold %d\n',i);
-        predicted_train = classify(net,XTrain);
-        accuracy_train(i) = sum(predicted_train == YTrain)/numel(YTrain)*100;
+        predicted_train = classify(net,XTrain); % classify training data using trained net
+        accuracy_train(i) = sum(predicted_train == YTrain)/numel(YTrain)*100; 
         fprintf('Training accuracy: %f\n',accuracy_train(i));
 
-        predicted_test = classify(net,XVal);
+        predicted_test = classify(net,XVal); % classify validation data using trained net
         accuracy_test(i) = sum(predicted_test == YVal)/numel(YVal)*100;
         fprintf('Testing accuracy: %f\n',accuracy_test(i));
         
@@ -118,11 +118,12 @@ for state=1:size(Type_filename,2)
         ,sum(accuracy_train)./fold);
     fprintf('********************************\nAverage Testing Accuracy: %f\n:'...
         ,sum(accuracy_test)./fold);
+	
      title=strcat(...
          strcat('E:\data_result\',Type_filename{state}),...
-         'CNN_Result_2Layer_',frequency,'_LOO_',num2str(index));
+         'CNN_Result_2Layer_',frequency,'_LOO_',num2str(index)); 
      
-     save(title,'accuracy_train','accuracy_test');
+     save(title,'accuracy_train','accuracy_test'); % save the training and testing accuracy 
     
 end
 
