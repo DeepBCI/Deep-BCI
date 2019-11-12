@@ -1,8 +1,8 @@
 % DataConvertforNN.m:
 % 
-% NN¿¡ »ç¿ëÇÒ ¼ö ÀÖ°Ô »óÀ§±×·ì°ú ÇÏÀ§±×·ìÀ¸·Î ³ª´«´Ù. 
-% K-means·Î ³ª´«´Ù.
-% High_P_DataSet_All.mÀ¸·Î ÀúÀå
+% NNì— ì‚¬ìš©í•  ìˆ˜ ìˆê²Œ ìƒìœ„ê·¸ë£¹ê³¼ í•˜ìœ„ê·¸ë£¹ìœ¼ë¡œ ë‚˜ëˆˆë‹¤. 
+% K-meansë¡œ ë‚˜ëˆˆë‹¤.
+% High_P_DataSet_All.mìœ¼ë¡œ ì €ì¥
 % 
 % author: Young-Seok Kweon
 % created: 2019.06.17
@@ -34,13 +34,13 @@ for agent=1:size(Type_filename,1)
         bis=sens.result.x(3,:);
         time=sens.result.x(2,:);
 
-        I=clustering(ce',2); % sensitivity°¡ ³·Àº ±×·ìÀÌ 1 (ce´Â ³ôÀ½)
+        I=clustering(ce',2); % sensitivityê°€ ë‚®ì€ ê·¸ë£¹ì´ 1 (ceëŠ” ë†’ìŒ)
         data.y=I;
 
-        % medium groupÀÇ Ã¹¹øÂ° subjectÀÇ mrk°¡ ´Ù¸§
+        % medium groupì˜ ì²«ë²ˆì§¸ subjectì˜ mrkê°€ ë‹¤ë¦„
         if agent==1
             % Propofol         
-            baseline_mrk= -(state==2 && i==1)+2; % Á¶°Ç¿¡ ¸ÂÀ¸¸é 1, ¾Æ´Ï¸é 2
+            baseline_mrk= -(state==2 && i==1)+2; % ì¡°ê±´ì— ë§ìœ¼ë©´ 1, ì•„ë‹ˆë©´ 2
         else
             % Midazolam
             baseline_mrk=2;
@@ -83,7 +83,7 @@ for agent=1:size(Type_filename,1)
             general.age(i)=cnt.age;
             general.sex(i)=cnt.sex;
             
-            fprintf('\n%s %d ¹øÂ° Ã³¸® ½Ã°£: ',Type_filename{agent,state},i);
+            fprintf('\n%s %d ë²ˆì§¸ ì²˜ë¦¬ ì‹œê°„: ',Type_filename{agent,state},i);
             toc;
         end
 
@@ -101,6 +101,6 @@ function idx=clustering(x,k)
 idx=kmeans(x,k);
 idx(idx==2)=0;
 if mean(x(idx==1))<mean(x(idx==0))
-    idx=~idx; % 1ÀÌ Low sensitivity°¡ ¾Æ´Ï¸é µÚÁı¾îÁÜ (Ce´Â ³ô¾Æ¾ßÇÔ)
+    idx=~idx; % 1ì´ Low sensitivityê°€ ì•„ë‹ˆë©´ ë’¤ì§‘ì–´ì¤Œ (CeëŠ” ë†’ì•„ì•¼í•¨)
 end
 end
