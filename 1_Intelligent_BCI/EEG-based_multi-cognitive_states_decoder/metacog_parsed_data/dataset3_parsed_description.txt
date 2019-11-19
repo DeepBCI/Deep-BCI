@@ -1,0 +1,11 @@
+Datasets3. Game Play
+
+각 trial에 대하여 Marker.execution_error_angle 기준으로 0일때와 0이 아닐 때 기준으로 분할. 
+나눌 때 marker.thumbstick_angle 이 -1이면 action이 없는 상태이므로 action을 취할 때까지 기다린 후 action 직후 3초로 자름. (0도 action으로 간주함)
+
+ep : 4 * 3000 * 5065 (# of channel * 3000ms sample * # of trial)
+channel : F3(3), F4(5), FC3(7), FC4(9) (각각 Fp1, Fp2, F7, F8에 대응)
+trial : execution error가 존재했는지 여부
+
+lb : 1 * 5065
+0과 1이 번갈아가며 나타나는 양상

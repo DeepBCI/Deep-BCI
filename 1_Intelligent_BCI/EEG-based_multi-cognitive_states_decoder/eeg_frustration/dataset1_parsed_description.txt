@@ -1,0 +1,10 @@
+한 subject 내에서 frustration block의 개수와 같은 수의 normal block을 뒷부분부터 사용.
+각 block을 반으로 분할했을 때 뒷부분을 3 sec으로 쪼개서 3D array 만듬
+trial들을 랜덤하게 섞지는 않음.
+
+ep : 4*3000*440 (# of channel, ms, # of trials)
+channel은 순서대로 Fp1(1), Fp2(30), F7(3), F8(28) 
+trial 중 앞의 220개는 frustration, 뒤 220개는 normal
+
+lb : 1*440
+[1,1,1,1,1,1,...220개...1,1,1,0,0,0,0,0....220개...0,0,0]

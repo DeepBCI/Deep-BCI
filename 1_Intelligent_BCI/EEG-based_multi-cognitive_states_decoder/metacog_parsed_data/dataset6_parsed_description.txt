@@ -1,0 +1,12 @@
+Dataset5 odd ball hypnosis  (원래 dataset5가 맞는데 4가 두개여서 하나씩 밀림)
+
+ch F3(4), F4(2) F7(5) F8(1)	Fp1, Fp2가 없어서 가까운 F3, F4 사용
+
+
+hypnosis 전(pre), 후(post)로 나눠서 MB, MF 정함
+pre가 MB, post를 MF로 labeling함. 최면걸리면 쳐맞은 것처럼 몽롱해서 MB 못할거라는 동재님의 판단
+
+active condition, passive condition이 있는데 이건 그냥 무시한채로 합침.
+랜덤으로 섞지도 않음.
+
+subject한명당 에폭 크기 240, 총 두명이라 합치면 480

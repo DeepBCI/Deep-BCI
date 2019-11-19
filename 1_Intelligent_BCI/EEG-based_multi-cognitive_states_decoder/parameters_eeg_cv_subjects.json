@@ -1,0 +1,21 @@
+{
+	"MOMENTUM": 0.9,
+	"MODEL_NAME": "CNN3D_TFC_CAM",
+	"SAMPLE_SIZE": 10,
+	"LOGDIR_ROOT": "log",
+	"STARTED_DATESTRING": "2019-09-26",
+	"BATCH_SIZE": 1,
+	"CHECKPOINT_EVERY": 10,
+	"EPSILON": 0.001,
+	"DATA_DIRECTORY": "eeg_save/",
+    "FEATURE_TO_USE": "spectrogram",
+    "LEARNING_RATE": 1e-3,
+	"CHECK_OR_NOT": false,
+	"SCREENING": false,
+	"NUM_STEPS": 1000,
+	"NUM_OF_CHAN": 64,
+	"LABEL": "maxrel",
+	"GPU" : true,
+	"SUBWISE" : true,
+	"description" : "to 18 sub"
+}
