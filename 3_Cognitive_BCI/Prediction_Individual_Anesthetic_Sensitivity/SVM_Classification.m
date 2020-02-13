@@ -45,7 +45,7 @@ for i=1:num_agents
                 
                 tic;
                
-                svmmodel=fitcsvm(XTrain,YTrain','KernelFunction','RBF'); % change the 'RBF' to 'linear' if you want to run linear SVM
+                svmmodel=fitcsvm(XTrain,YTrain','KernelFunction','RBF','KernelScale','auto'); % change the 'RBF' to 'linear' if you want to run linear SVM
                 time=toc;                
                 calculate_time(time);
                 
