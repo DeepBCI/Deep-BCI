@@ -1,6 +1,6 @@
 % SVM_Clasification.m
 % 
-% 
+% Subject dependent classification using SVM
 % 
 % author: Young-Seok, Kweon
 % created: 2019.07.15
