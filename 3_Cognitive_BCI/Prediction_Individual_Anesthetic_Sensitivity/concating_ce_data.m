@@ -1,6 +1,7 @@
 % concating_ce_data.m
 %
-%
+% Since there are differences of time point between ce and label latency,
+% this code matched the time point.
 %
 % author: Young-Seok Kweon
 % created: 2020.02.07
@@ -22,7 +23,7 @@ for d=1:3
         time_ce=y.time_cpce;
         ce=y.ce;
         
-        % event¿¡ ÇØ´çÇÏ´Â latency ±¸ÇÏ±â
+        % eventì— í•´ë‹¹í•˜ëŠ” latency êµ¬í•˜ê¸°
         if (d==2 && i==1) && a==1
             raw_event=hj_transfer(raw_event);
         end
@@ -37,9 +38,9 @@ for d=1:3
         latency=cell2mat(raw_event(1,:,:));
         latency=reshape(latency,size(latency,3),1);
         idx=logical(sum(mrk_orig==mrk_data',2));
-        latency_data=latency(idx); %event¿¡ ÇØ´çÇÏ´Â latency
+        latency_data=latency(idx); %eventì— í•´ë‹¹í•˜ëŠ” latency
         trigger_data=trigger(idx);
-        % ¾²Àßµ¥±â ¾ø´Â trigger Á¦°Å
+        % ì“°ìž˜ë°ê¸° ì—†ëŠ” trigger ì œê±°
         idx=[];cnt=0;
         for k=1:length(trigger_data)
             if ~(length(trigger_data{k})==4)
@@ -48,11 +49,11 @@ for d=1:3
             end
         end
         trigger_data(idx)=[];latency_data(idx)=[];
-        trigger_data=cell2mat(trigger_data); % 'S  2'¶ó 1x4xevent¼öÀÓ
+        trigger_data=cell2mat(trigger_data); % 'S  2'ë¼ 1x4xeventìˆ˜ìž„
         trigger_data=str2num(reshape(trigger_data(:,4,:),size(trigger_data(:,4,:),3),1)); % '2'->2
         
-        % eventÁß Ã¹¹øÂ° 'S  3' ÀÌÈÄ¿¡ ³ª¿À´Â 'S  8'ÀÌ 0 sec
-        latency_data=latency_data./1000;% 1000HzÀÓÀ¸·Î sec·Î º¯È¯
+        % eventì¤‘ ì²«ë²ˆì§¸ 'S  3' ì´í›„ì— ë‚˜ì˜¤ëŠ” 'S  8'ì´ 0 sec
+        latency_data=latency_data./1000;% 1000Hzìž„ìœ¼ë¡œ secë¡œ ë³€í™˜
         for temp_idx=2:length(trigger_data)
             if trigger_data(temp_idx)==8 && trigger_data(temp_idx-1)==3
                 break;
@@ -67,7 +68,7 @@ for d=1:3
         start_idx_s=temp_idx;
         
 
-        % eventÁß¿¡ auditory stimulation¸¸ ÃßÃâ (num_event>num_trial_data -> µ¿ÀÏÇÏ°Ô ¸ÂÃçÁÜ)
+        % eventì¤‘ì— auditory stimulationë§Œ ì¶”ì¶œ (num_event>num_trial_data -> ë™ì¼í•˜ê²Œ ë§žì¶°ì¤Œ)
         cnt=0;label=[];label_idx=[];
         for temp_idx=1:length(trigger_data)-1
             if trigger_data(temp_idx)==2 && trigger_data(temp_idx+1)==8
@@ -89,8 +90,8 @@ for d=1:3
             end
         end
         latency_label=latency_data(label_idx);
-        % jsWoo ÇÇ½ÇÇèÀÚ´Â baseline ('S  3') ½ÃÀÛÇÏ°í ¹Ù·Î PPF ÁÖÀÔµÈ°Ô ¾Æ´Ñ°Å °°À½
-        % ½ÃÀÛÇÏÀÚ¸¶ÀÚ ¹Ù·Î ´­·¶´Ù°í »ý°¢ÇÏ¸é ´©¸¥½ÃÁ¡ÀÌ¶û ÁÖÀÔ½ÃÁ¡ÀÌ¶û ¸ÅÄ¡°¡ ¾ÈµÊ
+        % jsWoo í”¼ì‹¤í—˜ìžëŠ” baseline ('S  3') ì‹œìž‘í•˜ê³  ë°”ë¡œ PPF ì£¼ìž…ëœê²Œ ì•„ë‹Œê±° ê°™ìŒ
+        % ì‹œìž‘í•˜ìžë§ˆìž ë°”ë¡œ ëˆŒë €ë‹¤ê³  ìƒê°í•˜ë©´ ëˆ„ë¥¸ì‹œì ì´ëž‘ ì£¼ìž…ì‹œì ì´ëž‘ ë§¤ì¹˜ê°€ ì•ˆë¨
         % [d=3,i=2]
         
         if d==3 && i==2 && a==1
@@ -132,7 +133,7 @@ for d=1:3
         time_0scale=latency_data(start_idx_s);
         latency_label=latency_data(label_idx); 
         
-        % ce µÚ¿¡ ³Ê¹« ±æ°Ô ³²¾Æ¼­ ÃÄ³¿
+        % ce ë’¤ì— ë„ˆë¬´ ê¸¸ê²Œ ë‚¨ì•„ì„œ ì³ëƒ„
         temp_t=latency_label(end);
         temp=time_ce-temp_t;
         min_t=min(temp(temp>0));
