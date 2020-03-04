@@ -3,7 +3,9 @@
 % NN에 사용할 수 있게 상위그룹과 하위그룹으로 나눈다. 
 % K-means로 나눈다.
 % High_P_DataSet_All.m으로 저장
-% 약재의 농도와 종류에 따라 Medium_P, Low_P, High_M, Medium_M, Low_M
+% 약재의 농도와 종류에 따라 High_P를 
+% Medium_P, Low_P, High_M, Medium_M, Low_M
+% 로 대체해서 저장
 %
 % author: Young-Seok Kweon
 % created: 2019.06.17
