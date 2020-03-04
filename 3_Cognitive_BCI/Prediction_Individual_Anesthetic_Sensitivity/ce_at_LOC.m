@@ -1,6 +1,6 @@
 % ce_at_LOC.m
 %
-%
+% Calculation effect site concentration at loss of consciousness
 %
 % author: Young-Seok Kweon
 % created: 2020.02.09
@@ -9,7 +9,7 @@ clc; clear; close all;
 %% load 
 type='PPF';
 % type='MDZ';
-num_f=5; % LOC°¡ µÇ·Á¸é ¸î¹ø ¿¬¼ÓÀ¸·Î ½ÇÆĞÇØ¾ßÇÏ³ª
+num_f=5; % LOCê°€ ë˜ë ¤ë©´ ëª‡ë²ˆ ì—°ì†ìœ¼ë¡œ ì‹¤íŒ¨í•´ì•¼í•˜ë‚˜
 for i=1:30
     x=load(['latency\',type,'_S',num2str(i)]);
     y=load(['ce\',type,'_S',num2str(i)]);
