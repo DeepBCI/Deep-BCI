@@ -8,8 +8,10 @@
 % 
 % author: Young-Seok Kweon
 % created: 2019.06.18
-%% main
+%% init
 clc;clear; close all;
+
+%% main
 frequency={'delta','theta','alpha','beta','gamma'};
 for i=1:1
 	CNN(frequency{i});
@@ -19,8 +21,15 @@ end
 function CNN(frequency)
 %% value setting for data setting
 
-basic_dir='E:\data_result\';
-Type_filename={'High_P_','Medium_P_','Low_P_'};
+basic_dir='E:\data_result\'; % directory of data
+Type_filename={'High_P_','Medium_P_','Low_P_'}; 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% [Type of Filename]
+% High_P: High dosage(0.5) propofol used for 1 bolus
+% Medium_P: Medium dosage(0.3) of propofol used for 1 bolus
+% Low_P: Low dosage(0.1) of propofol used for 1 bolus
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Type_filename={'High_M_','Medium_M_','Low_M_'};
 name_s={'DataSet_All'};
 n=10;
