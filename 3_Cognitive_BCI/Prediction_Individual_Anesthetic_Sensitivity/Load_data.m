@@ -20,11 +20,11 @@ clc;clear;close all;
 %% load excel 
 tic;
 n=60; % number of subjects
-dir='E:\Sedation raw data (n=60)\';
-filename='Subject_info';
-CeData='CeData\';
-agents={'PPF\','MDZ\'};
-[num,txt,raw]=xlsread(strcat(dir,filename));
+dir='E:\Sedation raw data (n=60)\'; % directory of data
+filename='Subject_info'; % excel filename 
+CeData='CeData\'; % sub name of ce directory
+agents={'PPF\','MDZ\'}; % PPF: Propofol, MDZ: Midazolam
+[num,txt,raw]=xlsread(strcat(dir,filename)); % read the excel file
 fprintf('Excel Load: ');
 toc
 
