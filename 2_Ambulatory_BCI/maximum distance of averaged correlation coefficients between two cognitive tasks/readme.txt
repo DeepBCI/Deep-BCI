@@ -1,4 +1,4 @@
-<maximum distance of averaged correlation coefficients between two cognitive tasks>
+<Maximum distance of averaged correlation coefficients between two cognitive tasks>
 
 * Programming Language: MATLAB
 * Contact: Y.K. Park (shoutme1@korea.ac.kr)
