@@ -11,7 +11,7 @@ import numpy as np
 
 class dataloader(data.Dataset):
 	def __init__(self, dlist='../day1.txt', d_type='train', valno=0, data_dir = '../'):
-
+		# input data format: numpy type, the shape ouf data should be (number of samples, frequency bands=5, 32, 32)
 		f = open(dlist)
 		name = f.readlines()
 		name = [elm[:-1] for elm in name]
@@ -19,11 +19,13 @@ class dataloader(data.Dataset):
 
 		x,y,s = [], [], []
 
+		# to generate combined dataset concatenate numpy files
+		# train or test
 		if d_type=='train' or d_type=='test':	
 			for i in range(15):
 				if i==valno:
 					continue
-				x_name = '{}/{}_de_lds_x.npy'.format(d_type, name[i])
+				x_name = '{}/{}_de_lds_x.npy'.format(d_type, name[i]) 
 				y_name = '{}/{}_de_lds_y.npy'.format(d_type, name[i])
 	
 				self.x = torch.from_numpy(np.load(data_dir+x_name)).float()
@@ -37,6 +39,7 @@ class dataloader(data.Dataset):
 			self.s = np.concatenate(s)
 			self.l = self.x.shape[0]
 
+		# validation
 		else:
 			i = valno
 			x_name = 'train/{}_de_lds_x.npy'.format(name[i])
