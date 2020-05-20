@@ -1,6 +1,7 @@
 % ce_at_LOC.m
 %
-% Calculation effect site concentration at loss of consciousness
+% Calculation effect site concentration (ce) at loss of consciousness
+% Save the results as ce_at_LOC_PPF.mat/ce_at_LOC_MDZ.mat 
 %
 % author: Young-Seok Kweon
 % created: 2020.02.09
