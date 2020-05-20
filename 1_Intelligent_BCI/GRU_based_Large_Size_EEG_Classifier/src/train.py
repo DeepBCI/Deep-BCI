@@ -83,30 +83,31 @@ for n in range(epoch):
 
 	net.eval()
 	
-	for i, data in enumerate(valset):
-		x_va,y_va,yid_va = Variable(data[0].cuda()),Variable(data[1].cuda()),data[2]
-		out = net(x_va)
-		loss = criterion(out,y_va)
-		loss_va+= float(loss.data[0])
-		_, pred = torch.max(out,1)
-		corr_va += float((pred==y_va).sum())
-		nva += float(y_va.size(0))
+	with torch.no_grad():
+		for i, data in enumerate(valset):
+			x_va,y_va,yid_va = Variable(data[0].cuda()),Variable(data[1].cuda()),data[2]
+			out = net(x_va)
+			loss = criterion(out,y_va)
+			loss_va+= float(loss.data[0])
+			_, pred = torch.max(out,1)
+			corr_va += float((pred==y_va).sum())
+			nva += float(y_va.size(0))
 
-	for i, data in enumerate(testset):
-		x_te,y_te,yid_te = Variable(data[0].cuda()),Variable(data[1].cuda()),data[2]
-		out = net(x_te)
-		loss = criterion(out,y_te)
-		loss_te+= float(loss.data[0])
-		_, pred = torch.max(out,1)
-		corr_te += float((pred==y_te).sum())
-		nte += float(y_te.size(0))
+		for i, data in enumerate(testset):
+			x_te,y_te,yid_te = Variable(data[0].cuda()),Variable(data[1].cuda()),data[2]
+			out = net(x_te)
+			loss = criterion(out,y_te)
+			loss_te+= float(loss.data[0])
+			_, pred = torch.max(out,1)
+			corr_te += float((pred==y_te).sum())
+			nte += float(y_te.size(0))
 
-	if prev_acc < corr_va/nva:
-		prev_acc = corr_va/nva
-		torch.save(net.state_dict(),model_path+model_name_to_save)
-		print('> Max validation accuracy: {:.4f} model saved'.format(prev_acc))
+		if prev_acc < corr_va/nva:
+			prev_acc = corr_va/nva
+			torch.save(net.state_dict(),model_path+model_name_to_save)
+			print('> Max validation accuracy: {:.4f} model saved'.format(prev_acc))
 
-	print('{:04d} epoch train loss: {:.4f} test loss: {:.4f}'.format(n+1,float(loss_tr/ntr),float(loss_te/nte)))
-	print('           train acc:  {:.4f} val acc: {:.4f} test acc: {:.4f}' .format(corr_tr/ntr, corr_va/nva, corr_te/nte))
+		print('{:04d} epoch train loss: {:.4f} test loss: {:.4f}'.format(n+1,float(loss_tr/ntr),float(loss_te/nte)))
+		print('           train acc:  {:.4f} val acc: {:.4f} test acc: {:.4f}' .format(corr_tr/ntr, corr_va/nva, corr_te/nte))
 
 print('finished')
