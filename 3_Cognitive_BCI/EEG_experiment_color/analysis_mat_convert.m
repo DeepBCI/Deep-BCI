@@ -1,17 +1,20 @@
-%% ¼­Çö raw data mat file·Î ÀúÀåÇÏ´Â ÄÚµå (ÁÖ¼® ¾ø´Â Æí, ¿À¸®Áö³Î ÆÄÀÏ)
-% 3.15. ±İ¿äÀÏ ¹ã»ù ÀÌ°É·Î ÀüÃ¼ convertÇÔ
+% analysis_mat_convert.m
+%
+% Convert EEG vision data to mat file
+%
+% created: 2019.03.15
 
 clear all; close all; clc;
 
-% ÆÄÀÏ À§Ä¡ (°æ·Î)
+% íŒŒì¼ ìœ„ì¹˜ (ê²½ë¡œ)
 dd = 'C:\Users\HANSEUL\Desktop\DoYeun\2019\analysis\';
 
-% ÆÄÀÏ ÀÌ¸§
+% íŒŒì¼ ì´ë¦„
 filelist={'gh_frequency'};
 
 %%
 
-% % ¸¶Ä¿º°·Î ÀÌ¸§ ºÙÀÌ±â
+% % ë§ˆì»¤ë³„ë¡œ ì´ë¦„ ë¶™ì´ê¸°
 
 % stimDef= {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, ...
 % 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, ...
@@ -22,7 +25,7 @@ filelist={'gh_frequency'};
 
 
 
-% Scientific Reprot ¹öÀü
+% Scientific Reprot ë²„ì „
 stimDef= {1, 2, 3, 4, 5, 6, 7; 'white','red', 'green', 'blue', 'yellow', 'cyan', 'magenta'};
 
 %%
