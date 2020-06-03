@@ -14,7 +14,7 @@ filelist={'gh_frequency'};
 
 %%
 
-% % 마커별로 이름 붙이기
+%% 마커별로 이름 붙이기
 
 % stimDef= {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, ...
 % 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, ...
@@ -75,6 +75,8 @@ eegfile_saveMatlab(cnt.title, cnt, mrk, mnt, ...
 'channelwise',1, ...
 'format','int16', ...
 'resolution', NaN);       
+
+fprintf('Subject %d Converting is Done!\n',ff);
 
 end
 
