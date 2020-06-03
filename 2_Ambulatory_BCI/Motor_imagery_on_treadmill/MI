@@ -1,3 +1,9 @@
+% MI.m
+%
+% analysis the data during motor imagery on treadmill
+%
+% created: 2019.07.01
+
 tic;
 
 %% init
