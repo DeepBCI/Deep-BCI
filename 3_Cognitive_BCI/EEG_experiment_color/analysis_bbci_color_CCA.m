@@ -1,7 +1,14 @@
-%% classify_try1ÀÌ¶û °°Àº ÄÚµå (±º´õ´õ±â ¾ø´Â ¹öÀü)
+% analysis_bbci_color_CCA.m
+%
+% Using bbci toolbox, performing the color detection with CCA 
+%
+%
+% created: 2019.07.01
 
+%% init
 clear all; close all; clc; 
 
+%% file path setting
 dd = 'C:\Users\HANSEUL\Desktop\DoYeun\2019\analysis\';
 filelist = 'dy_color';
 
@@ -9,13 +16,13 @@ filelist = 'dy_color';
 [cnt, mrk, mnt]=eegfile_loadMatlab([dd filelist]); % Load cnt, mrk, mnt variables to Matlab
 
 % Parameter setting 
-filtBank = [0.5 40];  % band pass filteringÇÒ ÁÖÆÄ¼ö ´ë¿ª ¼³Á¤
-ival = [2800 5000]; % sampling rateÀÌ 1000 ÀÌ¹Ç·Î ¸¶Ä¿ ±âÁØ 2ÃÊ¸¦ Àß¶ó¾ß ÇÏ´Ï±î 0~2000
+filtBank = [0.5 40];  % band pass filteringí•  ì£¼íŒŒìˆ˜ ëŒ€ì—­ ì„¤ì •
+ival = [2800 5000]; % sampling rateì´ 1000 ì´ë¯€ë¡œ ë§ˆì»¤ ê¸°ì¤€ 2ì´ˆë¥¼ ì˜ë¼ì•¼ í•˜ë‹ˆê¹Œ 0~2000
 
-% ³Ö°í ½ÍÀº Ã¤³Î ³ÖÀ½
+% ë„£ê³  ì‹¶ì€ ì±„ë„ ë„£ìŒ
 subChannel = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, ...
 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64];
-%  subChannel = [57, 58, 25, 61, 62, 63, 29, 30, 31]; % ºñÁÖ¾ó ÄİÅØ½º
+%  subChannel = [57, 58, 25, 61, 62, 63, 29, 30, 31]; % ë¹„ì£¼ì–¼ ì½œí…ìŠ¤
 
 [cnt, mrk] =proc_resample(cnt, 100, 'mrk',mrk,'N',0);
 %[cnt, mrk] =proc_resample(cnt, 100);
@@ -35,35 +42,35 @@ mnt = mnt_adaptMontage(mnt, cnt);
 %% cnt to epoch    
 epo = cntToEpo(cnt, mrk, ival);
 
-% % º£ÀÌ½º¶óÀÎ ¾ÈÇÏ°í regularizationÇÒ °æ¿ì (À§¿¡ -200À» 0À¸·Î ¹Ù²Ù°í ¿À¼¼¿ä)
+% % ë² ì´ìŠ¤ë¼ì¸ ì•ˆí•˜ê³  regularizationí•  ê²½ìš° (ìœ„ì— -200ì„ 0ìœ¼ë¡œ ë°”ê¾¸ê³  ì˜¤ì„¸ìš”)
 % ival22 = [0 2000];
 % epo = proc_baseline(epo, ival22); 
 
-% -200ms¸¦ ±âÁØÀ¸·Î baseline correction
+% -200msë¥¼ ê¸°ì¤€ìœ¼ë¡œ baseline correction
  base = [2800 3000];
  epo = proc_baseline(epo, base);
  
  ival2 = [3000 5000]; 
  epo = proc_selectIval(epo,ival2);
 
-%% Å¬·¡½º °í¸£±â
+%% í´ë˜ìŠ¤ ê³ ë¥´ê¸°
 
 %epo_all = proc_selectClasses(epo, 'imagine_Ambulance','imagine_Toilet');
 
-% ÀüÃ¼ Å¬·¡½º
+% ì „ì²´ í´ë˜ìŠ¤
 %  epo_all = proc_selectClasses(epo, 'white','red', 'green', 'blue', 'yellow', 'cyan', 'magenta');
 epo_all = proc_selectClasses(epo, 'red', 'green', 'blue');
-% 6Å¬·¡½º¾¿
+% 6í´ë˜ìŠ¤ì”©
  %epo_all = proc_selectClasses(epo, 'imagine_Ambulance','imagine_Clock', 'imagine_Light', 'imagine_Toilet', 'imagine_TV', 'imagine_Water');
  %epo_all = proc_selectClasses(epo, 'imagine_Hello', 'imagine_Helpme', 'imagine_Pain', 'imagine_Stop', 'imagine_Thankyou', 'imagine_Yes');
 
 
-%% °¢ Å¬·¡½ºº° 88Æ®¶óÀÌ¾ó¾¿ °ñ¶ó³»±â
+%% ê° í´ë˜ìŠ¤ë³„ 88íŠ¸ë¼ì´ì–¼ì”© ê³¨ë¼ë‚´ê¸°
 
-% ¸ÕÀú, °¢ Å¬·¡½º º° ¸î ¹øÀÇ Æ®¶óÀÌ¾óÀÌ ÂïÇû´ÂÁö ¼¼¾îº¸ÀÚ
+% ë¨¼ì €, ê° í´ë˜ìŠ¤ ë³„ ëª‡ ë²ˆì˜ íŠ¸ë¼ì´ì–¼ì´ ì°í˜”ëŠ”ì§€ ì„¸ì–´ë³´ì
 count_epo=sum(epo_all.y,2);
 
-% 88°³ ÀÌ»óÀ» ´Ù Àß¶ó¹ö¸®ÀÚ
+% 88ê°œ ì´ìƒì„ ë‹¤ ì˜ë¼ë²„ë¦¬ì
 y_temp = zeros(size(epo_all.y));
 
 for ci=1:size(y_temp,1)
@@ -93,8 +100,8 @@ t = [0:1/fs:window_time];
 
 % ground truth
 Y=cell(1);
-freq = [2 3 4 6 12]; % 60Hz¸¦ 5·Î ³ª´« Frequency-> 12Hz, 7·Î ³ª´« Frequency -> 8.57
-t = [0:1/fs:window_time]; % 1/fs ºÎÅÍ window_time±îÁö 1/fsÀÇ Frequency·Î sampling
+freq = [2 3 4 6 12]; % 60Hzë¥¼ 5ë¡œ ë‚˜ëˆˆ Frequency-> 12Hz, 7ë¡œ ë‚˜ëˆˆ Frequency -> 8.57
+t = [0:1/fs:window_time]; % 1/fs ë¶€í„° window_timeê¹Œì§€ 1/fsì˜ Frequencyë¡œ sampling
 for i=1:size(freq,2)
     Y{i}=[sin(2*pi*60/freq(i)*t);cos(2*pi*60/freq(i)*t);sin(2*pi*2*60/freq(i)*t);cos(2*pi*2*60/freq(i)*t)];
 end
