@@ -1,7 +1,9 @@
 tic;
+
+%% init
 clc; close all; clear all;
 
-% 
+%% set the path of files
 dd='C:\Users\SHIN\Desktop\MI_CODE\MI_DATA\190422\twoclasses_32ch\';
 filelist={'khshin_MI_ss1_0_cap', 'khshin_MI_ss1_3_cap', 'khshin_MI_ss1_6_cap', 'khshin_MI_ss1_9_cap'};
 
