@@ -9,7 +9,7 @@ load('D:\Project\2020\NIRS\Channel_selection\script\SFS\sd_loc');
 load('D:\Project\2020\NIRS\Channel_selection\script\SFS\indices');
 load('D:\Project\2020\NIRS\Channel_selection\script\SFS\inner_indices');
 [opy opx] = find(op_loc>0);
-Analysis_date = '20200525';
+Analysis_date = '20200610';
 
 for sub = [1 2 3 4 5 6 7 9 11 13 15 16 18 19]
     disp(['Subject = ' num2str(sub)])
@@ -45,11 +45,11 @@ for sub = [1 2 3 4 5 6 7 9 11 13 15 16 18 19]
         end
         
         [~,fList] = sort(fisher_weight, 'descend');
-        Select{1}{sub}{k} = ch{sub}.num(fList(1:20));
+        Select{1}{sub}{k} = ch{sub}.num(fList(1:15));
         %% 2. SFS
         disp('SFS')
         temp = ch{sub}.order;
-        for channel = 1:20
+        for channel = 1:15
             if channel == 1
                 for sfs = 1:length(temp)
                     for Inner_k = 1:kfold
@@ -93,7 +93,7 @@ for sub = [1 2 3 4 5 6 7 9 11 13 15 16 18 19]
         disp('SFS_Op+Dist (Individual)')
         temp = ch{sub}.order;
         dist_indi = [];
-        for channel = 1:20
+        for channel = 1:15
             if channel == 1
                 for sfs = 1:length(temp)
                     for Inner_k = 1:kfold
@@ -131,7 +131,7 @@ for sub = [1 2 3 4 5 6 7 9 11 13 15 16 18 19]
                 end
                 clear sfs c_est
                 
-                fitness = cv_acc - (optode/52) - (dist/25.02);
+                fitness = cv_acc - (optode/size(ch{sub}.num,2)) - (dist/25.02);
                 [~,accmax] = max(fitness);
                 dist_indi(channel-1) = dist(accmax);
                 
@@ -147,7 +147,7 @@ for sub = [1 2 3 4 5 6 7 9 11 13 15 16 18 19]
         %% 4. SFS_Op+Dist (Global)
         disp('SFS_Op+Dist (Global)')
         temp = ch{sub}.order;
-        for channel = 1:20
+        for channel = 1:15
             if channel == 1
                 for sfs = 1:length(temp)
                     for Inner_k = 1:kfold
@@ -184,7 +184,7 @@ for sub = [1 2 3 4 5 6 7 9 11 13 15 16 18 19]
                 end
                 clear sfs c_est
                 
-                fitness = cv_acc - (optode/52) - (dist/25.02);
+                fitness = cv_acc - (optode/size(ch{sub}.num,2)) - (dist/25.02);
                 [~,accmax] = max(fitness);
                 
                 SFS(channel) = temp(accmax);
@@ -201,7 +201,7 @@ for sub = [1 2 3 4 5 6 7 9 11 13 15 16 18 19]
         for alpha = 5:9
             disp(['Alpha = ' num2str(alpha/10)]);
             temp = ch{sub}.order;
-            for channel = 1:20
+            for channel = 1:15
                 if channel == 1
                     for sfs = 1:length(temp)
                         for Inner_k = 1:kfold
@@ -235,7 +235,7 @@ for sub = [1 2 3 4 5 6 7 9 11 13 15 16 18 19]
                     end
                     clear sfs c_est
                     
-                    fitness = (1-(alpha/10)) * cv_acc - (alpha/10) * (optode/52);
+                    fitness = (1-(alpha/10)) * cv_acc - (alpha/10) * (optode/size(ch{sub}.num,2));
                     [~,accmax] = max(fitness);
                     
                     SFS(channel) = temp(accmax);
@@ -256,7 +256,7 @@ for sub = [1 2 3 4 5 6 7 9 11 13 15 16 18 19]
             disp(['beta = ' num2str(beta/10)]);
             temp = ch{sub}.order;
             dist_indi = [];
-            for channel = 1:20
+            for channel = 1:15
                 if channel == 1
                     for sfs = 1:length(temp)
                         for Inner_k = 1:kfold
@@ -312,7 +312,7 @@ for sub = [1 2 3 4 5 6 7 9 11 13 15 16 18 19]
         for beta = 5:9
             disp(['beta = ' num2str(beta/10)]);
             temp = ch{sub}.order;
-            for channel = 1:20
+            for channel = 1:15
                 if channel == 1
                     for sfs = 1:length(temp)
                         for Inner_k = 1:kfold
