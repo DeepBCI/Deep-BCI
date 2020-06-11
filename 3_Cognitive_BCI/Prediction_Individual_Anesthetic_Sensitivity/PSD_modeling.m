@@ -1,6 +1,6 @@
 % PSD_modeling.m
 %
-%
+% modeling the PSD curve to remove artifacts
 %
 % author: Young-Seok, Kweon
 % created: 2019.10.15
