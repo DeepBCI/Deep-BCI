@@ -16,7 +16,7 @@ n=10;
 
 g= @(p1,p2,k1,k2,u1,u2,s1,s2,lambda,x)...
     p1+p2./power(x,lambda)...
-    +k1*normpdf(x,u1,s1)+k2*normpdf(x,u2,s2);
+    +k1*normpdf(x,u1,s1)+k2*normpdf(x,u2,s2); % PSD model mentioned at B. Blankertz et al. 2010, NeuroImage
 f=[0.5:0.5:40];
 for i=1:n_type
     for j=1:n
