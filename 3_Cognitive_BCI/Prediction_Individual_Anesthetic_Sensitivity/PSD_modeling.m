@@ -20,7 +20,14 @@ g= @(p1,p2,k1,k2,u1,u2,s1,s2,lambda,x)...
 f=[0.5:0.5:40];
 for i=1:n_type
     for j=1:n
-        x=load(['Feature_PSD\',type{i},'_S',num2str(j),'_PSD']);
+        x=load(['Feature_PSD\',type{i},'_S',num2str(j),'_PSD']); % load your own data
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        % data: power spectral density from each channels and trials
+        %    input form: channel x frequency points x trials
+        %
+        % label: state of each trials
+        %    input form: 1 x trials
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         data=x.data;
         label=x.label;
         frontal_base=mean(data(1:62,:,label==0),3);
