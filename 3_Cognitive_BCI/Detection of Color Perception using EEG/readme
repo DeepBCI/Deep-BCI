@@ -1,1 +1,12 @@
-For detection of color perception using EEG, following codes were uploaded.
+<Detection of Color Perception using EEG>
+
+* Programming Language: MATLAB
+* Contact: D. Y. Lee (doyeun_lee@korea.ac.kr)
+* Function: For detection of color perception using EEG, following codes were uploaded.
+        1. analysis_band
+        2. analysis_bbci_color_CCA
+        3. analysis_bbci_color_CSP
+        4. analysis_mat_convert
+        5. analysis_topo
+        6. analysis_topogra
+        7. CSPattern
