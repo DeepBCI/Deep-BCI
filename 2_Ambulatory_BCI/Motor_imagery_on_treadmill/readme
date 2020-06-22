@@ -1,0 +1,6 @@
+
+<Motor Imagery Classification on Treadmill>
+
+* Programming Language: MATLAB
+* Contact: gh_shin@korea.ac.kr
+* Function: Preprocess raw EEG data and classification Motor Imagery during subjects were on treadmill.
