@@ -1,5 +1,4 @@
 <Ear_EEG_Biosignal>
 *Programming Language: Matlab
 *Contact: Hyung-Tak Lee (htlee@korea.ac.kr)
-*Function: This program for analysis of various biosignal using ear-EEG.
-              ASSR, artifact, resting state, SSVEP, EOG data are used in this program.
+*Function: This program provides analysis methods for various biosignals measured around the ears, such as EEG, EOG, ECG, etc.
