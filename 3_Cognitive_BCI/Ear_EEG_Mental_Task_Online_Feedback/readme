@@ -1,1 +1,6 @@
-upload code for online experiment of mental task feedback
+<Ear_EEG_Mental_Task_Online_Feedback>
+*Programming Language: Matlab
+*Contact: Hyung-Tak Lee (htlee@korea.ac.kr)
+*Function: This program provides a synchronous online BCI feedback paradigm.
+              This program requires two Matlab toolboxes (OpenBMI and bbci_public)
+              Common spatial filter (CSP) is mainly used to extract discriminable features for classification.
