@@ -123,7 +123,7 @@ for i_kind=1:size(kind,2)
                 
                 final_name=strcat(...
                     strcat(temp_char(1),temp_char(6:end)),...
-                    '통합결과2');
+                    '통합결과2'); % find name of ce from midazolam
                 
                 a=final_dir;
                 a=string(a);
