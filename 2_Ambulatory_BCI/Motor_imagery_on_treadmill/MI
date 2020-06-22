@@ -54,7 +54,7 @@ for i = 1:length(filelist)
 
    %% CLASSIFIER
     
-    [C_eeg, loss_eeg_std, out_eeg.out, memo] = xvalidation(epo,'RLDAshrink','proc',proc, 'kfold', 5);
+    [C_eeg, loss_eeg_std, out_eeg.out, memo] = xvalidation(epo,'RLDAshrink','proc',proc, 'kfold', 5); % 5-fold cross validation
     Result(i)=1-C_eeg;
     Result_Std(i)=loss_eeg_std;
     
