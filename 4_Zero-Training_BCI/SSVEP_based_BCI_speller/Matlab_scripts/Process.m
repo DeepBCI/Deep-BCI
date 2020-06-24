@@ -100,7 +100,7 @@ function box_out = Process(box_in)
 
         for i = 1:nClasses
             ref = 2*pi*Freq(i)*t;
-            Y{i} = [sin(ref);cos(ref);sin(ref*2);cos(ref*2);sin(ref*3);cos(ref*3)];
+            Y{i} = [sin(ref);cos(ref);sin(ref*2);cos(ref*2)];
         end
 
 
