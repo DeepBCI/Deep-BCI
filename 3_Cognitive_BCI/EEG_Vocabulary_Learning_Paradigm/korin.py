@@ -1,7 +1,10 @@
 #-*- coding: utf-8 -*-
 
 
-
+'''
+Korean input fix code for memory experiment paradigm (the underlying library-pygame?- by default only supports
+ANSI inputs. Since the experiment requires use of Korean inputs, the following has been implemented to accomodate this requirment.
+'''
 
 class Coreano:
     def __init__(self, answers):
@@ -131,13 +134,6 @@ class Coreano:
 
 
 
-
-
-
-
-
-
-
     def flush(self):
         self.con = ''
         self.vow = ''
@@ -170,18 +166,4 @@ class Coreano:
         vowel = self.vowels.index(self.vow)
         endConsonant = self.endConsonants.index(self.encon)
         return unichr(44032 + (consonant * 21 + vowel) * 28 + endConsonant)
-
-
-
-
-    #####
-    # def korInput(self, charin):
-    #     if charin in self.consonants:
-    #         consonant = self.consonants.index(charin)
-    #         #return unichr(44032 + (consonant * 21 + 0) * 28 + 0)
-    #         #return unichr(int((44032 + (consonant + 21) * 28 + 0)/21/28))
-    #     elif charin in self.vowels:
-    #         vowel = self.vowels.index(charin)
-    #         #return unichr(44032 + (0 * 21 + vowel) * 28 + 0)
-    #         return unichr(12623 + (vowel + 0) * 1 + 0)
 

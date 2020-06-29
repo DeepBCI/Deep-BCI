@@ -77,17 +77,6 @@ class VocabularyDeveloperFeedback(MainloopFeedback):
     DISTRACTOR_ASK = 181
     ASK_TRAIN = 34
 
-    # PRESENT_WORD_01 = 90
-    # PRESENT_WORD_02 = 91
-    # PRESENT_WORD_03 = 92
-    # PRESENT_WORD_04 = 93
-    # PRESENT_WORD_05 = 94
-    # PRESENT_WORD_05 = 94
-    # PRESENT_WORD_06 = 95
-    # PRESENT_WORD_07 = 96
-    # PRESENT_WORD_08 = 97
-    # PRESENT_WORD_09 = 98
-    # PRESENT_WORD_10 = 99
 
     ###end of markers
 
@@ -208,12 +197,9 @@ class VocabularyDeveloperFeedback(MainloopFeedback):
     self.distrctDict = []
     if self.finnish:
         self.Filenames = ['Lektion_Finnisch_Kommunikation.txt']
-    print
-    "+++++++++++++++++++++++++++++++++++++++++++++++"
-    print
-    "VocabularyFeedbackDeveloper HAS BEEN INITIALIZED FROM PYFF"
-    print
-    "***********************************************"
+    print "+++++++++++++++++++++++++++++++++++++++++++++++"
+    print "VocabularyFeedbackDeveloper HAS BEEN INITIALIZED FROM PYFF"
+    print "***********************************************"
     self.send_parallel_and_write(self.INIT_FEEDBACK)
 
 
@@ -238,8 +224,7 @@ def pre_mainloop(self):  # check with Sophie (parts have changed so be careful)
     self.welcome()
     self.ask_name()
 
-    print
-    'db store_path: ' + str(self.st_path)
+    print 'db store_path: ' + str(self.st_path)
     # create logfile with run time for future reference
     localtime = time.localtime()
     # print 'self.path'+str(self.part)
@@ -1072,15 +1057,13 @@ def show_pair(self, pair, first_seen=False):
     # Fixation Part
     self.logger.debug("Fixation period started")  # what is this fixation period??
     ##UNNECESSARY self.send_parallel_and_write(self.FIXATION_PERIOD, task='show')
-    print
-    self.FIXATION_PERIOD
-    # time.sleep(self.fixation_time)
+    print self.FIXATION_PERIOD
+    time.sleep(self.fixation_time)
 
     # Presentation Part
     self.logger.debug("Presentation period started")
     # self.send_parallel(self.PRESENTATION_PERIOD ) ##REMOVED
-    print
-    self.PRESENTATION_PERIOD
+    print self.PRESENTATION_PERIOD
     # shows the sign and the word
     if first_seen:
 
@@ -1116,7 +1099,7 @@ def show_pair(self, pair, first_seen=False):
 
 def ask_test(self, pair, index):
     """
-    shows one pair
+    ask portion of the memory task.
     """
     # Fixation Part
     self.logger.debug("Fixation period of test started")
@@ -1214,8 +1197,7 @@ def ask_answer(self, pair, index, give_feedback=True):
     # Presentation Part
     self.logger.debug("Presentation period of test started")
     # self.send_parallel(self.PRESENTATION_PERIOD_TEST) ##UNNECESSARY
-    print
-    "pair is ", pair
+    print "pair is ", pair
     showed_item = " ".join(['What is ', pair[0], '?'])
 
     self.do_print(showed_item)
