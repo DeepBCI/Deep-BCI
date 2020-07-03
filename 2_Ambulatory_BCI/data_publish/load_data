@@ -1,0 +1,17 @@
+clear all;
+startup_bbci_toolbox
+
+subNum = 1;
+
+BTB.DataDir = 'E:\ear_data\isolated\data_1906';
+BTB.paradigm = 'SSVEP';
+BTB.MatDir = [BTB.DataDir '\' BTB.paradigm '\data_publish\' 'Mat_raw'];
+
+% ERP
+BTB.subPool = {'bhkwon','yskwon','knpark','tyyoon',...
+    'kschoi','kykim','dylee','kykim','swkim',...
+    'kmpark','shkim','yhchoi','jijo','jhlee',...
+    'jmwon','jsseo','jjpark','mklim'};
+    
+BTB.subject = BTB.subPool{subNum};
+load([BTB.MatDir '\' sprintf('s%d_%s.mat',subNum, BTB.subject)]);
