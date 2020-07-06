@@ -1,1 +1,38 @@
-dd
+clear all;
+
+subNum = 1;
+
+%% setting
+BTB.DataDir = 'E:\ear_data\data_1906';
+BTB.paradigm = 'SSVEP';
+BTB.MatDir = [BTB.DataDir '\' BTB.paradigm '\data_publish\' 'Mat_raw'];
+
+BTB.subPool = {'bhkwon','yskwon','knpark','tyyoon',...
+    'kschoi','kykim','dylee','kykim','swkim',...
+    'kmpark','shkim','yhchoi','jijo','jhlee',...
+    'jmwon','jsseo','jjpark','mklim'};
+BTB.subject = BTB.subPool{subNum};
+    
+switch(BTB.paradigm)
+    case 'SSVEP'
+        % Define some settings SSVEP
+        disp_ival= [0 4000]; % SSVEP
+        trig_all = {1,2,3, 11, 22; '5.45','8.57','12','Start','End'};
+        trig_sti = {1,2,3; '5.45','8.57','12'};
+    case {'vis_ERP', 'aud_ERP','ERP'}
+        disp_ival= [-200 800]; % ERP
+        ref_ival= [-200 0] ;
+        trig_all = {2,1, 11, 22; 'target','non-target','Start','End'};
+        trig_sti = {2,1 ;'target','non-target'};
+    case 'MI'
+        disp_ival = [0 5000];
+        trig_all = {1,2,3,11,22; 'right','left','rest','Start','End'};
+        trig_sti = {1,2,3; 'right','left','rest'};
+end    
+    
+%% load files
+load([BTB.MatDir '\' sprintf('s%d_%s.mat',subNum, BTB.subject)]);
+
+
+    
+    
