@@ -1,0 +1,57 @@
+%% Load Isolated data
+
+BTB.DataDir = 'E:\ear_data';
+BTB.paradigm = 'ERP';
+
+
+%%
+BTB.MatDir= [BTB.DataDir '\' BTB.paradigm '\data_publish\' 'Mat_raw'];
+
+switch(BTB.paradigm)
+    case 'SSVEP'
+        % Define some settings SSVEP
+        disp_ival= [0 4000]; % SSVEP
+        trig_all = {1,2,3, 11, 22; '5.45','8.57','12','Start','End'};
+        trig_sti = {1,2,3; '5.45','8.57','12'};
+    case {'vis_ERP', 'aud_ERP','vis_oddball','ERP','ERP_bp'}
+        disp_ival= [-200 800]; % ERP
+        ref_ival= [-200 0] ;
+        trig_all = {2,1, 11, 22; 'target','non-target','Start','End'};
+        trig_sti = {2,1 ;'target','non-target'};
+    case 'MI'
+        disp_ival = [0 5000];
+        trig_all = {1,2,3,11,22; 'right','left','rest','Start','End'};
+        trig_sti = {1,2,3; 'right','left','rest'};
+end
+
+%%
+for subNum = 1:18
+  BTB.subject = BTB.subPool{subNum};
+  d_temp = load([BTB.MatDir '\' sprintf('s%d.mat',subNum)]);
+
+  len = size(d_temp.cap_cnt,2);
+
+  cap_cnt(subNum,1:len) = d_temp.cap_cnt;
+  cap_i_cnt(subNum,1:len) = d_temp.cap_i_cnt;
+  cap_seg_mrk(subNum,1:len) = d_temp.cap_seg_mrk;
+
+  ear_cnt(subNum,1:len) = d_temp.ear_cnt;
+  ear_i_cnt(subNum,1:len) = d_temp.ear_i_cnt;
+  ear_seg_mrk(subNum,1:len) = d_temp.ear_seg_mrk;
+
+  IMU_cnt(subNum,1:len) = d_temp.IMU_cnt;
+  IMU_seg_mrk(subNum,1:len) = d_temp.IMU_seg_mrk;
+
+  for i=1:len
+    if ~isempty(cap_cnt{subNum,i})
+    cap_epo{subNum,i} = proc_segmentation(cap_cnt{subNum,i}, cap_seg_mrk{subNum,i}, disp_ival);
+    end
+    if ~isempty(ear_cnt{subNum,i})
+    ear_epo{subNum,i} = proc_segmentation(ear_cnt{subNum,i}, ear_seg_mrk{subNum,i}, disp_ival);
+    end
+    if ~isempty(IMU_cnt{subNum,i})
+    IMU_epo{subNum,i} = proc_segmentation(IMU_cnt{subNum,i}, IMU_seg_mrk{subNum,i}, disp_ival);
+    end
+  end
+end
+
