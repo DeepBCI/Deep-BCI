@@ -64,11 +64,15 @@ for agent=1:size(Type_filename,1)
                     X(:,:,count)=cnt.x(:,:,j);
                 end
             end
-
+            
+            % upper and lower frequency setting
             delta=[0.5 4]; theta=[4 8]; alpha=[8 15]; beta=[15 32];gamma=[32 60];
+            
             temp=X(:,:,1:30);
+            
+            % bandpass filtering based on frequency setting
             for j=1:30
-                X_new(:,:,1,j)=bandpass(temp(:,:,j),delta,1000);
+                X_new(:,:,1,j)=bandpass(temp(:,:,j),delta,1000); 
                 X_new(:,:,2,j)=bandpass(temp(:,:,j),theta,1000);
                 X_new(:,:,3,j)=bandpass(temp(:,:,j),alpha,1000);
                 X_new(:,:,4,j)=bandpass(temp(:,:,j),beta,1000);
