@@ -1,7 +1,7 @@
 % concating_ce_data.m
 %
 % Since there are differences of time point between ce and label latency,
-% this code matched the time point.
+% this code matched the time point between ce and data label and latency.
 %
 % author: Young-Seok Kweon
 % created: 2020.02.07
@@ -31,16 +31,20 @@ for d=1:3
         mrk_data=cell2mat(event(8,:,:));
         mrk_data=reshape(mrk_data,size(mrk_data,3),1);
         
-        raw_event=struct2cell(raw_event);
+        raw_event=struct2cell(raw_event); % convert struct to cell
         trigger=raw_event(6,:,:);
+        
         mrk_orig=cell2mat(raw_event(8,:,:));
-        mrk_orig=reshape(mrk_orig,size(mrk_orig,3),1);
+        mrk_orig=reshape(mrk_orig,size(mrk_orig,3),1); 
+        
         latency=cell2mat(raw_event(1,:,:));
         latency=reshape(latency,size(latency,3),1);
+        
         idx=logical(sum(mrk_orig==mrk_data',2));
         latency_data=latency(idx); %event에 해당하는 latency
-        trigger_data=trigger(idx);
-        % 쓰잘데기 없는 trigger 제거
+        trigger_data=trigger(idx); %event에 해당하는 trigger
+        
+        % remove useless trigger
         idx=[];cnt=0;
         for k=1:length(trigger_data)
             if ~(length(trigger_data{k})==4)
@@ -49,6 +53,7 @@ for d=1:3
             end
         end
         trigger_data(idx)=[];latency_data(idx)=[];
+        % convert triger to numeric number
         trigger_data=cell2mat(trigger_data); % 'S  2'라 1x4xevent수임
         trigger_data=str2num(reshape(trigger_data(:,4,:),size(trigger_data(:,4,:),3),1)); % '2'->2
         
