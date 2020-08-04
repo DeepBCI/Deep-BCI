@@ -1,16 +1,16 @@
-%  Raw data --> mat file 로 변환하는 코드
+%  This is code for coverting raw data into mat file
 
+%% init
 clear all; close all; clc;
 
+%% file setting
 % 파일 위치 (경로)
 dd = 'C:\Users\SHIN\Desktop\MI_CODE\MI_DATA\190422\';
 
 % 파일 이름
 filelist={'khshin_MI_ss1_0_cap', 'khshin_MI_ss1_3_cap', 'khshin_MI_ss1_6_cap', 'khshin_MI_ss1_9_cap'};
 
-%%
-
-% % 마커별로 이름 붙이기
+%% naming marker
 
 % stimDef= {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, ...
 % 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, ...
@@ -21,7 +21,7 @@ filelist={'khshin_MI_ss1_0_cap', 'khshin_MI_ss1_3_cap', 'khshin_MI_ss1_6_cap', '
 
 
 
-% Scientific Reprot 버전
+%% version of Scientific Reprot
 stimDef= {1, 2; 'right','left'};
 
 %%
