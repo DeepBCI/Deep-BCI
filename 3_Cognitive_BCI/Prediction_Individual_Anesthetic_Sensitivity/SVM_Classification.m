@@ -30,13 +30,16 @@ for i=1:num_agents
     for j=1:num_states
         fprintf('******************%s******************\n',Type_filename{i,j});
         tic;
+        
         name=strcat(Type_filename{i,j},name_part);
         data=load(strcat(basic_dir,name));
         
         data=data.data; % get eeg signals 
         y=logical(data.y); % get lable of subjects
+        
         time=toc;
-        calculate_time(time);
+        calculate_time(time); % show spending time to load the data
+        
         fprintf('[Data Load Done]\n');
         for k=1:num_frequency
             [X,Y]=preprocessing(data.x,frequency{k},y);
@@ -46,8 +49,9 @@ for i=1:num_agents
                 tic;
                
                 svmmodel=fitcsvm(XTrain,YTrain','KernelFunction','RBF','KernelScale','auto'); % change the 'RBF' to 'linear' if you want to run linear SVM
+                
                 time=toc;                
-                calculate_time(time);
+                calculate_time(time); % show spending time to clasify the class
                 
                 [YPredicted,score] = predict(svmmodel,XTest);
                 % To know the true positive, true negative, false positive, and false negative
