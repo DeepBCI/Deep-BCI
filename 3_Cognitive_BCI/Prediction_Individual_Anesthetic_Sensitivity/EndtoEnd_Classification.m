@@ -39,7 +39,8 @@ num_ch=size(channel,2);
 
 %% CNN layer construction
         
-layers = [imageInputLayer([4000 62 1])
+layers = [
+imageInputLayer([4000 62 1]) % input size
 
 convolution2dLayer([1*10 62],62) % conv1 layer to integrate the information of channel
 batchNormalizationLayer % To improve performance of layer, use batch normalization
@@ -110,11 +111,11 @@ for state=1:size(Type_filename,2)
         
         fprintf('\nFold %d\n',i);
         predicted_train = classify(net,XTrain); % classify training data using trained net
-        accuracy_train(i) = sum(predicted_train == YTrain)/numel(YTrain)*100; 
+        accuracy_train(i) = sum(predicted_train == YTrain)/numel(YTrain)*100; % calculating accuracy
         fprintf('Training accuracy: %f\n',accuracy_train(i));
 
         predicted_test = classify(net,XVal); % classify validation data using trained net
-        accuracy_test(i) = sum(predicted_test == YVal)/numel(YVal)*100;
+        accuracy_test(i) = sum(predicted_test == YVal)/numel(YVal)*100; % calculating accuracy
         fprintf('Testing accuracy: %f\n',accuracy_test(i));
         
         w = warning('query','last');
