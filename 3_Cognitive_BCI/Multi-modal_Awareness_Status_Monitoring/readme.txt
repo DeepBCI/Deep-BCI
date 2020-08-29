@@ -1,1 +1,3 @@
-Please inform your name, e-mail, and affiliation in this text file.
+Name: Rock-hyun Choi
+e-mail: choimosi@dgist.ac.kr
+affiliation: DGIST
