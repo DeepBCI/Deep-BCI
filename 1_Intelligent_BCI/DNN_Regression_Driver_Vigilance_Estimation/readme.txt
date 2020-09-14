@@ -2,7 +2,7 @@
 
 * Programming Language: Python, Pytorch
 * Contact: S. Hwang (sunny16@yonsei.ac.kr)
-* Function: This program is Deep Neural Network based drivers vigilance estimation program. The program include a simple example on SEED-VIG dataset which include 23 subject drivers vigilance value. These codes are composed with model, dataset loader, and training scheme. 
+* Function: This program is Deep Neural Network based drivers vigilance estimation program. The program include a simple example on SEED-VIG dataset (23 subject). These codes are composed with model, dataset loader, and training scheme (5 fold cross validation). 
 
 Reference
 
