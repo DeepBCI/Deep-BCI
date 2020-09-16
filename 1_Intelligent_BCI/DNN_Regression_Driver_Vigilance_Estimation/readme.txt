@@ -5,8 +5,8 @@
 * Function: This program is Deep Neural Network based drivers vigilance estimation program. The program include a simple example on SEED-VIG dataset (23 subject). These codes are composed with model, dataset loader, and training scheme (5 fold cross validation). 
 
 Best performance (model: https://github.com/DeepBCI/Deep-BCI/tree/master/1_Intelligent_BCI/DNN_Regression_Driver_Vigilance_Estimation/model)
-MSE: 0.0335 (0.0052)
-RMSE: 0.1688 (0.0073)
+MSE: 0.0327 (0.0076)
+RMSE: 0.1775 (0.0203)
 
 Reference
 
