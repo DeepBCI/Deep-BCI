@@ -67,17 +67,7 @@ class seedvig(data.Dataset):
                 self.val_label = np.concatenate((self.val_label, eeg_tey))
 
         
-        if self.mode=='train':
-            minval = self.train_dataset.min()
-            maxval = self.train_dataset.max()
 
-            self.train_dataset = 2*(self.train_dataset-minval)/(maxval-minval)-1
-        else:
-            minval = self.val_dataset.min()
-            maxval = self.val_dataset.max()
-
-            self.val_dataset = 2*(self.val_dataset-minval)/(maxval-minval)-1
-#        pdb.set_trace()
 
 
     def __getitem__(self, index):
