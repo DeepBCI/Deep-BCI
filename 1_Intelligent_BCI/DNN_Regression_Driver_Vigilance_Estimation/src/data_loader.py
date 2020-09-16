@@ -63,8 +63,8 @@ class seedvig(data.Dataset):
             else:
                 self.train_dataset = np.concatenate((self.train_dataset, eeg_tr))
                 self.train_label = np.concatenate((self.train_label, eeg_try))
-                self.val_dataset = np.concatenate((self.val_dataset, eeg_tr))
-                self.val_label = np.concatenate((self.val_label, eeg_try))
+                self.val_dataset = np.concatenate((self.val_dataset, eeg_te))
+                self.val_label = np.concatenate((self.val_label, eeg_tey))
 
         
         if self.mode=='train':
