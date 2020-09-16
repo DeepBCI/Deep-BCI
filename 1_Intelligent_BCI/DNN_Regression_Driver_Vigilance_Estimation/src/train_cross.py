@@ -14,7 +14,7 @@ class Solver(object):
         self.learning_rate = 0.0001
         self.beta1 = 0.5
         self.beta2 = 0.999
-        self.max_epoch = 10
+        self.max_epoch = 20
        
 
     def train(self):
