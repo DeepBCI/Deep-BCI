@@ -21,7 +21,7 @@ num_agents=size(Type_filename,1); % number of agents
 num_states=size(Type_filename,2); % number of dosage groups
 
 name_part='DataSet_All';
-frequency={'delta','theta','alpha','beta','gamma','raw'};
+frequency={'delta','theta','alpha','beta','gamma','raw'}; % frequency bands
 num_frequency=size(frequency,2);
 
 %% data load
@@ -55,7 +55,7 @@ for i=1:num_agents
                 
                 [YPredicted,score] = predict(svmmodel,XTest);
                 % To know the true positive, true negative, false positive, and false negative
-                pp(k,fold)=0;pn(k,fold)=0;nn(k,fold)=0;np(k,fold)=0;
+                pp(k,fold)=0;pn(k,fold)=0;nn(k,fold)=0;np(k,fold)=0; % initialize variables
                  for num=1:30
                      if YTest(num)==categorical({'1'})
                          pp(k,fold)=pp(k,fold)+(YPredicted(num)==YTest(num));
