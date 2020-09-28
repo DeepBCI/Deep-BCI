@@ -28,9 +28,9 @@ stimDef= {1, 2; 'right','left'};
 for ff= 1:length(filelist),
 
 file= filelist{ff};
-opt= [];
+opt= []; % initialize variable
 
-fprintf('** In processing %s **\n', file);
+fprintf('** In processing %s **\n', file); % print the processing progress
 
 % load the header file
 try,
