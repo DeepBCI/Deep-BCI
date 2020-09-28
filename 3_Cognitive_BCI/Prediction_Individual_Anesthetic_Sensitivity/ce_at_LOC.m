@@ -14,11 +14,13 @@ num_f=5; % LOC가 되려면 몇번 연속으로 실패해야하나
 for i=1:30
     x=load(['latency\',type,'_S',num2str(i)]);
     y=load(['ce\',type,'_S',num2str(i)]);
-    ce=y.ce;
-    time_ce=y.time_ce;
+    
+    ce=y.ce; % effect-site concentration of subjects
+    time_ce=y.time_ce; % time point corresponding to effecit-site concentration
+    
     label=x.label_new;
-    label_tag=label.label;
-    latency=label.latency;
+    label_tag=label.label; % label of data (press the button or not)
+    latency=label.latency; % time point corresponding to label
     s1=label.start_time_b;
     s2=label.start_time_s;
     for j=1:length(label_tag)-num_f
