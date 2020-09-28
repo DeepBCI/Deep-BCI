@@ -36,7 +36,7 @@ for i=1:n_type
                 'StartPoint',[0,0,1,1,10,20,1,1,1],...
                 'Upper',[inf,inf,inf,inf,15,30,100,100,100],...
                 'Lower',[-inf,-inf,0,0,0,15,0,0,0]);
-            g1=trained_g.p1+trained_g.p2./power(f,trained_g.lambda);
+            g1=trained_g.p1+trained_g.p2./power(f,trained_g.lambda); % modeling based on training parameter 
             y=trained_g(f);
             [v,idx]=maxk(y-g1',1);
             predictor(i,j,ch)=v;
@@ -46,7 +46,7 @@ for i=1:n_type
         fprintf('%s [done]\n',[type{i},'_S',num2str(j)]);
     end
 end
-p=[];k1_t=[];k2_t=[];
+p=[];k1_t=[];k2_t=[]; % initialize parameter
 for i=1:n_type
     p=cat(1,p,reshape(predictor(i,:,:),size(predictor,2),size(predictor,3)));
     k1_t=cat(1,k1_t,reshape(k1(i,:,:),size(k1,2),size(k1,3)));
