@@ -10,16 +10,16 @@ tic;
 clc; close all; clear all;
 
 %% set the path of files
-dd='C:\Users\SHIN\Desktop\MI_CODE\MI_DATA\190422\twoclasses_32ch\';
+dd='C:\Users\SHIN\Desktop\MI_CODE\MI_DATA\190422\twoclasses_32ch\'; 
 filelist={'khshin_MI_ss1_0_cap', 'khshin_MI_ss1_3_cap', 'khshin_MI_ss1_6_cap', 'khshin_MI_ss1_9_cap'};
 
 %%
-fold=5;
+fold=5; % fold for cross validation
 
 ival = [750 4500];
 % ival= [0 1000; 2000 3000; 4000 5000;];
 % selected_channel= [6 10 11 14 16 19 21 25];
-selected_channel= [1:32];
+selected_channel= [1:32]; % channel selection
 
  
 %%
