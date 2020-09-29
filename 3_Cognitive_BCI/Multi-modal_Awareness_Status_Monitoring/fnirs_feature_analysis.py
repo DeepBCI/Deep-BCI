@@ -58,3 +58,7 @@ feat_labels = df_nirs.columns[1:]
 forest = RandomForestClassifier(n_estimators=500,
                                 random_state=1)
 
+forest.fit(X_train, y_train)
+importances = forest.feature_importances_
+indices = np.argsort(importances)[::-1]
+
