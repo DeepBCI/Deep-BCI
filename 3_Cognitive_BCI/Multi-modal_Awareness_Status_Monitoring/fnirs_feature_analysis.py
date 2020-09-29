@@ -35,3 +35,9 @@ X_test = minmax.transform(X_test)
 from sklearn.manifold import TSNE
 tsne = TSNE(n_components=2)
 X_train_tsne = tsne.fit_transform(X_train)
+
+# feature importance
+# extra tree classifier
+from sklearn.ensemble import ExtraTreesClassifier
+model = ExtraTreesClassifier(n_estimators=100)
+model.fit(X_train, y_train)
