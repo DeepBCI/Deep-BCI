@@ -46,3 +46,9 @@ model.fit(X_train, y_train)
 for i in range(len(model.feature_importances_)):
     t = i + 1
     print('[%d]' % t, f_names[t], ':', model.feature_importances_[i])
+
+#feature reduction
+from sklearn.feature_selection import SelectFromModel
+sfm1 = SelectFromModel(model, max_features=5, prefit=True)
+X_train_ext = sfm1.transform(X_train)
+
