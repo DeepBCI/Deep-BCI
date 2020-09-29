@@ -16,3 +16,17 @@ for feature in ['mean', 'var', 'skew', 'kurt','peak','time-to-peak','slope','AUC
 df_nirs.columns = f_names
 
 print(df_nirs.shape)
+
+
+# split data
+from sklearn.model_selection import train_test_split
+X, y = df_nirs.iloc[:,1:], df_nirs.iloc[:,0]
+X_train, X_test, y_train, y_test =train_test_split(X, y, test_size=0.2, random_state=0, stratify=y)
+
+
+# feature scaling
+from sklearn.preprocessing import MinMaxScaler
+
+minmax = MinMaxScaler()
+X_train = minmax.fit_transform(X_train)
+X_test = minmax.transform(X_test)
