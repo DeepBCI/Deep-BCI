@@ -41,3 +41,8 @@ X_train_tsne = tsne.fit_transform(X_train)
 from sklearn.ensemble import ExtraTreesClassifier
 model = ExtraTreesClassifier(n_estimators=100)
 model.fit(X_train, y_train)
+
+# ranking
+for i in range(len(model.feature_importances_)):
+    t = i + 1
+    print('[%d]' % t, f_names[t], ':', model.feature_importances_[i])
