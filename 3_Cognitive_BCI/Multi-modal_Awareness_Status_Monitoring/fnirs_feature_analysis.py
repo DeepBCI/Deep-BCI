@@ -30,3 +30,5 @@ from sklearn.preprocessing import MinMaxScaler
 minmax = MinMaxScaler()
 X_train = minmax.fit_transform(X_train)
 X_test = minmax.transform(X_test)
+
+# demenstion reduction
