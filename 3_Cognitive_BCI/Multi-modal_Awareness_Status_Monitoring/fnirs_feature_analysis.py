@@ -31,4 +31,7 @@ minmax = MinMaxScaler()
 X_train = minmax.fit_transform(X_train)
 X_test = minmax.transform(X_test)
 
-# demenstion reduction
+# demension reduction
+from sklearn.manifold import TSNE
+tsne = TSNE(n_components=2)
+X_train_tsne = tsne.fit_transform(X_train)
