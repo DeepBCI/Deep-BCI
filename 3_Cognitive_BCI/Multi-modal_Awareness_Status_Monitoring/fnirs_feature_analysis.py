@@ -52,3 +52,9 @@ from sklearn.feature_selection import SelectFromModel
 sfm1 = SelectFromModel(model, max_features=5, prefit=True)
 X_train_ext = sfm1.transform(X_train)
 
+#randomforestclassifier
+from sklearn.ensemble import RandomForestClassifier
+feat_labels = df_nirs.columns[1:]
+forest = RandomForestClassifier(n_estimators=500,
+                                random_state=1)
+
