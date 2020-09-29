@@ -61,4 +61,11 @@ forest = RandomForestClassifier(n_estimators=500,
 forest.fit(X_train, y_train)
 importances = forest.feature_importances_
 indices = np.argsort(importances)[::-1]
+for f in range(X_train.shape[1]):
+    print("%2d) %-*s %f" % (f + 1, 30,
+                            feat_labels[indices[f]],
+                            importances[indices[f]]))
+sfm2 = SelectFromModel(forest, max_features=5, prefit=True)
+X_train_rf = sfm2.transform(X_train)
+
 
