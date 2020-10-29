@@ -12,6 +12,7 @@
 % 
 % 
 % created: 2019.05.07
+% updated: 2020.10.29
 % author: Young-Seok, Kweon
 
 %% initialize
@@ -53,18 +54,18 @@ end
 index_P=find(char(anesthetic(:,2))=='P');
 index_M=find(char(anesthetic(:,2))=='M');
 
-group{1}=anesthetic(index_P,:);
-group{2}=anesthetic(index_M,:);
+group{1}=anesthetic(index_P,:); % extract the propofol data from whole data set 
+group{2}=anesthetic(index_M,:); % extract the midazolam data from whole data set
 group_final{2,3}="abcd";
 % separate subjects (High/Medium/Low)
 for i=1:2 
-    index_H=find(char(group{i}(:,3))=='H');
-    index_M=find(char(group{i}(:,3))=='M');
-    index_L=find(char(group{i}(:,3))=='L');
+    index_H=find(char(group{i}(:,3))=='H'); 
+    index_M=find(char(group{i}(:,3))=='M'); 
+    index_L=find(char(group{i}(:,3))=='L'); 
    
-    group_final{i,1}=group{i}(index_H,:);
-    group_final{i,2}=group{i}(index_M,:);
-    group_final{i,3}=group{i}(index_L,:);
+    group_final{i,1}=group{i}(index_H,:); % extract the high dosage data from anesthetic group
+    group_final{i,2}=group{i}(index_M,:); % extract the medium dosage data from anesthetic group
+    group_final{i,3}=group{i}(index_L,:); % extract the low dosage data from anesthetic group
 end
 fprintf('Info processing: ');
 toc
