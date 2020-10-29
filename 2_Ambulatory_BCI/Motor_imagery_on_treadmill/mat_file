@@ -10,6 +10,13 @@ dd = 'C:\Users\SHIN\Desktop\MI_CODE\MI_DATA\190422\';
 % 파일 이름
 filelist={'khshin_MI_ss1_0_cap', 'khshin_MI_ss1_3_cap', 'khshin_MI_ss1_6_cap', 'khshin_MI_ss1_9_cap'};
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% khshin_MI_ss1_0_cap: standing on the treadmil  %
+% khshin_MI_ss1_3_cap: walking on the treadmil   %
+% khshin_MI_ss1_6_cap: jogging on the treadmil   %
+% khshin_MI_ss1_9_cap: running on the treadmil   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %% naming marker
 
 % stimDef= {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, ...
