@@ -73,3 +73,37 @@ def rri_test_recurrent(filelist=None):
         if i == 0:
             pass
     return shape_tmp, recurrence_tmp, np.asarray(recur_resize)
+
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Flatten
+from keras.layers import Conv2D, Convolution2D, MaxPooling2D
+
+model = Sequential()
+
+model.add(Convolution2D(32, (3, 3), activation='relu', input_shape=(1, 32, 32), data_format='channels_first'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.25))
+model.add(Convolution2D(32, (3, 3), activation='relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.25))
+model.add(Flatten())
+model.add(Dense(64, activation='relu'))
+# model.add(LeakyReLU(alpha=0.03))
+model.add(Dropout(0.5))
+model.add(Dense(3, activation='softmax'))
+
+model.compile(loss='categorical_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+
+#reshape to include depth
+X_train = x_train.reshape(x_train.shape[0], 1, 32,32)
+#convert to float32 and normalize to [0,1]
+X_train = X_train.astype('float32')
+X_train /= np.amax(X_train)
+# convert labels to class matrix, one-hot-encoding
+Y_train = np_utils.to_categorical(y_train, 3)
+# split in train and test set
+X_train, x_test, Y_train, y_test = train_test_split(X_train, Y_train, test_size=0.1)
+
+model.fit(X_train, Y_train, epochs=200, batch_size=16,shuffle=True)
