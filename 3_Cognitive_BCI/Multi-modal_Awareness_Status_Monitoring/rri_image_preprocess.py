@@ -44,3 +44,11 @@ print('data length=', len(dir_list1), len(dir_list2), len(dir_list3))
 shape_tmp = list()
 recurrence_tmp = list()
 recur_resize = list()
+
+def rri_test_recurrent(filelist=None):
+    global shape_tmp
+    for i in range(len(filelist)):
+    # global  np_tmp
+
+    # for i in range(10):
+        with open(filelist[i], 'rb') as f: plk_tmp = pkl.load(f)
