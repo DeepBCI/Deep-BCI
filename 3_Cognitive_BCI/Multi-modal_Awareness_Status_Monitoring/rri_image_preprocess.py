@@ -48,23 +48,18 @@ recur_resize = list()
 def rri_test_recurrent(filelist=None):
     global shape_tmp
     for i in range(len(filelist)):
-    # global  np_tmp
 
     # for i in range(10):
         with open(filelist[i], 'rb') as f: plk_tmp = pkl.load(f)
         ecg_re = ecg.ecg(signal=plk_tmp, sampling_rate=Fs, show=False)
-        # print(ecg_re)
         rpeaks_tmp = ecg_re['rpeaks'].tolist()
         nni = tools.nn_intervals(rpeaks=rpeaks_tmp)
-        # print(nni.shape, type(nni))
-        # print(nni)
         nni_tmp = nni.reshape((-1, int(nni.shape[0])))  # for 2d data type
-        # rp = RecurrencePlot(threshold='distance', percentage=20)
         rp = RecurrencePlot(threshold='point', percentage=20)
         X_rp = rp.fit_transform(nni_tmp)
-        # print("X_rp shape=", len(filelist)-i)
-        # print(type(X_rp), X_rp.shape)
-        # print(type(X_rp[0]), X_rp[0].shape)
-        # for list
-        # one of the most important parts
         dst = cv2.resize(X_rp[0], dsize=(135, 135), interpolation=cv2.INTER_AREA)
+        shape_tmp.append(X_rp.shape)
+        recurrence_tmp.append(X_rp)
+        recur_resize.append(dst)
+        # for pandas
+        # shape_tmp = shape_tmp.append(pd.DataFrame(X_rp.shape))
