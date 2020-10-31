@@ -74,3 +74,18 @@ loss_ax.legend(loc='upper left')
 acc_ax.legend(loc='lower left')
 
 plt.show()
+
+# 5. 모델 평가하기
+loss_and_metrics = model.evaluate(x_test, y_test, batch_size=120)
+print('## evaluation loss and_metrics ##')
+print('loss : ' + str(loss_and_metrics[0]))
+print('accuracy : ' + str(loss_and_metrics[1]*100))
+
+# 6. 모델 사용하기
+yhat_test = model.predict(x_test, batch_size=120)
+predict_class = np.argmax(yhat_test, axis=1)
+y_class = np.argmax(y_test, axis=1)
+
+# 7. 평가결과
+from sklearn.metrics import classification_report
+print(classification_report(y_class, predict_class))

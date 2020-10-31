@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="76eb7ec9-10a1-471e-bf65-e7a37bc05f30" name="Default Changelist" comment="" />
+    <list default="true" id="76eb7ec9-10a1-471e-bf65-e7a37bc05f30" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/3_Cognitive_BCI/Multi-modal_Awareness_Status_Monitoring/fnirs_CNN_classification.py" beforeDir="false" afterPath="$PROJECT_DIR$/3_Cognitive_BCI/Multi-modal_Awareness_Status_Monitoring/fnirs_CNN_classification.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
