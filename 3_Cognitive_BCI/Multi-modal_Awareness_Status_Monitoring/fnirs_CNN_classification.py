@@ -35,15 +35,7 @@ model.add(Conv2D(128, (5, 5), padding='same', activation='relu', input_shape=(12
 # model.add(BatchNormalization())
 model.add(MaxPooling2D(pool_size=(4, 1)))
 model.add(Dropout(0.25))
-model.add(Conv2D(128, (5, 5), padding='same', activation='relu'))
-model.add(MaxPooling2D(pool_size=(4, 1)))
-model.add(Dropout(0.25))
-model.add(Conv2D(128, (3, 3), padding='same', activation='relu'))
-model.add(MaxPooling2D(pool_size=(2, 1)))
-model.add(Dropout(0.25))
-model.add(Flatten())
-model.add(Dense(128, activation='relu'))
-model.add(Dropout(0.5))
+
 model.add(Dense(3, activation='softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
