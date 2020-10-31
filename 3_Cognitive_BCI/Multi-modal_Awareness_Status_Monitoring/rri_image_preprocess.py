@@ -74,39 +74,6 @@ def rri_test_recurrent(filelist=None):
             pass
     return shape_tmp, recurrence_tmp, np.asarray(recur_resize)
 
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten
-from keras.layers import Conv2D, Convolution2D, MaxPooling2D
-
-model = Sequential()
-
-model.add(Convolution2D(32, (3, 3), activation='relu', input_shape=(1, 32, 32), data_format='channels_first'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.25))
-model.add(Convolution2D(32, (3, 3), activation='relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.25))
-model.add(Flatten())
-model.add(Dense(64, activation='relu'))
-# model.add(LeakyReLU(alpha=0.03))
-model.add(Dropout(0.5))
-model.add(Dense(3, activation='softmax'))
-
-model.compile(loss='categorical_crossentropy',
-              optimizer='adam',
-              metrics=['accuracy'])
-
-#reshape to include depth
-X_train = x_train.reshape(x_train.shape[0], 1, 32,32)
-#convert to float32 and normalize to [0,1]
-X_train = X_train.astype('float32')
-X_train /= np.amax(X_train)
-# convert labels to class matrix, one-hot-encoding
-Y_train = np_utils.to_categorical(y_train, 3)
-# split in train and test set
-X_train, x_test, Y_train, y_test = train_test_split(X_train, Y_train, test_size=0.1)
-
-model.fit(X_train, Y_train, epochs=200, batch_size=16,shuffle=True)
 
 
 # 자료구조?
@@ -135,3 +102,25 @@ if __name__ == "__main__":
     #
     # cv2.waitKey(0)
     """
+    print(awake_recur_ressize_result.shape)
+    print(awake_recur_ressize_result[0])
+    # Create List of Single Item Repeated n Times in Python
+    # ref: https://stackoverflow.com/questions/3459098/create-list-of-single-item-repeated-n-times
+    awake_length = len(dir_list1)
+    print("awake_length=", type(awake_length), awake_length)
+    y_awake = ["awake"] * awake_length
+    print(len(y_awake), y_awake[0])
+
+    _, _, drowsy_recur_ressize_result = rri_test_recurrent(dir_list2)  # drowsy
+    drowsy_length = len(dir_list2)
+    print("drowsy_length=", type(drowsy_length), drowsy_length)
+    y_drowsy = ["drowsy"] * drowsy_length
+    print(len(y_drowsy), y_drowsy[0])
+
+    _, _, uncons_recur_ressize_result = rri_test_recurrent(dir_list3)  # uncons
+    uncons_length = len(dir_list3)
+    print("drowsy_length=", type(uncons_length), uncons_length)
+    y_uncons = ["uncons"] * uncons_length
+    print(len(y_uncons), y_uncons[0])
+
+    print("final numpy x shape=", np.asarray(recur_resize).shape)
