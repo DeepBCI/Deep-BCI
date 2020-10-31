@@ -21,3 +21,26 @@ pd.set_option('display.max_columns', 500) ## columns
 pd.set_option('display.width', 1000)
 
 Fs = 250
+
+filepath_awake = 'd:/bci/ecg_all/pkl-250Hz/without bed/awake'
+filepath_drows = 'd:/bci/ecg_all/pkl-250Hz/without bed/drows'
+filepath_uncons = 'd:/bci/ecg_all/pkl-250Hz/without bed/uncons'
+
+dir_list1 = list()
+dir_list2 = list()
+dir_list3 = list()
+
+fm = FileManager()
+print("file manager start")
+fm.search(filepath_awake, dir_list1)
+dir_list1 = dir_list1[:10]
+fm.search(filepath_drows, dir_list2)
+dir_list2 = dir_list2[:10]
+fm.search(filepath_uncons, dir_list3)
+dir_list3 = dir_list3[:10]
+print('data length=', len(dir_list1), len(dir_list2), len(dir_list3))
+# np_tmp = np.empty(shape=(10,140,140))
+
+shape_tmp = list()
+recurrence_tmp = list()
+recur_resize = list()
