@@ -52,3 +52,13 @@ def rri_test_recurrent(filelist=None):
 
     # for i in range(10):
         with open(filelist[i], 'rb') as f: plk_tmp = pkl.load(f)
+        ecg_re = ecg.ecg(signal=plk_tmp, sampling_rate=Fs, show=False)
+        # print(ecg_re)
+        rpeaks_tmp = ecg_re['rpeaks'].tolist()
+        nni = tools.nn_intervals(rpeaks=rpeaks_tmp)
+        # print(nni.shape, type(nni))
+        # print(nni)
+        nni_tmp = nni.reshape((-1, int(nni.shape[0])))  # for 2d data type
+        # rp = RecurrencePlot(threshold='distance', percentage=20)
+        rp = RecurrencePlot(threshold='point', percentage=20)
+        X_rp = rp.fit_transform(nni_tmp)
