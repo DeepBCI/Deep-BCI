@@ -124,3 +124,28 @@ if __name__ == "__main__":
     print(len(y_uncons), y_uncons[0])
 
     print("final numpy x shape=", np.asarray(recur_resize).shape)
+
+    Y = y_awake + y_drowsy + y_uncons
+    print("finaly list y len=", len(Y))
+    Y = np.asarray(Y)
+    print(Y.shape)
+
+    # make file! in order to saive time
+    X = np.asarray(recur_resize)
+    np.save('recur_X_np', X)
+    np.save('recur_Y_np', Y)
+    X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X, Y, test_size=0.30)
+
+    """
+    train_datagen = ImageDataGenerator(rescale=1. / 255,
+                                       shear_range=0.2,
+                                       zoom_range=0.2,
+                                       horizontal_flip=True)
+
+    test_datagen = ImageDataGenerator(rescale=1. / 255)
+
+
+    train_datagen.flow_from_directory()
+    """
+    # train_datagen.flow_from_dataframe()
+    cv2.destroyAllWindows()
