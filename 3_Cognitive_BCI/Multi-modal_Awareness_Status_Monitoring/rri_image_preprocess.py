@@ -107,3 +107,31 @@ Y_train = np_utils.to_categorical(y_train, 3)
 X_train, x_test, Y_train, y_test = train_test_split(X_train, Y_train, test_size=0.1)
 
 model.fit(X_train, Y_train, epochs=200, batch_size=16,shuffle=True)
+
+
+# 자료구조?
+if __name__ == "__main__":
+    result, recur_result, awake_recur_ressize_result = rri_test_recurrent(dir_list1)   # awake
+    print(len(result))
+    # print(result[0])
+    pd_result =  pd.DataFrame(result)
+    # print("result=", pd_result)
+    """
+    # plot check
+    plot_tmp = recur_result[50]
+    plot_tmp = plot_tmp[0]
+    print(plot_tmp.shape)
+    # matrix 채울 방법이...
+    dst = cv2.resize(plot_tmp, dsize=(135, 135), interpolation=cv2.INTER_AREA)
+    print(type(dst), dst.shape)
+    """
+    """
+    cv2.imshow('dst', dst)
+    # cv2.imshow('dst', dst)
+    plt.imshow(plot_tmp, cmap='binary', origin='lower')
+    plt.title('Recurrence Plot', fontsize=16)
+    plt.tight_layout()
+    plt.show()
+    #
+    # cv2.waitKey(0)
+    """
