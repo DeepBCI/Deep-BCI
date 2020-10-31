@@ -63,3 +63,13 @@ def rri_test_recurrent(filelist=None):
         recur_resize.append(dst)
         # for pandas
         # shape_tmp = shape_tmp.append(pd.DataFrame(X_rp.shape))
+        # plot check
+        plt.imshow(X_rp[0], cmap='binary', origin='lower')
+        plt.plot(nni)
+        plt.title('Recurrence Plot', fontsize=16)
+        plt.tight_layout()
+        plt.show()
+        # np_tmp = np.column_stack([np_tmp, X_rp])
+        if i == 0:
+            pass
+    return shape_tmp, recurrence_tmp, np.asarray(recur_resize)
