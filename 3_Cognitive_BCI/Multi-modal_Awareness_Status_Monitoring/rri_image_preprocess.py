@@ -62,3 +62,9 @@ def rri_test_recurrent(filelist=None):
         # rp = RecurrencePlot(threshold='distance', percentage=20)
         rp = RecurrencePlot(threshold='point', percentage=20)
         X_rp = rp.fit_transform(nni_tmp)
+        # print("X_rp shape=", len(filelist)-i)
+        # print(type(X_rp), X_rp.shape)
+        # print(type(X_rp[0]), X_rp[0].shape)
+        # for list
+        # one of the most important parts
+        dst = cv2.resize(X_rp[0], dsize=(135, 135), interpolation=cv2.INTER_AREA)
