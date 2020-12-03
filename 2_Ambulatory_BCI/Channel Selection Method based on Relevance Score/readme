@@ -2,4 +2,4 @@
 
 * Programming Language: Python and MATLAB  
 * Contact: J.W. Lee (dsa934@korea.ac.kr)
-* Function : This algorithm is a electrode selection method by evaluating electrode's contribution to motor imagery based on relevance score and CNNs for brain signal data(BCI competition III IVa) which has 118 electrodes.
+* Function : This algorithm is an electrode selection method by evaluating electrode's contribution to motor imagery based on relevance score and CNNs for brain signal data(BCI competition III IVa) which has 118 electrodes.
