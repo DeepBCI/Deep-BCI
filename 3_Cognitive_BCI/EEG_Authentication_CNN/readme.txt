@@ -1,0 +1,3 @@
+*Programming Language: Python
+*Contact: Hyung-Tak Lee (htlee@korea.ac.kr)
+*Function: This program aims at identifying individuals based on resting-state EEG using convolutional neural network. 
