@@ -2,4 +2,4 @@
 
 * Programming Language: MATLAB
 * Contact: Y.-E. Lee (ye_lee@korea.ac.kr)
-* Function: This algorithm is Scalp- and ear-EEG mobiledataset with ERP and SSVEP paradigm duringstanding, walking, and running for practicalbrain-computer interface
+* Function: This algorithm is decoding scalp- and ear-EEG mobile dataset with ERP and SSVEP paradigm during standing, walking, and running for practical brain-computer interface
