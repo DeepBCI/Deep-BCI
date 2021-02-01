@@ -1,7 +1,7 @@
 
-
 from __future__ import print_function
 
+# declare packages
 import torch
 import torch.nn as nn
 
