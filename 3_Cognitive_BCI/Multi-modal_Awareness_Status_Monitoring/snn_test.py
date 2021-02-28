@@ -7,7 +7,9 @@ from keras.callbacks import TensorBoard
 
 
 #bindsnet library
-https://github.com/BindsNET/bindsnet
+# https://github.com/BindsNET/bindsnet
+# ref: https://medium.com/pytorch/bindsnet-72726c208a
+# https://bindsnet-docs.readthedocs.io/guide/guide_part_i.html
 
 (X_train,y_train), (X_test, y_test) = mnist.load_data()
 X_train = X_train.reshape(60000,28,28,1).astype('float32')
