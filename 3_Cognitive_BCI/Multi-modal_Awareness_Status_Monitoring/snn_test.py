@@ -41,3 +41,8 @@ model.add(Flatten())
 model.add(Dense(128, activation='relu'))
 #128칸1차원배열이 출력, 활성화함수
 model.add(Dropout(0.5))
+
+model.add(Dense(n_classes, activation='softmax'))
+#결과값dense, 0~1을 표현하기위한 softmax
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.fit(X_train, y_train, batch_size=128, epochs=15, verbose=1)
