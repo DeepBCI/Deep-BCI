@@ -34,12 +34,6 @@ model.add(Conv2D(32, kernel_size=(3,3), activation='relu', input_shape=(28,28,1)
 model.add(Conv2D(64, kernel_size=(3,3), activation='relu'))
 model.add(MaxPooling2D(pool_size=(2,2)))
 
-model.add(Conv2D(32, kernel_size=(3,3), activation='relu', input_shape=(28,28,1)) )
-model.add(Conv2D(64, kernel_size=(3,3), activation='relu'))
-model.add(MaxPooling2D(pool_size=(2,2)))
-#conv2d(커널개수, 커널행렬크기,활성화함수)
-#한개의 데이터셋은 conv2d를 통과하면 커널 개수 만큼의 output을가짐
-#maxpooling(pooling의 행렬크기)
 model.add(Dropout(0.25))
 #드롭아웃
 model.add(Flatten())
