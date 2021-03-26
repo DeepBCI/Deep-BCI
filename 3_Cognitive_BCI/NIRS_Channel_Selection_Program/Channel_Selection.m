@@ -34,172 +34,68 @@ for sub = 1:15
         fv_test.x = fv.x(:,test);
         fv_test.y = fv.y(:,test);
         
-        %% 1. SFS_Op+Dist (Global ver1)
-        disp('SFS_Op+Dist (Global ver1)')
-        temp = ch.order;
-        for channel = 1:num_channel
-            if channel == 1
-                for sfs = 1:length(temp)
-                    for Inner_k = 1:kfold
-                        Inner_test = (Inner_indice{k} == Inner_k);
-                        Inner_train = ~Inner_test;
-                        Trset = train_shrinkageLDA_classifier(fv_train.x(3*temp(sfs)-2:3*temp(sfs),Inner_train), fv_train.y(1,Inner_train));
-                        c_est(Inner_k) = apply_shrinkageLDA_classifier(Trset, fv_train.x(3*temp(sfs)-2:3*temp(sfs),Inner_test), fv_train.y(1,Inner_test));
-                    end
-                    cv_acc(sfs) = mean(c_est);
-                end
-                [~,accmax] = max(cv_acc);
-                
-                SFS(channel) = temp(accmax);
-                tempfeat = fv_train.x(3*temp(accmax)-2:3*temp(accmax),:);
-                temp(accmax) = [];
-                clear sfs c_est cv_acc accmax
-            else
-                for sfs = 1:length(temp)
-                    for Inner_k = 1:kfold
-                        Inner_test = (Inner_indice{k} == Inner_k);
-                        Inner_train = ~Inner_test;
-                        Trset = train_shrinkageLDA_classifier([fv_train.x(3*temp(sfs)-2:3*temp(sfs),Inner_train); tempfeat(:,Inner_train)], fv_train.y(1,Inner_train));
-                        c_est(Inner_k) = apply_shrinkageLDA_classifier(Trset, [fv_train.x(3*temp(sfs)-2:3*temp(sfs),Inner_test); tempfeat(:,Inner_test)], fv_train.y(1,Inner_test));
-                    end
-                    cv_acc(sfs) = mean(c_est);
-                    temp_s = [ch.opnum(1,SFS(:)) ch.opnum(1,temp(sfs))];
-                    temp_d = [ch.opnum(2,SFS(:)) ch.opnum(2,temp(sfs))];
-                    optode(sfs) = length(unique(temp_s))+length(unique(temp_d));
-                    
-                    loc1 = mean([ch.cxloc(SFS(:)); ch.cyloc(SFS(:))]',1);
-                    loc2 = [ch.cxloc(temp(sfs)) ch.cyloc(temp(sfs))];
-                    dist(sfs) = pdist([loc1; loc2]);
-                    clear loc1 loc2 dist_temp temp_s temp_d
-                end
-                clear sfs c_est
-                
-                fitness = cv_acc - (optode/52) - (dist/24.08);
-                [~,accmax] = max(fitness);
-                dist_indi(channel) = dist(accmax)*(channel-1);
-                
-                SFS(channel) = temp(accmax);
-                tempfeat = [tempfeat; fv_train.x(3*temp(accmax)-2:3*temp(accmax),:)];
-                temp(accmax) = [];
-                clear a b optode temp_s temp_d cv_acc accmax dist
-            end
-        end
-        Select{1}{k} = ch.num(SFS);
-        clearvars -except num_channel Analysis_date iter fv_train Inner_indice sub ch fv indices kfold k op_d op_s op_info op_loc opx opy Select subdir_list
-        
-        %% 2. SFS_Op+Dist (Global ver2)
-        
-        disp('SFS_Op+Dist (Global ver2)')
-        temp = ch.order;
-        for channel = 1:num_channel
-            if channel == 1
-                for sfs = 1:length(temp)
-                    for Inner_k = 1:kfold
-                        Inner_test = (Inner_indice{k} == Inner_k);
-                        Inner_train = ~Inner_test;
-                        Trset = train_shrinkageLDA_classifier(fv_train.x(3*temp(sfs)-2:3*temp(sfs),Inner_train), fv_train.y(1,Inner_train));
-                        c_est(Inner_k) = apply_shrinkageLDA_classifier(Trset, fv_train.x(3*temp(sfs)-2:3*temp(sfs),Inner_test), fv_train.y(1,Inner_test));
-                    end
-                    cv_acc(sfs) = mean(c_est);
-                end
-                [~,accmax] = max(cv_acc);
-                
-                SFS(channel) = temp(accmax);
-                tempfeat = fv_train.x(3*temp(accmax)-2:3*temp(accmax),:);
-                temp(accmax) = [];
-                clear sfs c_est cv_acc accmax
-            else
-                for sfs = 1:length(temp)
-                    for Inner_k = 1:kfold
-                        Inner_test = (Inner_indice{k} == Inner_k);
-                        Inner_train = ~Inner_test;
-                        Trset = train_shrinkageLDA_classifier([fv_train.x(3*temp(sfs)-2:3*temp(sfs),Inner_train); tempfeat(:,Inner_train)], fv_train.y(1,Inner_train));
-                        c_est(Inner_k) = apply_shrinkageLDA_classifier(Trset, [fv_train.x(3*temp(sfs)-2:3*temp(sfs),Inner_test); tempfeat(:,Inner_test)], fv_train.y(1,Inner_test));
-                    end
-                    cv_acc(sfs) = mean(c_est);
-                    temp_s = [ch.opnum(1,SFS(:)) ch.opnum(1,temp(sfs))];
-                    temp_d = [ch.opnum(2,SFS(:)) ch.opnum(2,temp(sfs))];
-                    optode(sfs) = length(unique(temp_s))+length(unique(temp_d));
-                    
-                    loc1 = [ch.cxloc(SFS(1)) ch.cyloc(SFS(1))];
-                    loc2 = mean([ch.cxloc(temp(sfs)) ch.cyloc(temp(sfs)); ch.cxloc(SFS(2:end))' ch.cyloc(SFS(2:end))'],1);
-                    dist(sfs) = pdist([loc1; loc2]);
-                    clear loc1 loc2 dist_temp temp_s temp_d
-                end
-                clear sfs c_est
-                
-                fitness = cv_acc - (optode/52) - (dist/24.08);
-                [~,accmax] = max(fitness);
-                
-                SFS(channel) = temp(accmax);
-                tempfeat = [tempfeat; fv_train.x(3*temp(accmax)-2:3*temp(accmax),:)];
-                temp(accmax) = [];
-                clear a b optode temp_s temp_d cv_acc accmax dist
-            end
-        end
-        Select{2}{k} = ch.num(SFS);
-        clearvars -except num_channel Analysis_date iter fv_train Inner_indice sub ch fv indices kfold k op_d op_s op_info op_loc opx opy Select subdir_list
-        
-        %% 3. SFS_Alpha_Beta
-        disp('SFS_Alpha_Beta')
-        for beta = 0:10
-            for alpha = 0:10
-                disp(['Alpha = ' num2str(alpha/10) ', Beta = ' num2str(beta/10)]);
-                temp = ch.order;
-                for channel = 1:num_channel
-                    if channel == 1
-                        for sfs = 1:length(temp)
-                            for Inner_k = 1:kfold
-                                Inner_test = (Inner_indice{k} == Inner_k);
-                                Inner_train = ~Inner_test;
-                                Trset = train_shrinkageLDA_classifier(fv_train.x(3*temp(sfs)-2:3*temp(sfs),Inner_train), fv_train.y(1,Inner_train));
-                                c_est(Inner_k) = apply_shrinkageLDA_classifier(Trset, fv_train.x(3*temp(sfs)-2:3*temp(sfs),Inner_test), fv_train.y(1,Inner_test));
+        %% SFS_Alpha_Beta_Gamma
+        disp('SFS_Alpha_Beta_Gamma')
+        for gamma = 0:10
+            for beta = 0:10
+                for alpha = 0:10
+                    disp(['Alpha = ' num2str(alpha/10) ', Beta = ' num2str(beta/10) ', Gamma = ' num2str(beta/10)]);
+                    temp = ch.order;
+                    for channel = 1:num_channel
+                        if channel == 1
+                            for sfs = 1:length(temp)
+                                for Inner_k = 1:kfold
+                                    Inner_test = (Inner_indice{k} == Inner_k);
+                                    Inner_train = ~Inner_test;
+                                    Trset = train_shrinkageLDA_classifier(fv_train.x(3*temp(sfs)-2:3*temp(sfs),Inner_train), fv_train.y(1,Inner_train));
+                                    c_est(Inner_k) = apply_shrinkageLDA_classifier(Trset, fv_train.x(3*temp(sfs)-2:3*temp(sfs),Inner_test), fv_train.y(1,Inner_test));
+                                end
+                                cv_acc(sfs) = mean(c_est);
                             end
-                            cv_acc(sfs) = mean(c_est);
-                        end
-                        [~,accmax] = max(cv_acc);
-                        
-                        SFS(channel) = temp(accmax);
-                        tempfeat = fv_train.x(3*temp(accmax)-2:3*temp(accmax),:);
-                        temp(accmax) = [];
-                        clear sfs c_est cv_acc accmax
-                    else
-                        for sfs = 1:length(temp)
-                            for Inner_k = 1:kfold
-                                Inner_test = (Inner_indice{k} == Inner_k);
-                                Inner_train = ~Inner_test;
-                                Trset = train_shrinkageLDA_classifier([fv_train.x(3*temp(sfs)-2:3*temp(sfs),Inner_train); tempfeat(:,Inner_train)], fv_train.y(1,Inner_train));
-                                c_est(Inner_k) = apply_shrinkageLDA_classifier(Trset, [fv_train.x(3*temp(sfs)-2:3*temp(sfs),Inner_test); tempfeat(:,Inner_test)], fv_train.y(1,Inner_test));
-                            end
-                            cv_acc(sfs) = mean(c_est);
-                            temp_s = [ch.opnum(1,SFS(:)) ch.opnum(1,temp(sfs))];
-                            temp_d = [ch.opnum(2,SFS(:)) ch.opnum(2,temp(sfs))];
-                            optode(sfs) = length(unique(temp_s))+length(unique(temp_d));
+                            [~,accmax] = max(cv_acc);
                             
-                            loc1 = mean([ch.cxloc(SFS(:)); ch.cyloc(SFS(:))]',1);
-                            loc2 = [ch.cxloc(temp(sfs)) ch.cyloc(temp(sfs))];
-                            dist(sfs) = pdist([loc1; loc2]);
-                            clear loc1 loc2 dist_temp temp_s temp_d
+                            SFS(channel) = temp(accmax);
+                            tempfeat = fv_train.x(3*temp(accmax)-2:3*temp(accmax),:);
+                            temp(accmax) = [];
+                            clear sfs c_est cv_acc accmax
+                        else
+                            for sfs = 1:length(temp)
+                                for Inner_k = 1:kfold
+                                    Inner_test = (Inner_indice{k} == Inner_k);
+                                    Inner_train = ~Inner_test;
+                                    Trset = train_shrinkageLDA_classifier([fv_train.x(3*temp(sfs)-2:3*temp(sfs),Inner_train); tempfeat(:,Inner_train)], fv_train.y(1,Inner_train));
+                                    c_est(Inner_k) = apply_shrinkageLDA_classifier(Trset, [fv_train.x(3*temp(sfs)-2:3*temp(sfs),Inner_test); tempfeat(:,Inner_test)], fv_train.y(1,Inner_test));
+                                end
+                                cv_acc(sfs) = mean(c_est);
+                                temp_s = [ch.opnum(1,SFS(:)) ch.opnum(1,temp(sfs))];
+                                temp_d = [ch.opnum(2,SFS(:)) ch.opnum(2,temp(sfs))];
+                                optode(sfs) = length(unique(temp_s))+length(unique(temp_d));
+                                
+                                loc1 = mean([ch.cxloc(SFS(:)); ch.cyloc(SFS(:))]',1);
+                                loc2 = [ch.cxloc(temp(sfs)) ch.cyloc(temp(sfs))];
+                                dist(sfs) = pdist([loc1; loc2]);
+                                clear loc1 loc2 dist_temp temp_s temp_d
+                            end
+                            clear sfs c_est
+                            
+                            fitness = (alpha/10) * cv_acc - (beta/10)*(optode/52) - (gamma/10)*(dist/24.08);
+                            [~,accmax] = max(fitness);
+                            dist_indi(channel) = dist(accmax)*(channel-1);
+                            
+                            SFS(channel) = temp(accmax);
+                            tempfeat = [tempfeat; fv_train.x(3*temp(accmax)-2:3*temp(accmax),:)];
+                            temp(accmax) = [];
+                            clear a b optode temp_s temp_d cv_acc accmax dist
                         end
-                        clear sfs c_est
-                        
-                        fitness = cv_acc - (alpha/10)*(optode/52) - (beta/10)*(dist/24.08);
-                        [~,accmax] = max(fitness);
-                        dist_indi(channel) = dist(accmax)*(channel-1);
-                        
-                        SFS(channel) = temp(accmax);
-                        tempfeat = [tempfeat; fv_train.x(3*temp(accmax)-2:3*temp(accmax),:)];
-                        temp(accmax) = [];
-                        clear a b optode temp_s temp_d cv_acc accmax dist
                     end
+                    Select{2}{k}{alpha+1,beta+1,gamma+1} = ch.num(SFS);
+                    clearvars -except num_channel Analysis_date iter fv_train Inner_indice sub ch fv indices kfold k op_d op_s op_info op_loc opx opy Select subdir_list alpha beta gamma
                 end
-                Select{3}{k}{alpha+1,beta+1} = ch.num(SFS);
-                clearvars -except num_channel Analysis_date iter fv_train Inner_indice sub ch fv indices kfold k op_d op_s op_info op_loc opx opy Select subdir_list alpha beta
             end
         end
-        clearvars -except num_channel Analysis_date iter fv_train Inner_indice sub ch fv indices Inner_indice kfold k op_d op_s op_info op_loc opx opy Select sub tempfeat subdir_list beta fv_train
+        clearvars -except num_channel Analysis_date iter fv_train Inner_indice sub ch fv indices Inner_indice kfold k op_d op_s op_info op_loc opx opy Select sub tempfeat subdir_list fv_train
     end
     toc
-    save(['D:\Project\2021\NIRS\20210203\Result\0203\Selected_' num2str(sub) '.mat'], 'Select', 'ch', 'indices', 'Inner_indice');
+    save(['D:\Project\2021\NIRS\20210203\Result\Selected_' num2str(sub) '.mat'], 'Select', 'ch', 'indices', 'Inner_indice');
     clear ch Select indices Inner_indice
 end
