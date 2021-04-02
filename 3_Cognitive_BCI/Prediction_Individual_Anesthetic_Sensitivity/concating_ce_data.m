@@ -5,9 +5,9 @@
 %
 % author: Young-Seok Kweon
 % created: 2020.02.07
-%% init
+%% initialization
 clc;clear;close all;
-%% load
+%% load data
 type={'PPF','MDZ'};
 dosage={'H','M','L'};
 n=10;%number of subjects in each group
