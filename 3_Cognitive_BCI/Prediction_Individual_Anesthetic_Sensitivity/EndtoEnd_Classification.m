@@ -8,16 +8,17 @@
 % 
 % author: Young-Seok Kweon
 % created: 2019.06.18
-%% init
+
+%% initialization
 clc;clear; close all;
 
-%% main
+%% value setting
 frequency={'delta','theta','alpha','beta','gamma'};
 for i=1:1
 	CNN(frequency{i});
 end
 
-%% function 
+%% CNN function run convolutional neural network with specific frequency band 
 function CNN(frequency)
 %% value setting for data setting
 
