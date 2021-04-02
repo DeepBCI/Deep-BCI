@@ -9,9 +9,10 @@
 %
 % author: Young-Seok Kweon
 % created: 2019.06.17
-%% initialize
 
+%% initialize
 clc; clear; close all;
+
 %% value setting for data setting
 
 basic_dir='E:\data_convert\';
@@ -26,9 +27,9 @@ n=10;
 %% data setting and load
 sampling_frequency=1000;
 
-for agent=1:size(Type_filename,1)
+for agent=1:size(Type_filename,1) % number of agent
     
-    for state=1:size(Type_filename,2)
+    for state=1:size(Type_filename,2) % number of dosage
 
         name=strcat(Type_filename{agent,state},name_s{1});
         sens=load([basic_dir2 name]);
@@ -56,7 +57,8 @@ for agent=1:size(Type_filename,1)
 
             [cnt, mrk, mnt]=file_loadMatlab([basic_dir name]); % Load cnt, mrk, mnt variables to Matlab
 
-         
+            
+            % epoching EEG data 
             count=0;
             for j=1:size(mrk.event.desc)
                 if mrk.event.desc(j)==baseline_mrk
