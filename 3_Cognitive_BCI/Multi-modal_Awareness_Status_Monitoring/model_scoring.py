@@ -6,34 +6,24 @@ def normalize(matrix):
     return matrix
 
 
-class CVSequence(tf.keras.utils.Sequence):
-    def __init__(self, x, y, s, i, batch_size, data, data_source):
-        self.x = x
-        self.y = y
-        self.s = s
-        self.i = i
-        self.data = data
-        self.data_source = data_source
-        self.batch_size = batch_size
+def get_score(conf_mat, method='accuracy'):
+    a_real = conf_mat[0]
+    s_real = conf_mat[1]
+    d_real = conf_mat[2]
+    a_pred = conf_mat.T[0]
+    s_pred = conf_mat.T[1]
+    d_pred = conf_mat.T[2]
 
-        if not self.data:   # self.data could be 0(False) or not 0(True). so this means if self.data=False
-            self.input_shape = self.data_source['data']['00']['ppg'][self.x[0][0]:self.x[0][1]].shape
-        else:
-            self.input_shape = self.data[self.s[0]][self.x[0][0]:self.x[0][1]].shape
-        self.output_shape = (self.y.shape[1],)
-        np.random.shuffle(self.i)
-    def __getitem__(self, index=None):
-        if index is None:
-            index = self.i
-        else:
-            index = self.i[index * self.batch_size:(index + 1) * self.batch_size]
-        if not self.data:
-            x = np.stack(list(map(lambda i: self.data_source['data'][f'{self.s[i]:02}']['ppg'][self.x[i][0]:self.x[i][1],0], index)))
-        else:
-            x = np.stack(list(map(lambda i: self.data[self.s[i]][self.x[i][0]:self.x[i][1],0], index)))
-        y = np.stack(list(map(lambda i: self.y[i], index)))
-        return x, y
-    def __len__(self):
-        return int(np.floor(len(self.i) / self.batch_size))
-    def on_epoch_end(self):
-        np.random.shuffle(self.i)
+    if method == 'recall':
+        rec_a = a_real[0] / sum(a_real)
+        rec_s = s_real[1] / sum(s_real)
+        rec_d = d_real[2] / sum(d_real)
+        return (rec_a+rec_s+rec_d)/3
+    if method == 'precision':
+        prc_a = a_pred[0] / sum(a_pred)
+        prc_s = s_pred[1] / sum(s_pred)
+        prc_d = d_pred[2] / sum(d_pred)
+        return (prc_a+prc_s+prc_d)/3
+    else:
+        corr = a_real[0] + s_real[1] + d_real[2]
+        return corr / sum(sum(conf_mat))
