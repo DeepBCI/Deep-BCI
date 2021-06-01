@@ -27,3 +27,8 @@ def get_score(conf_mat, method='accuracy'):
     else:
         corr = a_real[0] + s_real[1] + d_real[2]
         return corr / sum(sum(conf_mat))
+
+
+tot_matrix_lstm=ds_lstm['confusion_matrix'][0][0]
+for i in [1,2,3,4]:
+    tot_matrix_lstm+=ds_lstm['confusion_matrix'][0][i]
