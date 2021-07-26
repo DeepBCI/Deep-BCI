@@ -31,7 +31,7 @@ toc
 
 %% excel data processing
 
-tic;
+tic; % start point to measure data process time 
 type=[2,7,8]; % excel 파일에서 가져올 column 지정
 %     2: identity code
 %     7: kind of anesthetic
@@ -68,7 +68,9 @@ for i=1:2
     group_final{i,3}=group{i}(index_L,:); % extract the low dosage data from anesthetic group
 end
 fprintf('Info processing: ');
-toc
+
+toc % calculate data process time 
+
 %% file name check
 kind={'P_','M_'};
 dose={'High_','Medium_','Low_'}; % set the name for specific dose
