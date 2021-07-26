@@ -1,8 +1,14 @@
 % DataConvertforNN.m:
 % 
-% NN에 사용할 수 있게 상위그룹과 하위그룹으로 나눈다. 
-% K-means로 나눈다.
-% High_P_DataSet_All.m으로 저장
+% 0. Divide subjects into two groups to use for neural networks
+% 0. NN에 사용할 수 있게 상위그룹과 하위그룹으로 나눈다. 
+%
+% 1. Using K-means algorithm 
+% 1. K-means로 나눈다.
+%
+% 2. High_P_DataSet_All.m으로 저장
+% 2. Save data at High_P_DataSet_All.m 
+%
 % 약재의 농도와 종류에 따라 High_P를 
 % Medium_P, Low_P, High_M, Medium_M, Low_M
 % 로 대체해서 저장
