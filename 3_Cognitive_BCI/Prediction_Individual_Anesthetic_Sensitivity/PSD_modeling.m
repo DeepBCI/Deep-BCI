@@ -1,6 +1,8 @@
 % PSD_modeling.m
 %
 % modeling the PSD curve to remove artifacts
+% The PSD curve has alpha peak and delta peak
+% This code model these two peaks
 %
 % author: Young-Seok, Kweon
 % created: 2019.10.15

@@ -1,17 +1,24 @@
 % DataConvertforNN.m:
 % 
-% NN에 사용할 수 있게 상위그룹과 하위그룹으로 나눈다. 
-% K-means로 나눈다.
-% High_P_DataSet_All.m으로 저장
+% 0. Divide subjects into two groups to use for neural networks
+% 0. NN에 사용할 수 있게 상위그룹과 하위그룹으로 나눈다. 
+%
+% 1. Using K-means algorithm 
+% 1. K-means로 나눈다.
+%
+% 2. High_P_DataSet_All.m으로 저장
+% 2. Save data at High_P_DataSet_All.m 
+%
 % 약재의 농도와 종류에 따라 High_P를 
 % Medium_P, Low_P, High_M, Medium_M, Low_M
 % 로 대체해서 저장
 %
 % author: Young-Seok Kweon
 % created: 2019.06.17
-%% initialize
 
+%% initialize
 clc; clear; close all;
+
 %% value setting for data setting
 
 basic_dir='E:\data_convert\';
@@ -26,9 +33,9 @@ n=10;
 %% data setting and load
 sampling_frequency=1000;
 
-for agent=1:size(Type_filename,1)
+for agent=1:size(Type_filename,1) % number of agent
     
-    for state=1:size(Type_filename,2)
+    for state=1:size(Type_filename,2) % number of dosage
 
         name=strcat(Type_filename{agent,state},name_s{1});
         sens=load([basic_dir2 name]);
@@ -56,7 +63,8 @@ for agent=1:size(Type_filename,1)
 
             [cnt, mrk, mnt]=file_loadMatlab([basic_dir name]); % Load cnt, mrk, mnt variables to Matlab
 
-         
+            
+            % epoching EEG data 
             count=0;
             for j=1:size(mrk.event.desc)
                 if mrk.event.desc(j)==baseline_mrk

@@ -1,7 +1,9 @@
 % SVM_Clasification.m
 % 
 % Subject dependent classification using SVM
-% 
+% SVM got power spectral density from 6 frequency bands 
+% SVM predict sensitivity of individual subject
+%
 % author: Young-Seok, Kweon
 % created: 2019.07.15
 

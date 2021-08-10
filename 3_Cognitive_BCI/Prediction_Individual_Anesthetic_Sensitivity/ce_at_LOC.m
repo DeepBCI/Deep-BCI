@@ -5,9 +5,9 @@
 %
 % author: Young-Seok Kweon
 % created: 2020.02.09
-%% init
+%% initialization
 clc; clear; close all;
-%% load 
+%% load data & find loss of consciousness (LOC)
 type='PPF';
 % type='MDZ';
 num_f=5; % LOC가 되려면 몇번 연속으로 실패해야하나
@@ -54,7 +54,7 @@ for i=1:30
     loc_ce(i,2)=ce(idx_t2);
 end
 save(['ce_at_LOC_',type],'loc_ce');
-%% plot
+%% plot figure 
 figure;
 % dosage={[1:4,6:10],[11:17,19:20],21:30};%MDZ
 dosage={1:10,12:20,[21,24:30]};%PPF
@@ -70,6 +70,12 @@ for i=1:3
     bar(temp_);
 end
 dos_tag={'H','M','L'};
+%%%%%%%%%%%%%%%%%%%%%%%
+% H: High group
+% M: Middle group
+% L: Low group
+%%%%%%%%%%%%%%%%%%%%%%%
+
 figure;
 for i=1:3
     subplot(1,3,i);
