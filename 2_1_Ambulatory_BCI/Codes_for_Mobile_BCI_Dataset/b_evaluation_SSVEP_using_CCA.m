@@ -1,10 +1,10 @@
 %% CCA based classifier
-AUC_all = []; mean_AUC=[];
+ACC_all = []; mean_AUC=[];
 
 %% Generating Compared Signals
 freq = [11 7 5];  % [11 7 5] 5.45, 8.75, 12  [17 11 7 5]
 fs = 100;
-window_time = 4;
+window_time = 5;
 
 t = [1/fs:1/fs:window_time];
 
@@ -15,14 +15,15 @@ for i=1:size(freq,2)
 end
 
 %% Selected channels
-chan = {'PO3','POz','PO4','O1','Oz','O2'};
+% chan = {'PO7','PO3','POz','PO4','PO8','O1','Oz','O2'};
+chan = {'L1','L2','L4','L5','L6','L7','L9','L10','R1','R2','R4','R5','R7','R8'}; % ear-EEG
 
 %%
-for subNum = 1:17
+for subNum = 1:nSub
 
-for ispeed = 1:sum(~cellfun('isempty', EPO_all(subNum,:)))
+for ispeed = 2:sum(~cellfun('isempty', EPO(subNum,:)))+1
 %% channel select
-epo = EPO_all{subNum,ispeed};
+epo = EPO{subNum,ispeed};
 epo = proc_selectChannels(epo, chan);
 
 %% one-hot decoding
@@ -45,14 +46,14 @@ end
 acc=length(find(epo.y_dec == pred))/nTrial;
 
 % Get Accuracy
-AUC_all(ispeed,subNum)=acc;
+ACC_all(ispeed,subNum)=acc;
 
 end
 end
 %% Average Accuracy per Speed
 disp('Mean AUC')
-for ispeed = 1:4
-mean_AUC(ispeed,1) = sum(AUC_all(ispeed,:))/nnz(AUC_all(ispeed,:));
+for ispeed = 2:5
+mean_AUC(ispeed,1) = sum(ACC_all(ispeed,:))/nnz(ACC_all(ispeed,:));
 end
 disp(mean_AUC)
 
