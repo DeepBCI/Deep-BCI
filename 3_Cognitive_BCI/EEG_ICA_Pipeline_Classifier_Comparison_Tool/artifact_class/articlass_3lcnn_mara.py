@@ -1,7 +1,8 @@
 from .articlass_helper  import *
 from .trainfunc_3lcnn import *
 from .architectures import artifact_class
-from .io_handler.pytorch_output_articomp import *
+from .etchelpers.pytorch_output_articomp import *
+#from etchelpers.pytorch_output_articomp import *
 import numpy as np
 import torch
 import torch.nn as nn
