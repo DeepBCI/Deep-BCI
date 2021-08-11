@@ -18,7 +18,9 @@ from sklearn.model_selection import StratifiedKFold, StratifiedShuffleSplit
 
 """ This is an example script file for running multiple preprocessed pipelines of the same dataset with a CNN.
     You will be designating detailed configurations (dataset pipeline name, source, balancing strategy, training and netowkr parameters)
-    in a separate .yaml file in the configs folder. """
+    in a separate .yaml file in the configs folder. 
+    To run the script you must provide valid arguments to the script: they are -dataset_config, -network_config, -train_config.
+    Each argument basically provides the path to the respective configuration yaml files. (I expect the names are self explanatory)"""
 
 def get_cmdarg():
     # using argparse for parsing arguments
@@ -114,7 +116,6 @@ model_noica = None
 torch.manual_seed(42)
 torch.backends.cudnn.deterministic = train_config['determinism']
 torch.backends.cudnn.benchmark = train_config['determinism_bench']
-
 
 # could be participant, group, whatever divisions you have for dataset files
 # ica and nonica should have identical number of subgroups given a task
