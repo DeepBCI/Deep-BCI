@@ -1,0 +1,23 @@
+group_datafile: 0
+dataset_info_exists: 0
+experiment_name: memoryica
+dataset_name: memory_askrw
+datapaths:
+  ica: d:\data/bbciMat/cogsys_transfer_memory/askrw_ica_all/
+
+
+datafiles_prefix: sbj_
+data_to_use: x_post
+label_to_use: label_next_ind
+output_classn: 2
+participants_in_data: 14
+
+data_dim_format: time x chan x N
+include_eog: 0
+eog_channels: [59, 60]
+balance_dataset: True
+
+trim_data: False
+
+crop_time_len: 80
+final_conv_len: 1

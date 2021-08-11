@@ -1,0 +1,11 @@
+runsets: [mara]
+
+# frag training options are set for fragmenting training within subject/fold to separate jobs for parallel running
+frag_training: False
+# subj and fold 0 are used for starting from beginning / going till the end
+frag_start:
+  subj: 0
+  fold: 0
+frag_end:
+  subj: 0
+  fold: 0

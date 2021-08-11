@@ -1,0 +1,6 @@
+network_name: 3lcnn
+filt_sizes: [16,32,64]
+kernels: [[3,5],[3,5],[3,5]]
+strides: [[1,1],[1,1],[1,1]]
+dilations: [[1,1],[1,1],[1,1]]
+paddings: [[1,2],[1,2],[1,2]]

@@ -1,0 +1,9 @@
+epochs: 200
+learning_rate: 0.0002
+train_batch: 128
+test_batch: 128
+device: cuda:0
+determinism: True
+determinism_bench: False
+early_stop_patience: 25
+folds: 10

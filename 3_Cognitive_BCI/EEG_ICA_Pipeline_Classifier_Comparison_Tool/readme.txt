@@ -1,6 +1,6 @@
 <EEG_ICA_Pipeline_Classifier_Comparison_Tool>
 
-* Programming Language: Python
+* Programming Language: Python, yaml, matlab
 * Contact: T. Kang(tae1324+bci@korea.ac.kr)
 * Detail: Tool for running different configurations (ICA-rejections, network architecture and settings, preprocessing pipelines, etc.) of training on the same (or even multiple) dataset.
 Formats training results in collated structure to make performance comparison easy and streamlined.
