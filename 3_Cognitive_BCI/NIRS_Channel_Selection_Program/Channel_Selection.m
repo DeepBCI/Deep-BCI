@@ -2,30 +2,19 @@ clear all
 close all
 clc
 
-addpath(genpath('D:\Hyung-Tak Lee\bbci_public-master'))
-addpath(genpath('D:\Hyung-Tak Lee\FDR'))
-addpath(genpath('D:\Hyung-Tak Lee\RLDA'))
-startup_bbci_toolbox('DataDir','D:\Hyung-Tak Lee\NIRS\data', 'TmpDir','/tmp/');
-load('D:\Hyung-Tak Lee\NIRS\data\Discription.mat');
+startup_bbci_toolbox('DataDir','D:\Project\2019\NIRS\Channel_selection\data', 'TmpDir','/tmp/');
+load('D:\Project\2021\NIRS\\data\Discription');
 [opy opx] = find(op_loc>0);
 subdir_list = {'VP00','VP01','VP02','VP03','VP04','VP05','VP06','VP07','VP09','VP011','VP013','VP015','VP016','VP018','VP019'};
-num_channel = 15;
+num_channel = 20;
 
 for sub = 1:15
     tic
     disp(['Subject = ' num2str(sub)])
-    kfold = 5;
-    load(['D:\Hyung-Tak Lee\NIRS\data\fv\fv_' subdir_list{sub} '.mat']);
-    load('D:\Hyung-Tak Lee\NIRS\data\indice_5fold.mat');
-    
-    for search = 1:size(fv.clab,2)
-        ch.num(1,search) = sscanf(cell2mat(fv.clab(search)),strcat("CH","%d","oxy"));
-        ch.opnum(:,search) = op_info(ch.num(1,search),2:3)';
-        [ch.cyloc(1,search), ch.cxloc(1,search)] = find(op_loc == ch.num(1,search));
-        [ch.syloc(1,search), ch.sxloc(1,search)] = find(op_s == ch.opnum(1,search));
-        [ch.dyloc(1,search), ch.dxloc(1,search)] = find(op_d == ch.opnum(2,search));
-    end
-    ch.order = 1:size(fv.clab,2);
+    kfold = 10;
+    load(['D:\Project\2021\NIRS\data\fv\fv_' subdir_list{sub} '.mat']);
+    load('D:\Project\2021\NIRS\data\indice.mat');
+    load('D:\Project\2021\NIRS\data\ch_info.mat');
     
     for k = 1:kfold
         disp(['Fold = ' num2str(k)])
@@ -37,13 +26,12 @@ for sub = 1:15
         fv_test.x = fv.x(:,test);
         fv_test.y = fv.y(:,test);
         
-        %% 1. SFS_Op+Dist (Global ver)
-%         disp('SFS_Op')
-        for th = 10
-            for be = 10
-                for al = 10
-                    temp = ch.order;
-%                     disp(['Alpha = ' num2str(al) ', Beta = ' num2str(be) ', Theta = ' num2str(th)])
+        %% Channel selection
+        temp = ch.order;
+        for th = 0:10
+            for be = 0:10
+                for al = 0:10
+                    disp(['Alpha = ' num2str(al) ', Beta = ' num2str(be) ', Theta = ' num2str(th)])
                     for channel = 1:num_channel
                         if channel == 1
                             for sfs = 1:length(temp)
@@ -80,10 +68,8 @@ for sub = 1:15
                                 clear loc1 loc2 dist_temp temp_s temp_d
                             end
                             clear sfs c_est
-                            if channel == 2
-                                dist_max = max(dist);
-                            end
-                            fitness = (al/10)*(cv_acc) - (be/10)*(optode/(channel*2)) - (th/10)*(dist/dist_max);
+                            
+                            fitness = (al/10)*(cv_acc) - (be/10)*(optode/(2*channel)) - (th/10)*(dist/24.08);
                             [~,accmax] = max(fitness);
                             
                             SFS(channel) = temp(accmax);
@@ -99,6 +85,6 @@ for sub = 1:15
         end
     end
     toc
-    save(['D:\Hyung-Tak Lee\NIRS\Result\0714\Selected_' num2str(sub) '.mat'], 'Select', 'ch', 'indices', 'Inner_indice');
+    save(['D:\Project\2021\NIRS\20210811\Result\0811\Selected_' num2str(sub) '.mat'], 'Select', 'ch', 'indices', 'Inner_indice');
     clear ch Select indices Inner_indice
 end
