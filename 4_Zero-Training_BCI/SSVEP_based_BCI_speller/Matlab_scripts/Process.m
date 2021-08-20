@@ -59,9 +59,9 @@ function box_out = Process(box_in)
             p1=p2(:,1:FFT_L/2+1);
             p1(:,2:end-1)=2*p1(:,2:end-1);
 
-            subplot(5,2,2*kkk)
-            plot(FFT_f,p1(1,:))
-            xlim([5 45])
+            subplot(5,2,2*kkk);
+            plot(FFT_f,p1(1,:));
+            xlim([in.freq(1)-1 2*in.freq(end)+1]);
         end
         box_in.user_data.m_cnt = box_in.user_data.m_cnt + 1;
 %         fname = sprintf('sig%02d.fig', box_in.user_data.m_cnt);
@@ -100,7 +100,7 @@ function box_out = Process(box_in)
 
         for i = 1:nClasses
             ref = 2*pi*Freq(i)*t;
-            Y{i} = [sin(ref);cos(ref);sin(ref*2);cos(ref*2)];
+            Y{i} = [sin(ref);cos(ref);sin(ref*2);cos(ref*2);sin(ref*3);cos(ref*3)];
         end
 
 
@@ -115,7 +115,7 @@ function box_out = Process(box_in)
 %           disp(r)
           disp(ind)
           
-          box_in = OV_addOutputBuffer(box_in,1,dat.buffer{1}.start_time,dat.buffer{1}.end_time,ind*ones(2,fs*time));
+          box_in = OV_addOutputBuffer(box_in,1,dat.buffer{1}.start_time,dat.buffer{1}.end_time,ind*ones(2,size(data,2)));
           
 
           
