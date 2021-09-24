@@ -2,7 +2,7 @@ function box_out = Initialize(box_in)
 % Initialization
 
     box_in.user_data.time = 5.0;
-    box_in.user_data.freq =  14.0:0.2:21;
+    box_in.user_data.freq =  reshape(reshape(14.0:0.2:21,6,6)',1,[]);
     box_in.user_data.marker  = {'1','up';'2', 'left';'3', 'right';'4', 'down'};
     box_in.user_data.interval = [0 5000];  % ms
 %     box_in.user_data.fs = 300; %box_in.inputs{1}.header.sampling_rate;
