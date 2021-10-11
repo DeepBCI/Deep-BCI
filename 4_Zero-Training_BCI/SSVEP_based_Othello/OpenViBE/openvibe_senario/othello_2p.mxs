@@ -492,7 +492,7 @@
 					<TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
 					<Name>High Cut-off Frequency (Hz)</Name>
 					<DefaultValue>40</DefaultValue>
-					<Value>89</Value>
+					<Value>90</Value>
 					<Modifiability>false</Modifiability>
 				</Setting>
 				<Setting>
@@ -579,7 +579,7 @@
 					<TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
 					<Name>High Cut-off Frequency (Hz)</Name>
 					<DefaultValue>40</DefaultValue>
-					<Value>89</Value>
+					<Value>90</Value>
 					<Modifiability>false</Modifiability>
 				</Setting>
 				<Setting>
@@ -666,7 +666,7 @@
 					<TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
 					<Name>High Cut-off Frequency (Hz)</Name>
 					<DefaultValue>40</DefaultValue>
-					<Value>89</Value>
+					<Value>90</Value>
 					<Modifiability>false</Modifiability>
 				</Setting>
 				<Setting>
@@ -753,7 +753,7 @@
 					<TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
 					<Name>High Cut-off Frequency (Hz)</Name>
 					<DefaultValue>40</DefaultValue>
-					<Value>89</Value>
+					<Value>90</Value>
 					<Modifiability>false</Modifiability>
 				</Setting>
 				<Setting>
@@ -1182,7 +1182,7 @@
 			<Attributes>
 				<Attribute>
 					<Identifier>(0x1fa7a38f, 0x54edbe0b)</Identifier>
-					<Value>336</Value>
+					<Value>368</Value>
 				</Attribute>
 				<Attribute>
 					<Identifier>(0x207c9054, 0x3c841b63)</Identifier>
