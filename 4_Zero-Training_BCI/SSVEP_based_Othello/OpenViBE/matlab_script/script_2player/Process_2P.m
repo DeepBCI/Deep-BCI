@@ -41,12 +41,8 @@ for i = 1: OV_getNbPendingInputChunk(box_in,1)
     for i = 1
         [box_in, start_time,end_time , ~] = OV_popInputBuffer(box_in,i);
     end
-    
-    
-    
-    
-    
-    disp('buffer');
+
+    % disp('buffer');
     temp_mat =[];
     for i = 1:size(box_in.inputs{2}.buffer,2)
         if (size(box_in.inputs{2}.buffer{i}.matrix_data,2) > 1)
@@ -80,7 +76,7 @@ for i = 1: OV_getNbPendingInputChunk(box_in,1)
     
     box_in.outputs{1}.header = box_in.inputs{1}.header;
     box_in.outputs{1}.header.nb_channels = 1;
-    box_in.outputs{1}.header.channel_names = {'index_num'};
+    box_in.outputs{1}.header.channel_names = {'CCA_index_num'};
     box_in.user_data.is_headerset = 1;
     
     SMT.x = dat_x ;
@@ -156,7 +152,7 @@ for i = 1: OV_getNbPendingInputChunk(box_in,1)
     %             disp(ismember(i,used_marker))
     %         end
     
-    a= 1;b=0;
+    a= 1;b=0; % weight parameter
     for sub_idx =1 :4
         wn(sub_idx) = sub_idx^(-a)+b;
     end
@@ -185,20 +181,9 @@ for i = 1: OV_getNbPendingInputChunk(box_in,1)
         weight_r=[];
         ind = 0;
     end
-%     disp('class')
-%     disp(nClasses)
-%     disp('rho unique')
-%     disp(unique(weight_r))
-%     disp('rho size')
-%     disp(size(weight_r))
+
     disp('results')
     disp(ind)
-    %          cca_result  = cell2mat(r);
-    %          [~, ind] = max(cca_result);
-    %             disp('output')
-    %           disp(r)
-%               ind = 1;
-%     disp(ind)
     
     box_in = OV_addOutputBuffer(box_in,1,dat.buffer{1}.start_time,dat.buffer{1}.end_time,ind*ones(1,size(data,2)));
     
