@@ -1,0 +1,31 @@
+name: BCI2021
+n_classes: 2
+
+init_weight: 'default'
+
+n_band: 5
+
+cnn_params:
+  in_channels: 1
+  out_channels: 40
+  c_kernel_size:
+    - 22
+    - 45
+  c_stride: 1
+  p_kernel_size:
+    - 1
+    - 75
+  p_stride: 10
+
+sub_band_att_params:
+  - 29
+  - 64
+
+lstm_params:
+  input_size: 29
+  hidden_size: 64
+  num_layers: 2
+
+segment_att_params:
+  - 128
+  - 512
