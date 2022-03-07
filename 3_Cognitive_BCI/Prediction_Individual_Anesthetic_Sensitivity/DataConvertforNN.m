@@ -31,7 +31,7 @@ n=10;
 
 
 %% data setting and load
-sampling_frequency=1000;
+sampling_frequency=1000; % sampling_frequency is sampling rate of original signal
 
 for agent=1:size(Type_filename,1) % number of agent
     
