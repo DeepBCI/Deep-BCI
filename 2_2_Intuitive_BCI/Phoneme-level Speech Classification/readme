@@ -1,3 +1,4 @@
 Create new folder for phoneme-level speech classification
 
 1) ku_img_ch11_re256_bf05_125_notch55_65.m -> preprocessing for KU imagined speech (channel select, downsampling, band pass filter, notch filter)
+2) ku_ovt_ch64_bf30_120_notch59_61.m -> preprocessing for KU overt speech (band pass filter, notch filter)
