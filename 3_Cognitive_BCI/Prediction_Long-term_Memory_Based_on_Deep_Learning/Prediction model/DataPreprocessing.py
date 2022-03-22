@@ -3,6 +3,7 @@ import numpy as np
 import scipy.io as sio
 
 def gpu_setting(gpu_num):
+    # Setting cuda for using gpu
     txt = 'GPU available!' if torch.cuda.is_available() else 'GPU can not find'
     device = torch.device(f'cuda:{gpu_num}' if torch.cuda.is_available() else 'cpu')
     torch.cuda.set_device(device)
