@@ -1,6 +1,6 @@
 clear all; close all; clc;
 
-BMI.EEG_DIR=['C:\Users\cvpr\Desktop\½ÇÇèµ¥ÀÌÅÍ_¼­Çö\shlee'];
+BMI.EEG_DIR=['C:\Users\cvpr\Desktop\Â½Ã‡Ã‡Ã¨ÂµÂ¥Ã€ÃŒÃ…Ã_Â¼Â­Ã‡Ã¶\shlee'];
 
 filelist={'s4_lcw_sess1_190226'};
 %filelist={'s7_kshreal_sess2_190314'};
@@ -13,6 +13,7 @@ marker={'1','imagine_Ambulance';  '2','imagine_Clock';  '3','imagine_Hello';  '4
 '101','cue_Ambulance'; '102','cue_Clock'; '103','cue_Hello'; '104','cue_Helpme'; '105','cue_Light'; '106','cue_Pain';  '107','cue_Stop'; '108','cue_Thankyou';  '109','cue_Toilet'; '110','cue_TV';  '111','cue_Water';  '112','cue_Yes'; '113','cue_Rest'; ...
 '17','cross'; '201','totalstart'; '202','totalend'; '211','intervalstart'; '212','intervalend'};
 
+% Load EEG files
 [EEG.data, EEG.marker, EEG.info]=Load_EEG(file,{'device','brainVision';'marker', marker;'fs', [100]});
 
 field={'x','t','fs','y_dec','y_logic','y_class','class', 'chan'};
@@ -38,7 +39,7 @@ SMT= prep_segmentation(CNTfilt, {'interval', time_interval});
 [SMT, CSP_W, CSP_D]=func_csp(SMT,{'nPatterns', [3]});
 ft=func_featureExtraction(SMT, {'feature','logvar'});
 
-%cv³»¿ë
+%cvÂ³Â»Â¿Ã«
 for iter=1:10
 CV.train={
         '[SMT, CSP_W, CSP_D]=func_csp(SMT,{"nPatterns", [3]})'
