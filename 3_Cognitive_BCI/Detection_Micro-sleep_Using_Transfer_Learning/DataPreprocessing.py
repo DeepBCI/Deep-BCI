@@ -9,7 +9,7 @@ def load_data(type):
     data_all = {'len':len(list)}
     label_all = {'len':len(list)}
     for i, file in tqdm(enumerate(list), desc='Data Load'):
-        f = io.loadmat(type+'\\'+file)
+        f = io.loadmat(type+'\\'+file) # Read MATLAB format file
         data = f['epo']['x']
         label = f['epo']['y']
 
@@ -19,9 +19,9 @@ def load_data(type):
 
 def load_single_data(results_dir, type, test_sub):
     if test_sub >= 9:
-        f = io.loadmat(results_dir + type + str(test_sub + 1))
+        f = io.loadmat(results_dir + type + str(test_sub + 1)) # Read MATLAB format file
     else:
-        f = io.loadmat(results_dir + type + '0' + str(test_sub + 1))
+        f = io.loadmat(results_dir + type + '0' + str(test_sub + 1)) # Read MATLAB format file
     data = f['epo']['x']
     label = f['epo']['y']
     data = data[0][0]
