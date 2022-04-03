@@ -2,7 +2,7 @@ import argparse
 import os
 
 def parse_args():
-    descript = 'Pytorch Implementation of \'Subject-Adaptive EEG-based Image Classification\''
+    descript = 'Pytorch Implementation of \'Subject Adaptive EEG‑based Visual Recognition\''
     parser = argparse.ArgumentParser(description=descript)
 
     parser.add_argument('--data_path', type=str, default='./dataset')
