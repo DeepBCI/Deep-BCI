@@ -49,7 +49,7 @@ class concatenation_CNN(torch.nn.Module):
         
         self.layer13 = torch.nn.Sequential(
             torch.nn.Dropout(p=0.5, inplace=False),
-            torch.nn.Conv2d(40, 2, kernel_size=(1,50), stride=(1,1), dilation=(1, 15))
+            torch.nn.Conv2d(40, 40, kernel_size=(1,50), stride=(1,10), dilation=(1, 15))
             )
         
         ## Deep
@@ -95,9 +95,16 @@ class concatenation_CNN(torch.nn.Module):
         
         self.layer29 = torch.nn.Sequential(
             torch.nn.Dropout(p=0.5, inplace=False),
-            torch.nn.Conv2d(200, 2, kernel_size=(1,10), stride=(1, 1), dilation=(1, 81), bias=False)
+            torch.nn.Conv2d(200, 40, kernel_size=(1,10), stride=(1, 10), dilation=(1, 81), bias=False)
             )
         
+        self.layer30 = torch.nn.Sequential(
+            torch.nn.Linear(8040, 1024),
+            torch.nn.Linear(1024, 256),
+            torch.nn.Linear(256, 32),
+            torch.nn.Linear(32, 16),
+            torch.nn.Linear(16, 2)
+            )
         
     def forward(self, x):
         ##CNN
@@ -108,7 +115,6 @@ class concatenation_CNN(torch.nn.Module):
         eout = self.layer12(eout)
         eout = safe_log(eout)
         eout = self.layer13(eout)
-        eout = F.log_softmax(eout, 1)
         eout = np.squeeze(eout)
         
         ##DNN
@@ -129,14 +135,14 @@ class concatenation_CNN(torch.nn.Module):
         nout = self.layer28(nout)
         nout = identity(nout)
         nout = self.layer29(nout)
-        nout = F.log_softmax(nout, 1)
         nout = np.squeeze(nout)
         
-        #print('EEG feature map size : {}'.format(eout.size()))
-        #print('NIRS feature map size : {}'.format(nout.size()))
         conout = torch.cat((nout,eout), dim=2)
-        #print('Concatenation feature map size : {}'.format(conout.size()))
-        conout = torch.mean(conout, dim=2)
+        #print(conout.size())
+        conout = conout.view(-1,8040)
+        conout = self.layer30(conout)
+        
+        conout = F.log_softmax(conout, 1)
         
         return conout
 
@@ -172,28 +178,6 @@ for temp_subNum in range(1, 30):
     NIRS_X = raw['NIRS_X']
     Y = raw['Y']
     
-    ###########################################################################
-    ### (3) Preprocessing #####################################################
-    ###########################################################################
-    from braindecode.datautil.signalproc import exponential_running_standardize
-    for ii in range(0, 60):
-        # 1. Data reconstruction
-        temp_data = EEG_X[ii, :, :]
-        temp_data = temp_data.transpose()
-        ExpRunStand_data = exponential_running_standardize(temp_data, factor_new=0.001, init_block_size=None, eps=0.0001)
-        ExpRunStand_data = ExpRunStand_data.transpose()
-        EEG_X[ii, :, :] = ExpRunStand_data
-        del temp_data, ExpRunStand_data
-        
-    for ii in range(0, 60):
-        # 1. Data reconstruction
-        temp_data = NIRS_X[ii, :, :]
-        temp_data = temp_data.transpose()
-        ExpRunStand_data = exponential_running_standardize(temp_data, factor_new=0.001, init_block_size=None, eps=0.0001)
-        ExpRunStand_data = ExpRunStand_data.transpose()
-        NIRS_X[ii, :, :] = ExpRunStand_data
-        del temp_data, ExpRunStand_data
-        
     from sklearn.model_selection import RepeatedStratifiedKFold
     EEG_X = EEG_X[:,np.newaxis,:,:]
     NIRS_X = NIRS_X[:,np.newaxis,:,:]
@@ -206,16 +190,17 @@ for temp_subNum in range(1, 30):
         model = concatenation_CNN().to(device)
         optimizer = torch.optim.Adam(model.parameters(), lr=0.001, weight_decay=0.5*0.001, eps=1e-08, betas=(0.9, 0.999))
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max = 10)
-
+        ratio_tr = np.int8(np.round(np.size(train_index)*0.75))
+                
         EEG_X_train, EEG_X_test = EEG_X[train_index], EEG_X[test_index]
-        EEG_train = EEG_X_train[0:43,:,:,:]
-        EEG_val = EEG_X_train[43:54,:,:,:]
+        EEG_train = EEG_X_train[0:ratio_tr,:,:,:]
+        EEG_val = EEG_X_train[ratio_tr:,:,:,:]
         NIRS_X_train, NIRS_X_test = NIRS_X[train_index], NIRS_X[test_index]
-        NIRS_train = NIRS_X_train[0:43,:,:,:]
-        NIRS_val= NIRS_X_train[43:54,:,:,:]
+        NIRS_train = NIRS_X_train[0:ratio_tr,:,:,:]
+        NIRS_val= NIRS_X_train[ratio_tr:,:,:,:]
         Y_train1, Y_test = Y[train_index], Y[test_index]
-        Y_train = Y_train1[0:43,:]
-        Y_val = Y_train1[43:54,:]
+        Y_train = Y_train1[0:ratio_tr,:]
+        Y_val = Y_train1[ratio_tr:,:]
         
         EEG_train = torch.tensor(EEG_train, dtype=torch.float32)
         NIRS_train = torch.tensor(NIRS_train, dtype=torch.float32)
@@ -228,8 +213,6 @@ for temp_subNum in range(1, 30):
         EEG_val_set = TensorDataset(EEG_val, Y_val)
         NIRS_train_set = TensorDataset(NIRS_train, Y_train)
         NIRS_val_set = TensorDataset(NIRS_val, Y_val)
-        #EEG_train_set, EEG_val_set = torch.utils.data.random_split(edstr, [43, 11])
-        #NIRS_train_set, NIRS_val_set = torch.utils.data.random_split(ndstr, [43, 11])
         
         EEG_X_test = torch.tensor(EEG_X_test, dtype=torch.float32)
         NIRS_X_test = torch.tensor(NIRS_X_test, dtype=torch.float32)
@@ -265,7 +248,9 @@ for temp_subNum in range(1, 30):
                     train_loss.backward()
                     optimizer.step()
                     scheduler.step()
-            train_accuracy = correct/43*100
+                    tr_total_num += label.size(0)
+                    
+            train_accuracy = correct/tr_total_num*100
             train_Loss.append(train_loss.item())
             train_Acc.append(train_accuracy)
             
@@ -287,7 +272,9 @@ for temp_subNum in range(1, 30):
                         val_loss = F.nll_loss(val_output, label1.long())
                         corr = label1[label1 == output2.to(device)].size(0)
                         correct += corr
-                val_accuracy = correct/11*100
+                        val_total_num += label1.size(0)
+                        
+                val_accuracy = correct/val_total_num*100
                 val_Loss.append(val_loss.item())
                 val_Acc.append(val_accuracy)
                 
@@ -295,10 +282,6 @@ for temp_subNum in range(1, 30):
                     best_model = model
                     best_val_loss = (1-val_accuracy)
                     
-            #if (training_epochs % 250) == 0:
-            #    print('[{},{}]Train Loss:{:.4f}, Tr_Accuracy:{:.2f}%'.format(n_sp,training_epochs, train_loss, train_accuracy)) 
-            #    print('[{},{}]Validation Loss:{:.4f}, Validation_Accuracy:{:.2f}%'.format(n_sp,training_epochs, val_loss, val_accuracy))
-            
         torch.save(best_model.state_dict(), 'D:/Project/2020/Deeplearning/Hybrid_MA/model_save/model_{}_{}.pt'.format(temp_subNum,n_sp))
         
         corr=0
