@@ -1,4 +1,6 @@
 clear all
+clc
+
 load('data_set_IVa_av');
 load('true_labels_av');
 cnt= 0.1*double(cnt);
