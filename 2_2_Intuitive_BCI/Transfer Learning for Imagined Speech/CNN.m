@@ -70,8 +70,10 @@ for i=1:kfold
   % Accuracy of each k-fold
   Afold(i,1)=100*sum(diag(con))/sum(con(:));
 end
+
 % Average accuracy over k-folds 
 Acc=mean(Afold); 
+
 % Store result
 CNN.fold=Afold; CNN.acc=Acc; CNN.con=confmat; 
 fprintf('\n Classification Accuracy (CNN): %g %% \n ',Acc);
