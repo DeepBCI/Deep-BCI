@@ -29,7 +29,6 @@ Cls2.x=squeeze(mean(Cls2.x,2));
 left_chan=18; % Channel C3
 right_chan=51; % channel C4
 xx=-500:10:4990;
-
 figure % Class1: right, Class2: foot
 subplot(1,2,1)
 plot(xx,Cls1.x(:,left_chan)/100,'r-',xx,Cls2.x(:,left_chan)/100,'b--'); % C4
