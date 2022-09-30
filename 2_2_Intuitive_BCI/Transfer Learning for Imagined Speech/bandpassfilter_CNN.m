@@ -68,3 +68,4 @@ Acc=mean(Afold);
 % Store result
 CNN.fold=Afold; CNN.acc=Acc; CNN.con=confmat; 
 fprintf('\n Classification Accuracy (CNN): %g %% \n ',Acc);
+%fprintf('\n Classification Accuracy (CNN): %g %% \n ',Afold);
