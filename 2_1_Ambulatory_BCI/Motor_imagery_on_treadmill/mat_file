@@ -62,7 +62,7 @@ mrk.orig= mrk_orig;
 
 % Assign the channel montage information into mnt variable
 mnt = getElectrodePositions(cnt.clab);
-
+% tmp_clab = cnt.clab;
 % Assign the sampling rate into fs_orig variable
 fs_orig= mrk_orig.fs;
 
