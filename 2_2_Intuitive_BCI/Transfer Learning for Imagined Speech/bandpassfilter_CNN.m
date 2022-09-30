@@ -3,6 +3,10 @@ for i=1:size(eeg,3)
     e(:,:,1,i) = bandpass(eeg(:,:,i),[30 45], 1024); %gamma
 end
 
+%for i=1:size(eeg,3)
+%    e(:,:,1,i) = bandpass(eeg(:,:,i),[1 4], 1024); %delta
+%end
+
 %%
 XTrain=e;
 YTrain=class_word;
