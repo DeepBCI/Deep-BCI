@@ -82,6 +82,12 @@ for i = 1:length(filelist)
 %     epoLeft=proc_selectClasses(epo,{'Left'});
 %     epoRight=proc_selectClasses(epo,{'Right'});
 %     epoRest=proc_selectClasses(epo,{'Rest'});
+
+
+
+%     epoRest=proc_selectClasses(epo,{'tongue'});
+
+
   
 
 end
