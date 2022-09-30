@@ -37,6 +37,7 @@ rng('default');
 % Divide data into k-folds
 % fold=cvpartition(label,'kfold',kfold);
 kfold=10;
+% kfold=5;
 fold=cvpartition(y,'kfold',kfold);
 % Pre
 Afold=zeros(kfold,1); confmat=0;
