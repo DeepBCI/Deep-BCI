@@ -28,10 +28,10 @@ ival = [750 4500];
 % selected_channel= [6 10 11 14 16 19 21 25];
 selected_channel= [1:32]; % channel selection
 
- 
+
 %%
 for i = 1:length(filelist)
-    
+   filelist
     [cnt,mrk,mnt] = eegfile_loadMatlab([dd filelist{i}]);
 
    %% band pass filtering, order of 5, range of 8-15Hz
