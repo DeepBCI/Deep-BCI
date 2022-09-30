@@ -1,6 +1,6 @@
 %% 4D
 eeg_4d=reshape(eeg,64, 1280, 1, 300);
-
+% delta_band = [1,4]
 %%
 % XTrain=eeg_4d;
 XTrain=eeg_4d;
