@@ -33,7 +33,7 @@ stimDef= {1, 2; 'right','left'};
 
 %%
 for ff= 1:length(filelist),
-
+filelist
 file= filelist{ff};
 opt= []; % initialize variable
 
