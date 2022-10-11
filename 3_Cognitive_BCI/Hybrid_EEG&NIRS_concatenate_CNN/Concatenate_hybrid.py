@@ -10,6 +10,7 @@ import torch
 from torch.utils.data import TensorDataset, DataLoader
 import numpy as np
 import torch.nn.functional as F
+from lht_torch import DS_set
 
 import os
 default_path = 'D:/Project/2020/Deeplearning'
@@ -138,7 +139,6 @@ class concatenation_CNN(torch.nn.Module):
         nout = np.squeeze(nout)
         
         conout = torch.cat((nout,eout), dim=2)
-        #print(conout.size())
         conout = conout.view(-1,8040)
         conout = self.layer30(conout)
         
@@ -202,30 +202,12 @@ for temp_subNum in range(1, 30):
         Y_train = Y_train1[0:ratio_tr,:]
         Y_val = Y_train1[ratio_tr:,:]
         
-        EEG_train = torch.tensor(EEG_train, dtype=torch.float32)
-        NIRS_train = torch.tensor(NIRS_train, dtype=torch.float32)
-        EEG_val = torch.tensor(EEG_val, dtype=torch.float32)
-        NIRS_val = torch.tensor(NIRS_val, dtype=torch.float32)
-        Y_train = torch.tensor(Y_train, dtype=torch.float32)
-        Y_val = torch.tensor(Y_val, dtype=torch.float32)
-        
-        EEG_train_set = TensorDataset(EEG_train, Y_train)
-        EEG_val_set = TensorDataset(EEG_val, Y_val)
-        NIRS_train_set = TensorDataset(NIRS_train, Y_train)
-        NIRS_val_set = TensorDataset(NIRS_val, Y_val)
-        
-        EEG_X_test = torch.tensor(EEG_X_test, dtype=torch.float32)
-        NIRS_X_test = torch.tensor(NIRS_X_test, dtype=torch.float32)
-        Y_test = torch.tensor(Y_test, dtype=torch.float32)
-        edste = TensorDataset(EEG_X_test, Y_test)
-        ndste = TensorDataset(NIRS_X_test, Y_test)
-        
-        etrn_loader = DataLoader(EEG_train_set, batch_size, shuffle=False)
-        ntrn_loader = DataLoader(NIRS_train_set, batch_size, shuffle=False)
-        eval_loader = DataLoader(EEG_val_set, batch_size, shuffle=False)
-        nval_loader = DataLoader(NIRS_val_set, batch_size, shuffle=False)
-        ete_loader = DataLoader(edste, batch_size, shuffle=False)
-        nte_loader = DataLoader(ndste, batch_size, shuffle=False)
+        etrn_loader = DS_set(EEG_train, Y_train)
+        ntrn_loader = DS_set(NIRS_train, Y_train)
+        eval_loader = DS_set(EEG_val, Y_val)
+        nval_loader = DS_set(NIRS_val, Y_val)
+        ete_loader = DS_set(EEG_X_test, Y_test)
+        nte_loader = DS_set(NIRS_X_test,Y_test)
         
         for training_epochs in range(1, training_epochs+1):  
             corr = 0
@@ -257,7 +239,7 @@ for temp_subNum in range(1, 30):
             corr = 0
             correct = 0
             val_total_num = 0
-            best_misclass = 1
+            best_misclass = 100
             with torch.no_grad():
                 for ei,edata1 in enumerate(eval_loader):
                     for ni,ndata1 in enumerate(nval_loader):
@@ -278,9 +260,10 @@ for temp_subNum in range(1, 30):
                 val_Loss.append(val_loss.item())
                 val_Acc.append(val_accuracy)
                 
-                if (1-val_accuracy) <= best_misclass:
+                if val_Loss[-1] <= best_misclass:
                     best_model = model
-                    best_val_loss = (1-val_accuracy)
+                    best_val_loss = val_Loss[-1]
+                    best_epoch = training_epochs
                     
         torch.save(best_model.state_dict(), 'D:/Project/2020/Deeplearning/Hybrid_MA/model_save/model_{}_{}.pt'.format(temp_subNum,n_sp))
         
