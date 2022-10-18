@@ -102,8 +102,7 @@ class concatenation_CNN(torch.nn.Module):
         self.layer30 = torch.nn.Sequential(
             torch.nn.Linear(8040, 1024),
             torch.nn.Linear(1024, 256),
-            torch.nn.Linear(256, 32),
-            torch.nn.Linear(32, 16),
+            torch.nn.Linear(256, 16),
             torch.nn.Linear(16, 2)
             )
         
@@ -129,6 +128,7 @@ class concatenation_CNN(torch.nn.Module):
         nout = identity(nout)
         nout = self.layer25(nout)
         nout = F.elu(nout, 1)
+        deepfeat = nout
         nout = self.layer26(nout)
         nout = identity(nout)
         nout = self.layer27(nout)
@@ -138,12 +138,11 @@ class concatenation_CNN(torch.nn.Module):
         nout = self.layer29(nout)
         nout = np.squeeze(nout)
         
-        conout = torch.cat((nout,eout), dim=2)
-        conout = conout.view(-1,8040)
+        conout = torch.cat((nout,eout,deepfeat), dim=2)
+        conout = conout.view(-1,12080)
         conout = self.layer30(conout)
         
         conout = F.log_softmax(conout, 1)
-        
         return conout
 
 ## classification
@@ -209,7 +208,7 @@ for temp_subNum in range(1, 30):
         ete_loader = DS_set(EEG_X_test, Y_test)
         nte_loader = DS_set(NIRS_X_test,Y_test)
         
-        for training_epochs in range(1, training_epochs+1):  
+        for i in range(1, training_epochs+1):  
             corr = 0
             correct = 0
             tr_total_num = 0
@@ -265,6 +264,11 @@ for temp_subNum in range(1, 30):
                     best_val_loss = val_Loss[-1]
                     best_epoch = training_epochs
                     
+                if (i % 20) == 0:
+                    print('Epoch: {},  Tr_Acc: {:.5f},  Tr_Loss: {:.5f}'.format(i,train_Acc[-1],train_Loss[-1]))
+                    print('Epoch: {},  Val_Acc: {:.5f},  Val_Loss: {:.5f}'.format(i,val_Acc[-1],val_Loss[-1]))
+                            
+                    
         torch.save(best_model.state_dict(), 'D:/Project/2020/Deeplearning/Hybrid_MA/model_save/model_{}_{}.pt'.format(temp_subNum,n_sp))
         
         corr=0
@@ -292,9 +296,9 @@ for temp_subNum in range(1, 30):
             test_accuracy = correct/test_total_num*100
             test_Loss.append(test_loss)
             test_Acc.append(test_accuracy)
-            test_Acc2.append(test_accuracy)
             
-            #print('[{},{}]Test Loss:{:.4f}, Te_Accuracy:{:.2f}%'.format(n_sp,training_epochs, test_loss, test_accuracy))
+            print('Epoch: {},  Te_Acc: {:.5f},  Te_Loss: {:.5f}'.format(i,test_Acc[-1],test_Loss[-1]))
+                    
         n_sp = n_sp + 1
         del model, train_loss, val_loss, test_loss, train_output, val_output, te_output
                 
