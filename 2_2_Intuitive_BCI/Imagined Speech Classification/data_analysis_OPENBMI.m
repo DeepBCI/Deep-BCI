@@ -20,11 +20,11 @@ field={'x','t','fs','y_dec','y_logic','y_class','class', 'chan'};
 
 CNT=opt_eegStruct({EEG.data, EEG.marker, EEG.info}, field);
 
-CNT_allclass=prep_selectClass(CNT,{'class',{'imagine_Ambulance','imagine_Clock', 'imagine_Hello', 'imagine_Helpme', 'imagine_Light', 'imagine_Pain', 'imagine_Stop', 'imagine_Thankyou', 'imagine_Toilet', 'imagine_TV', 'imagine_Water', 'imagine_Yes', 'imagine_Rest'}});
+CNT_all_class=prep_selectClass(CNT,{'class',{'imagine_Ambulance','imagine_Clock', 'imagine_Hello', 'imagine_Helpme', 'imagine_Light', 'imagine_Pain', 'imagine_Stop', 'imagine_Thankyou', 'imagine_Toilet', 'imagine_TV', 'imagine_Water', 'imagine_Yes', 'imagine_Rest'}});
 
 
 %% 
-CNT2class=prep_selectClass(CNT_allclass,{'class',{'imagine_Rest','imagine_Ambulance'}});
+CNT2class=prep_selectClass(CNT_all_class,{'class',{'imagine_Rest','imagine_Ambulance'}});
 
 
 freq_band = [0.5 40];
