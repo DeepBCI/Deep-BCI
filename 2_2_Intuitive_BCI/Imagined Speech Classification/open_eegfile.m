@@ -39,6 +39,25 @@ cnt = proc_filtButter(cnt, 5, [0.5 120]);
 cnt = proc_filtnotch(cnt, cnt.fs, 60);
 
 
+% 
+% Fs = 1000;
+% T = 1/Fs;
+% L = length(cnt.x(:,10));
+% t = (0:L-1)*T;
+% 
+% Y_cnt = fft(cnt.x(:,10));
+% Y_P1 = abs(Y_cnt/L);
+% Y_P2 = Y_P1(1:L/2+1,1);
+% Y_P2(2:end-1) = 2*Y_P2(2:end-1);
+% 
+% Y_cntn = fft(cnt_notch.x);
+% Yn_P1 = abs(Y_cntn/L);
+% Yn_P2 = Yn_P1(1:L/2+1,1);
+% Yn_P2(2:end-1) = 2*Yn_P2(2:end-1);
+% 
+
+
+
 
 %% naming the markers
 tmp = [];
