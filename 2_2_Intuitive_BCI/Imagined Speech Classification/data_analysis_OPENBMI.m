@@ -23,7 +23,7 @@ CNT=opt_eegStruct({EEG.data, EEG.marker, EEG.info}, field);
 CNT_all_class=prep_selectClass(CNT,{'class',{'imagine_Ambulance','imagine_Clock', 'imagine_Hello', 'imagine_Helpme', 'imagine_Light', 'imagine_Pain', 'imagine_Stop', 'imagine_Thankyou', 'imagine_Toilet', 'imagine_TV', 'imagine_Water', 'imagine_Yes', 'imagine_Rest'}});
 
 
-%% 
+%% select class
 CNT2class=prep_selectClass(CNT_all_class,{'class',{'imagine_Rest','imagine_Ambulance'}});
 
 
