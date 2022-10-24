@@ -55,7 +55,11 @@ cnt = proc_filtnotch(cnt, cnt.fs, 60);
 % Yn_P2 = Yn_P1(1:L/2+1,1);
 % Yn_P2(2:end-1) = 2*Yn_P2(2:end-1);
 % 
-
+% figure(2)
+% subplot(2,1,1)
+% plot(Y_P2(:,10))
+% subplot(2,1,2)
+% plot(Yn_P2(:,1))
 
 
 
