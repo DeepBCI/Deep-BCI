@@ -126,3 +126,7 @@ eegfile_saveMatlab(cnt.title, cnt, mrk, mnt, ...
 
 disp('All EEG Data Converting is Done!');
 
+% concat ch
+% for i = 1:length(mnt.clab)
+%     EEG_data(:,i) = eval(['ch',num2str(i)]);
+% end
