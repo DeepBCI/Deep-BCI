@@ -56,8 +56,8 @@ CV.option={
 % 'leaveout'
 };
 
-[loss]=eval_crossValidation(SMT, CV); % input : eeg, or eeg_epo
-Result_iter(1,iter)=1-loss';
+[loss_value]=eval_crossValidation(SMT, CV); % input : eeg, or eeg_epo
+Result_iter(1,iter)=1-loss_value';
 end
 
 Mean_CV_result=mean(Result_iter',1)';
