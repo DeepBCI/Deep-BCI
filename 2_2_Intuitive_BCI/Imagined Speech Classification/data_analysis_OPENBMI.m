@@ -1,6 +1,6 @@
 clear all; close all; clc;
 
-BMI.EEG_DIR=['C:\Users\cvpr\Desktop\½ÇÇèµ¥ÀÌÅÍ_¼­Çö\shlee'];
+BMI.EEG_DIR=['C:\Users\cvpr\Desktop\BTSdataset\shlee'];
 
 filelist={'s4_lcw_sess1_190226'};
 %filelist={'s7_kshreal_sess2_190314'};
