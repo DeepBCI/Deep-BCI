@@ -130,3 +130,5 @@ disp('All EEG Data Converting is Done!');
 % for i = 1:length(mnt.clab)
 %     EEG_data(:,i) = eval(['ch',num2str(i)]);
 % end
+
+% EEG_data = double(EEG_data);
