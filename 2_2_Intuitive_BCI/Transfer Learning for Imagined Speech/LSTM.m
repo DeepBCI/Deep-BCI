@@ -66,4 +66,4 @@ end
 Acc=mean(Afold); 
 % Store result
 LSTM.fold=Afold; LSTM.acc=Acc; LSTM.con=confmat; 
-fprintf('\n classification Accuracy (LSTM): %g %% \n ',Acc);
+fprintf('\n classification Accuracy (LSTM_matlab): %g %% \n ',Acc);
