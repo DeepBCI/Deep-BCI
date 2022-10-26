@@ -1,6 +1,6 @@
 
 for ch=1:size(eeg,3)
-    e(:,:,1,ch) = bandpass(eeg(:,:,ch),[30 45], 1024); %gamma
+    e_eeg(:,:,1,ch) = bandpass(eeg(:,:,ch),[30 45], 1024); %gamma
 end
 
 %for i=1:size(eeg,3)
@@ -8,7 +8,7 @@ end
 %end
 
 %%
-XTrain=e;
+XTrain=e_eeg;
 YTrain=class_word;
 
   %% classification
@@ -51,8 +51,8 @@ for i=1:kfold
   % Call index of training & testing sets
   trainIdx=fold.training(i); testIdx=fold.test(i);
   % Call training & testing features and classs
-  XTrain=e(:,:,:,trainIdx); YTrain=class_word(trainIdx);
-  XTest=e(:,:,:,testIdx); YTest=class_word(testIdx);
+  XTrain=e_eeg(:,:,:,trainIdx); YTrain=class_word(trainIdx);
+  XTest=e_eeg(:,:,:,testIdx); YTest=class_word(testIdx);
   % Convert class of both training and testing into categorial format
   YTrain=categorical(YTrain); YTest=categorical(YTest);
 %   YTrain=YTrain'; YTest=YTest';
