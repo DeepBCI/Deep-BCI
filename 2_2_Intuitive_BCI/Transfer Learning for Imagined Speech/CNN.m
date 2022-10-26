@@ -49,7 +49,7 @@ rng('default');
 kfold=5;
 fold=cvpartition(class,'kfold',kfold);
 % Pre
-Afold=zeros(kfold,1); confmat=0;
+Nfold=zeros(kfold,1); confmat=0;
 % Start deep learning
 for i=1:kfold
   % Call index of training & testing sets
@@ -69,13 +69,12 @@ for i=1:kfold
   % Store temporary
   confmat=confmat+con; 
   % Accuracy of each k-fold
-  Afold(i,1)=100*sum(diag(con))/sum(con(:));
+  Nfold(i,1)=100*sum(diag(con))/sum(con(:));
 end
 
 % Average accuracy over k-folds 
-Acc=mean(Afold); 
+Acc=mean(Nfold); 
 
 % Store result
-CNN.fold=Afold; CNN.acc=Acc; CNN.con=confmat; 
+CNN.fold=Nfold; CNN.acc=Acc; CNN.con=confmat; 
 fprintf('\n Classification Accuracy (CNN_matlab): %g %% \n ',Acc);
-
