@@ -1,0 +1,25 @@
+# List the (additional, Accuracy is always included) metrics used by the downstream datasets and their chance values
+# The *first* metric will be used to generate plots.
+# Specify the chance level of the metric as associated value, if not specified, assumed to be 0.5
+
+mbmf:
+  - auroc
+
+bci_iv_2a:
+  - Accuracy: 0.25
+
+spe:
+#  - bac : 0.5 # auroc
+  - Accuracy: 0.5
+#  - auroc
+
+rpe:
+  - auroc
+
+behavior :
+#  - Accuracy : 0.5
+  - bac : 0.5
+#  - auroc
+
+pmb :
+  - auroc

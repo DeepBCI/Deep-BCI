@@ -1,0 +1,141 @@
+mmidb:
+  name: "Physionet MMIDB"
+  toplevel: /<path/to>/physionet.org/files/eegmmidb/
+  tmin: 0
+  tlen: 6
+  data_max: 0.001
+  data_min: -0.001
+  events:
+    - T1
+    - T2
+  exclude_sessions:
+    - "*R0[!48].edf"  # equivalently "*R0[1235679].edf"
+    - "*R1[!2].edf"   # equivalently "*R1[134].edf"
+  exclude_people:
+    - S088
+    - S090
+    - S092
+    - S100
+  train_params:
+    epochs: 7
+    batch_size: 4 # I find this dataset likes small batch sizes
+  lr: 0.00001
+  folds: 5
+
+
+bci_iv_2a:
+  name: "BCI Competition IV 2a"
+  toplevel: ./dataset/pretraining/bcic42a #<path>
+  tmin: -2
+  tlen: 6
+  data_max: 100
+  data_min: -100
+  extensions:
+    -.raw.fif
+  picks:
+    - eeg
+  train_params:
+    epochs: 15
+    batch_size: 60 # This dataset likes batches of ~60 (community is overfitting this)
+  lr: 0.00005
+
+
+
+ern:
+  name: "Kaggle ERN Competition"
+  toplevel: <path>
+  tmin: -0.7
+  tlen: 2
+  data_max: 3500
+  data_min: -4010
+  extensions:
+    - .raw.fif
+  picks:
+    - eeg
+  rename_channels:
+    PO8: P08
+  exclude_channels:
+    - FeedBackEvent
+  test_subjects:
+    - S01
+    - S03
+    - S04
+    - S05
+    - S08
+    - S09
+    - S10
+    - S15
+    - S19
+    - S25
+  train_params:
+    epochs: 15
+    batch_size: 32
+    balance_method: undersample
+  lr: 0.00001
+  folds: 4
+
+sleep-edf:
+  name: "Sleep EDFx Cassette"
+  filename_format: "SC4{subject:2}{session:1}"
+  annotation_format: "SC4{subject:2}{session:1}*Hypnogram*"
+  toplevel: /<path/to>/physionet.org/files/sleep-edfx/1.0.0/sleep-cassette/
+  tmin: 0
+  tlen: 30
+  data_max: 4460.6
+  data_min: -4465.7
+  extensions:
+    - .edf
+  chunk_duration: 30
+  events:
+    'Sleep stage W': 0
+    'Sleep stage 1': 1
+    'Sleep stage 2': 2
+    'Sleep stage 3': 3
+    'Sleep stage 4': 3
+    'Sleep stage R': 4
+  rename_channels:
+    FPZ: 'EEG Fpz-Cz'
+    PZ: 'EEG Pz-Oz'
+    HEOGL: "EOG horizontal"
+  picks:
+    - eeg
+  exclude_channels:
+    - "Resp oro-nasal"
+    - 'EMG submental'
+    - 'Temp rectal' # Comfiest sleep ever
+    - 'Event marker'
+  train_params:
+    epochs: 40
+    batch_size: 80
+    balance_method: undersample
+    validation_interval: 1000
+  lr: 0.00005
+  folds: 10
+
+
+erpbci:
+  data_max: 0.00631
+  data_min: -0.00283
+  toplevel: /<path/to>/erpbci/1.0.0
+  tmin: -0.1
+  tlen: 0.7
+  # We low-passed offline using this parameter just so it didn't happen over and over.
+  # Uncommenting this and part of LoaderERPBCI in dn3_ext.py should reproduce the same results (it says where)
+#  lpf: 120
+  extensions:
+  # Swap the following for using default dataset
+#    - .edf
+    - .fif
+  picks:
+    - eeg
+  exclude_people:
+    - s08
+    - s12
+    - s10
+    # This stronge person shouldn't affect anyone else, if it does just comment them out
+    - BENDR
+  train_params:
+    epochs: 20
+    batch_size: 64
+    balance_method: undersample
+  lr: 0.00001

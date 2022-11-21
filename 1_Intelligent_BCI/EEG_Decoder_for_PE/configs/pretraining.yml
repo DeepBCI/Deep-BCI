@@ -1,0 +1,105 @@
+Configuratron:
+  use_only:
+    - tueg_v1_1
+    - tueg_v1_2
+    - bci_iv_2a
+  samples: 15360 # = 60 seconds
+  sfreq: 256
+  deep1010:
+    return_mask: True
+
+validation_dataset: bci_iv_2a
+
+augmentation_params:
+  upsample_crop: 32
+  batch_crop_frac: 0.05
+
+training_params:
+  epochs: 1
+  validation_interval: 100
+  train_log_interval: 100
+  batch_size: 64
+  warmup_frac: 0.05
+
+mask_threshold: 0.85
+mask_inflation: 1.
+mask_pct_max: 0.6
+
+optimizer_params:
+  lr: 0.00002
+  weight_decay: 0.01
+  betas: [0.9, 0.98]
+
+bending_college_args:
+  mask_rate: 0.065
+  mask_span: 10
+  layer_drop: 0.01
+  multi_gpu: True
+  temp: 0.1
+  encoder_grad_frac: 0.1
+  num_negatives: 20
+  enc_feat_l2: 1.0
+
+datasets:
+  tueg_v1_1:
+    data_max: 3276.7
+    data_min: -1583.9258304722666
+#    toplevel: /<path/to>/TUEG/v1.1.0
+    toplevel: /https://isip.piconepress.com/projects/tuh_eeg/downloads/tuh_eeg/v1.1.0
+    #  exclude: tueg_exclusion.csv
+    thinkers: 14907
+    limit: 10000
+    stride: 15360
+    dataset_id: 2
+    task_id: 2
+    total: 53506
+    preload: False
+    rename_channels:
+      CP3: "*C3P*"
+      CP4: "*C4P*"
+      FT9: "*T1*"
+      FT10: "*T2*"
+    # Uncomment below if you want to exclude trials with extreme values (e.g. channels with 0 or noisy values)
+#    exclude: !include configs/tueg_v1_1_after_rejection.yml
+    exclude_channels: !include configs/tueg_channel_exclusions.yml
+    exclude_people:
+      - "s001_2006_01_10"
+    load_onthefly: True
+    picks:
+      - eeg
+
+  tueg_v1_2:
+    data_max: 3276.7
+    data_min: -1583.9258304722666
+#    toplevel: /<path/to>/TUEG/v1.2.0
+    toplevel: /https://isip.piconepress.com/projects/tuh_eeg/downloads/tuh_eeg/v1.2.0
+    stride: 15360 # = 256 * 60 = 1 min
+    thinkers: 1507
+    dataset_id: 3
+    task_id: 2
+    total: 12918
+    rename_channels:
+      CP3: "*C3P*"
+      CP4: "*C4P*"
+      FT9: "*T1*"
+      FT10: "*T2*"
+    exclude_channels: !include configs/tueg_channel_exclusions.yml
+    # Uncomment below if you want to exclude trials with extreme values (e.g. channels with 0 or noisy values)
+#    exclude: !include configs/tueg_v1_2_bad_trial_rejection.yml
+    #  load_onthefly: True
+    picks:
+      - eeg
+
+  bci_iv_2a:
+    name: "BCI Competition IV 2a"
+#    toplevel: <path>
+    toplevel: ./dataset/pretraining/bcic42a
+    stride: 1536
+    data_max: 100
+    data_min: -100
+    extensions:
+      - .raw.fif
+    picks:
+      - eeg
+    exclude_sessions:
+      - "*E*"

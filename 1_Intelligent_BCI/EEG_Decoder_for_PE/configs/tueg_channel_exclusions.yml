@@ -1,0 +1,12 @@
+- "BURSTS"
+- "DC*"
+- "*EKG*"
+# Only include EEG prefixed electrodes that match known channels
+- "EEG [!TINPCOAF]*"
+- "EMG*"
+- "RESP*"
+- "PHOT*"
+- "IBI"
+- "PULSE*"
+- "SUPPR"
+- "*ANNOT*"

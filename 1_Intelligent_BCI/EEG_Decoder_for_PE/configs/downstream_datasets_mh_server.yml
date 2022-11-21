@@ -1,0 +1,235 @@
+mbmf:
+  name: "mbmf"
+  toplevel: ./EEG_data_mh
+  tmin: -1 #-1
+  tlen: 3.5 #3
+  train_params:
+    epochs: 1 # 40 or 20 | original = 15
+    batch_size: 60 # 80
+  lr: 0.00005 # 0.00001 # 0.00005
+  targets: 2
+  events : {"1" : 1, "2" : 2} # 1: MF, 2: MB
+  force_label : True
+  extensions: raw.set #xx.set #raw.set #
+  lpf : 120
+  picks:
+    - eeg
+  exclude_channels:
+    - E43
+    - E32
+    - E27
+    - E45
+    - E40
+    - E31
+  data_max: 5.66e+05 # -1_2 : 5.66e+05,  -1_0 : 8.58e+04
+  data_min: -4.28e+05 # -1_2 : -4.28e+05 # -1_0 : -2.40e+05
+#  folds: 5
+  exclude_people:
+    - subj001
+    - subj002
+    - subj003
+    - subj004
+    - subj005
+    - subj006
+    - subj007
+    - subj008
+    - subj009
+    - subj010
+    - subj011
+    - subj012
+    - subj013
+    - subj014
+    - subj015
+    - subj016
+    - subj017
+    - subj018
+    - subj021
+    - subj022
+    - subj023
+    - subj024
+    - subj025
+    - subj026
+    - subj027
+    - subj028
+    - subj029
+    - subj030
+    - subj031
+#    - subj032
+#    - subj033
+#    - subj034
+#    - subj035
+
+
+spe:
+  name: "SPE"
+  toplevel: ./EEG_data_mh # Y:\Research\EEG_kdj\EEG_data_mh
+  exclude_people:
+    - subj001
+    - subj002
+    - subj003
+    - subj004
+    - subj005
+    - subj006
+    - subj007
+    - subj008
+    - subj009
+    - subj010
+    - subj011
+    - subj012
+    - subj013
+    - subj014
+    - subj015
+    - subj016
+    - subj017
+    - subj018
+    - subj021
+    - subj022
+    - subj023
+    - subj024
+    - subj025
+    - subj026
+    - subj027
+    - subj028
+    - subj029
+    - subj030
+    - subj031
+#    - subj032
+#    - subj033
+#    - subj034
+#    - subj035
+
+
+  tmin: -1 # -1
+  tlen: 3.5 #3
+  train_params:
+    epochs: 2 #15
+    batch_size: 60
+  lr: 0.00005 #0.00001 0.00005
+  targets: 2
+  events : {'act1':1, 'act2':2, 'rewd':3, 'sta1':4, 'sta2':5} #{"0" : 0, "1" : 1} # 0 = under, 1 = over
+  force_label : True
+  extensions: raw.set #xx.set #raw.set
+  lpf : 120
+  picks:
+    - eeg
+  exclude_channels:
+    - E43
+    - E32
+    - E27
+    - E45
+    - E40
+    - E31
+  data_max: 5.66e+05
+  data_min: -4.28e+05
+#  folds : 10
+
+# + 43 - P10, 32 - P9
+# + 27 - CP5, 45 - CP6
+
+rpe:
+  name: "RPE"
+  toplevel: ./EEG_data_mh
+  exclude_people:
+    - subj019
+    - subj020
+  tmin: -1 # -1
+  tlen: 3.5 #3
+  train_params:
+    epochs: 15
+    batch_size: 60
+  lr: 0.00005 #0.00001 0.00005
+  targets: 2
+  events : {'act1':1, 'act2':2, 'rewd':3, 'sta1':4, 'sta2':5} #{"0" : 0, "1" : 1} # 0 = under, 1 = over
+  force_label : True
+  extensions: raw.set #xx.set #raw.set
+  lpf : 120
+  picks:
+    - eeg
+  exclude_channels:
+    - E43
+    - E32
+    - E27
+    - E45
+    - E40
+    - E31
+  data_max: 5.66e+05
+  data_min: -4.28e+05
+#  folds : 10
+
+
+behavior:
+  name: "behavior"
+  toplevel: ./EEG_data_mh # Y:\Research\EEG_kdj\EEG_data_mh
+#  exclude_people:
+#    - subj001
+#    - subj002
+#    - subj003
+#    - subj004
+#    - subj005
+#    - subj006
+#    - subj007
+#    - subj008
+#    - subj009
+#    - subj010
+#    - subj011
+#    - subj012
+#    - subj013
+#    - subj014
+#    - subj015
+#    - subj016
+#    - subj017
+#    - subj018
+#    - subj021
+#    - subj022
+#    - subj023
+#    - subj024
+#    - subj025
+#    - subj026
+#    - subj027
+#    - subj028
+#    - subj029
+#    - subj030
+#    - subj031
+#    - subj032
+#    - subj033
+#    - subj034
+#    - subj035
+
+  tmin: -1 # -1
+  tlen: 3.5 #3
+  train_params:
+    epochs: 20 #15 #15
+    batch_size: 60
+  lr: 0.00005 #0.00001 0.00005
+  targets: 2
+  events : {'act1':1, 'act2':2, 'rewd':3, 'sta1':4, 'sta2':5} #{"0" : 0, "1" : 1} # 0 = under, 1 = over
+  force_label : True
+  extensions: raw.set #xx.set #raw.set
+  lpf : 120
+  picks:
+    - eeg
+  exclude_channels:
+    - E43
+    - E32
+    - E27
+    - E45
+    - E40
+    - E31
+  data_max: 5.66e+05
+  data_min: -4.28e+05
+
+bci_iv_2a:
+  name: "BCI Competition IV 2a"
+  toplevel: C:\Users\kmh\Documents\Transformer\dataset\pretraining\bcic42a #<path>
+  tmin: -2
+  tlen: 6
+  data_max: 100
+  data_min: -100
+  extensions:
+    -.raw.fif
+  picks:
+    - eeg
+  train_params:
+    epochs: 15
+    batch_size: 60 # This dataset likes batches of ~60 (community is overfitting this)
+  lr: 0.00005

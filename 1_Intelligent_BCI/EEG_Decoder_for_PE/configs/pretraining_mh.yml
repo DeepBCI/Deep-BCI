@@ -1,0 +1,1051 @@
+Configuratron:
+  use_only:
+#    - hbn2
+#    - hbn
+#    - hbn3
+#    - arithmetic_36
+    - spe
+#    - mi_109
+#    - lemon_202
+#
+  samples: 15360 #46080 #15360 # = 60 seconds
+  sfreq: 256
+  deep1010:
+    return_mask: True
+
+validation_dataset: #spe #arithmetic_36 #spe #bci_iv_2a
+
+augmentation_params:
+  upsample_crop: 32
+  batch_crop_frac: 0.05
+
+training_params:
+  epochs: 10 #1
+  validation_interval: 100
+  train_log_interval: 100
+  batch_size: 8 #10 #64
+  warmup_frac: 0.05
+
+mask_threshold: 0.85
+mask_inflation: 1.
+mask_pct_max: 0.6
+
+optimizer_params:
+  lr: 0.00002
+  weight_decay: 0.01
+  betas: [0.9, 0.98]
+
+bending_college_args:
+  mask_rate: 0.065
+  mask_span: 2 #10 # TODO 221115
+  layer_drop: 0.01
+  multi_gpu: True
+  temp: 0.1
+  encoder_grad_frac: 0.1
+  num_negatives: 20
+  enc_feat_l2: 1.0
+
+datasets:
+  arithmetic_36:
+#    data_max: 3276.7
+#    data_min: -1583.9258304722666
+    toplevel: Y:/BENDR_for_pretraining/arithmetic_36
+#    thinkers: 14907
+#    limit: 10000
+    stride: 15360
+#    dataset_id: 2
+#    task_id: 2
+#    total: 53506
+    preload: False
+    extensions:
+      - .edf
+    picks:
+      - eeg
+    lpf : 120
+    exclude_channels:
+      - 'EEG A2-A1'
+    exclude_people:
+      - S001
+      - S002
+      - S003
+      - S004
+      - S005
+      - S006
+      - S007
+      - S008
+      - S009
+      - S010
+      - S011
+      - S012
+      - S013
+      - S014
+      - S015
+      - S016
+      - S017
+      - S018
+      - S019
+      - S020
+      - S021
+      - S022
+      - S023
+      - S024
+      - S025
+      - S026
+      - S027
+      - S028
+      - S029
+      - S030
+      - S031
+      - S032
+      - S033
+      - S034
+      - S035
+      - S036
+      - S037
+      - S038
+      - S039
+
+  mi_109:
+#    data_max: 3276.7
+#    data_min: -1583.9258304722666
+    toplevel: Y:/BENDR_for_pretraining/mi_109
+    stride: 15360 # = 256 * 60 = 1 min
+    extensions:
+      - .edf
+#    thinkers: 1507
+#    dataset_id: 3
+#    task_id: 2
+#    total: 12918
+    picks:
+      - eeg
+#    lpf : 120
+
+  lemon_202:
+    #    data_max: 3276.7
+    #    data_min: -1583.9258304722666
+    toplevel: Y:/BENDR_for_pretraining/lemon_202
+    stride: 15360 # = 256 * 60 = 1 min
+    extensions:
+      - .set
+    #    thinkers: 1507
+    #    dataset_id: 3
+    #    task_id: 2
+    #    total: 12918
+    picks:
+      - eeg
+  #    lpf : 120
+    exclude_channels:
+      - PO9
+      - PO10
+      - AFZ-COPY
+      - FP2-COPY
+      - FZ-COPY
+    exclude_people:
+      - sub-032301
+      - sub-032302
+      - sub-032303
+      - sub-032304
+      - sub-032305
+      - sub-032306
+      - sub-032307
+      - sub-032308
+      - sub-032309
+      - sub-032310
+      - sub-032311
+      - sub-032312
+      - sub-032313
+      - sub-032314
+      - sub-032315
+      - sub-032316
+      - sub-032317
+      - sub-032318
+      - sub-032319
+      - sub-032320
+      - sub-032321
+      - sub-032322
+      - sub-032323
+      - sub-032324
+      - sub-032325
+      - sub-032326
+      - sub-032327
+      - sub-032328
+      - sub-032329
+      - sub-032330
+      - sub-032331
+      - sub-032332
+      - sub-032333
+      - sub-032334
+      - sub-032335
+      - sub-032336
+      - sub-032337
+      - sub-032338
+      - sub-032339
+      - sub-032340
+      - sub-032341
+      - sub-032342
+      - sub-032343
+      - sub-032344
+      - sub-032345
+      - sub-032346
+      - sub-032347
+      - sub-032348
+      - sub-032349
+      - sub-032350
+      - sub-032351
+      - sub-032352
+      - sub-032353
+      - sub-032354
+      - sub-032355
+      - sub-032356
+      - sub-032357
+      - sub-032358
+      - sub-032359
+      - sub-032360
+      - sub-032361
+      - sub-032362
+      - sub-032363
+      - sub-032364
+      - sub-032365
+      - sub-032366
+      - sub-032367
+      - sub-032368
+      - sub-032369
+      - sub-032370
+      - sub-032371
+      - sub-032372
+      - sub-032373
+      - sub-032374
+      - sub-032375
+      - sub-032376
+      - sub-032377
+      - sub-032378
+      - sub-032379
+      - sub-032380
+      - sub-032381
+      - sub-032382
+      - sub-032383
+      - sub-032384
+      - sub-032385
+      - sub-032386
+      - sub-032387
+      - sub-032388
+      - sub-032389
+      - sub-032390
+      - sub-032391
+      - sub-032392
+      - sub-032393
+      - sub-032394
+      - sub-032395
+      - sub-032396
+      - sub-032397
+      - sub-032398
+      - sub-032399
+      - sub-032400
+      - sub-032401
+      - sub-032402
+      - sub-032403
+      - sub-032404
+      - sub-032405
+      - sub-032406
+      - sub-032407
+      - sub-032408
+      - sub-032409
+      - sub-032410
+      - sub-032411
+      - sub-032412
+      - sub-032413
+      - sub-032414
+      - sub-032415
+      - sub-032416
+      - sub-032417
+      - sub-032418
+      - sub-032419
+      - sub-032420
+      - sub-032421
+      - sub-032422
+      - sub-032423
+      - sub-032424
+      - sub-032425
+      - sub-032426
+      - sub-032427
+      - sub-032428
+      - sub-032429
+      - sub-032430
+      - sub-032431
+      - sub-032432
+      - sub-032433
+      - sub-032434
+      - sub-032435
+      - sub-032436
+      - sub-032437
+      - sub-032438
+      - sub-032439
+      - sub-032440
+      - sub-032441
+      - sub-032442
+      - sub-032443
+      - sub-032444
+      - sub-032445
+      - sub-032446
+      - sub-032447
+      - sub-032448
+      - sub-032449
+      - sub-032450
+      - sub-032451
+      - sub-032452
+      - sub-032453
+      - sub-032454
+      - sub-032455
+      - sub-032456
+      - sub-032457
+      - sub-032458
+      - sub-032459
+      - sub-032460
+      - sub-032461
+      - sub-032462
+      - sub-032463
+      - sub-032464
+      - sub-032465
+      - sub-032466
+      - sub-032467
+      - sub-032468
+      - sub-032469
+      - sub-032470
+      - sub-032471
+      - sub-032472
+      - sub-032473
+      - sub-032474
+      - sub-032475
+      - sub-032476
+      - sub-032477
+      - sub-032478
+      - sub-032479
+      - sub-032480
+      - sub-032481
+      - sub-032482
+      - sub-032483
+      - sub-032484
+      - sub-032485
+      - sub-032486
+      - sub-032487
+      - sub-032488
+      - sub-032489
+      - sub-032490
+      - sub-032491
+      - sub-032492
+      - sub-032493
+      - sub-032494
+      - sub-032495
+      - sub-032496
+      - sub-032497
+      - sub-032498
+      - sub-032499
+      - sub-032500
+      - sub-032501
+      - sub-032502
+      - sub-032503
+      - sub-032504
+      - sub-032505
+      - sub-032506
+      - sub-032507
+      - sub-032508
+      - sub-032509
+      - sub-032510
+      - sub-032511
+      - sub-032512
+      - sub-032513
+      - sub-032514
+      - sub-032515
+      - sub-032516
+      - sub-032517
+      - sub-032518
+      - sub-032519
+      - sub-032520
+      - sub-032521
+      - sub-032522
+      - sub-032523
+
+  hbn: # 128 channel geodesic hydrocel system EGI, fs = 500 Hz
+    toplevel: Y:/BENDR_for_pretraining/HBN_1000_1
+    stride: 15360 # 원래는 1536
+    extensions:
+      - .mff #.raw.fif
+    picks:
+      - eeg
+    lpf : 120
+    exclude_channels:
+      - E1
+      - E2
+      - E3
+      - E4
+      - E5
+      - E6
+      - E7
+      - E8
+      - E10
+      - E12
+      - E13
+      - E14
+      - E15
+      - E16
+      - E17
+      - E18
+      - E19
+      - E20
+      - E21
+      - E23
+      - E25
+      - E26
+      - E27
+      - E28
+      - E29
+      - E30
+      - E31
+      - E32
+      - E34
+      - E35
+      - E37
+      - E38
+      - E39
+      - E41
+      - E42
+      - E43
+      - E44
+      - E46
+      - E47
+      - E48
+      - E49
+      - E50
+      - E51
+      - E53
+      - E54
+      - E55
+      - E56
+      - E57
+      - E59
+      - E60
+      - E61
+      - E63
+      - E64
+      - E65
+      - E66
+      - E67
+      - E68
+      - E69
+      - E71
+      - E72
+      - E73
+      - E74
+      - E75
+      - E76
+      - E77
+      - E78
+      - E79
+      - E80
+      - E81
+      - E82
+      - E84
+      - E85
+      - E86
+      - E87
+      - E88
+      - E89
+      - E90
+      - E91
+      - E93
+      - E94
+      - E95
+      - E97
+      - E98
+      - E99
+      - E100
+      - E101
+      - E102
+      - E103
+      - E105
+      - E106
+      - E107
+      - E110
+      - E111
+      - E112
+      - E113
+      - E114
+      - E115
+      - E116
+      - E117
+      - E118
+      - E119
+      - E120
+      - E121
+      - E123
+      - E125
+      - E126
+      - E127
+      - E128
+      - Vertex Reference
+    exclude_people:
+      - subj0057
+      - subj0083
+      - subj0102
+      - subj0111
+
+      - subj0001
+      - subj0002
+      - subj0003
+      - subj0004
+      - subj0005
+      - subj0006
+      - subj0007
+      - subj0008
+      - subj0009
+      - subj0010
+      - subj0001
+      - subj0012
+      - subj0013
+      - subj0014
+      - subj0015
+      - subj0016
+      - subj0017
+      - subj0018
+      - subj0019
+      - subj0020
+      - subj0021
+      - subj0022
+      - subj0023
+      - subj0024
+      - subj0025
+      - subj0026
+      - subj0027
+      - subj0028
+      - subj0029
+      - subj0030
+      - subj0031
+      - subj0032
+      - subj0033
+      - subj0034
+      - subj0035
+      - subj0036
+      - subj0037
+      - subj0038
+      - subj0039
+      - subj0040
+      - subj0041
+      - subj0042
+      - subj0043
+      - subj0044
+      - subj0045
+      - subj0046
+      - subj0047
+      - subj0048
+      - subj0049
+      - subj0050
+      - subj0051
+      - subj0052
+      - subj0053
+      - subj0054
+      - subj0055
+      - subj0056
+      - subj0057
+      - subj0058
+      - subj0059
+      - subj0060
+      - subj0061
+      - subj0062
+      - subj0063
+      - subj0064
+      - subj0065
+      - subj0066
+      - subj0067
+      - subj0068
+      - subj0069
+      - subj0070
+      - subj0071
+      - subj0072
+      - subj0073
+      - subj0074
+      - subj0075
+      - subj0076
+      - subj0077
+      - subj0078
+      - subj0079
+      - subj0080
+      - subj0081
+      - subj0082
+      - subj0083
+      - subj0084
+      - subj0085
+      - subj0086
+      - subj0087
+      - subj0088
+      - subj0089
+      - subj0090
+      - subj0091
+      - subj0092
+      - subj0093
+      - subj0094
+      - subj0095
+      - subj0096
+      - subj0097
+      - subj0098
+      - subj0099
+      - subj0100
+
+  hbn2: # 128 channel geodesic hydrocel system EGI, fs = 500 Hz
+    toplevel: Y:/BENDR_for_pretraining/HBN_1000_2
+    stride: 15360 # 원래는 1536
+    extensions:
+      - .mff #.raw.fif
+    picks:
+      - eeg
+    lpf: 120
+    exclude_channels:
+      - E1
+      - E2
+      - E3
+      - E4
+      - E5
+      - E6
+      - E7
+      - E8
+      - E10
+      - E12
+      - E13
+      - E14
+      - E15
+      - E16
+      - E17
+      - E18
+      - E19
+      - E20
+      - E21
+      - E23
+      - E25
+      - E26
+      - E27
+      - E28
+      - E29
+      - E30
+      - E31
+      - E32
+      - E34
+      - E35
+      - E37
+      - E38
+      - E39
+      - E41
+      - E42
+      - E43
+      - E44
+      - E46
+      - E47
+      - E48
+      - E49
+      - E50
+      - E51
+      - E53
+      - E54
+      - E55
+      - E56
+      - E57
+      - E59
+      - E60
+      - E61
+      - E63
+      - E64
+      - E65
+      - E66
+      - E67
+      - E68
+      - E69
+      - E71
+      - E72
+      - E73
+      - E74
+      - E75
+      - E76
+      - E77
+      - E78
+      - E79
+      - E80
+      - E81
+      - E82
+      - E84
+      - E85
+      - E86
+      - E87
+      - E88
+      - E89
+      - E90
+      - E91
+      - E93
+      - E94
+      - E95
+      - E97
+      - E98
+      - E99
+      - E100
+      - E101
+      - E102
+      - E103
+      - E105
+      - E106
+      - E107
+      - E110
+      - E111
+      - E112
+      - E113
+      - E114
+      - E115
+      - E116
+      - E117
+      - E118
+      - E119
+      - E120
+      - E121
+      - E123
+      - E125
+      - E126
+      - E127
+      - E128
+      - Vertex Reference
+    exclude_people:
+      - subj0068
+      - subj0077
+      - subj0087
+      - subj0090
+      - subj0132
+      - subj0135
+      - subj0157
+      - subj0239
+#      -
+      - subj0041
+      - subj0042
+      - subj0043
+      - subj0044
+      - subj0145
+      - subj0146
+      - subj0047
+      - subj0048
+      - subj0049
+      - subj0050
+      - subj0051
+      - subj0052
+      - subj0053
+      - subj0054
+      - subj0155
+      - subj0156
+      - subj0057
+      - subj0058
+      - subj0059
+      - subj0060
+      - subj0061
+      - subj0062
+      - subj0063
+      - subj0064
+      - subj0165
+      - subj0166
+      - subj0067
+      - subj0068
+      - subj0069
+      - subj0070
+      - subj0071
+      - subj0072
+      - subj0073
+      - subj0074
+      - subj0175
+      - subj0176
+      - subj0077
+      - subj0078
+      - subj0079
+      - subj0080
+      - subj0081
+      - subj0082
+      - subj0083
+      - subj0084
+      - subj0185
+      - subj0186
+      - subj0087
+      - subj0088
+      - subj0089
+      - subj0090
+      - subj0091
+      - subj0092
+      - subj0093
+      - subj0094
+      - subj0195
+      - subj0196
+      - subj0097
+      - subj0098
+      - subj0099
+      - subj0100
+      - subj0101
+      - subj0102
+      - subj0103
+      - subj0104
+      - subj0105
+      - subj0106
+      - subj0107
+      - subj0108
+      - subj0109
+      - subj0110
+      - subj0111
+      - subj0112
+      - subj0113
+      - subj0114
+      - subj0115
+      - subj0116
+      - subj0117
+      - subj0118
+      - subj0119
+      - subj0120
+      - subj0121
+      - subj0122
+      - subj0123
+      - subj0124
+      - subj0125
+      - subj0126
+      - subj0127
+      - subj0128
+      - subj0129
+      - subj0130
+      - subj0131
+      - subj0132
+      - subj0133
+      - subj0134
+      - subj0135
+      - subj0136
+      - subj0137
+      - subj0138
+      - subj0139
+      - subj0140
+      - subj0141
+      - subj0142
+      - subj0143
+      - subj0144
+      - subj0145
+      - subj0146
+      - subj0147
+      - subj0148
+      - subj0149
+      - subj0150
+      - subj0151
+      - subj0152
+      - subj0153
+      - subj0154
+      - subj0155
+      - subj0156
+      - subj0157
+      - subj0158
+      - subj0159
+      - subj0160
+      - subj0161
+      - subj0162
+      - subj0163
+      - subj0164
+      - subj0165
+      - subj0166
+      - subj0167
+      - subj0168
+      - subj0169
+      - subj0170
+      - subj0171
+      - subj0172
+      - subj0173
+      - subj0174
+      - subj0175
+      - subj0176
+      - subj0177
+      - subj0178
+      - subj0179
+      - subj0180
+
+#      - subj0083
+#      - subj0102
+#      - subj0111
+
+  hbn3: # 128 channel geodesic hydrocel system EGI, fs = 500 Hz
+    toplevel: Y:/BENDR_for_pretraining/HBN_1000_3
+    stride: 15360 # 원래는 1536
+    extensions:
+      - .mff #.raw.fif
+    picks:
+      - eeg
+    lpf: 120
+    exclude_channels:
+      - E1
+      - E2
+      - E3
+      - E4
+      - E5
+      - E6
+      - E7
+      - E8
+      - E10
+      - E12
+      - E13
+      - E14
+      - E15
+      - E16
+      - E17
+      - E18
+      - E19
+      - E20
+      - E21
+      - E23
+      - E25
+      - E26
+      - E27
+      - E28
+      - E29
+      - E30
+      - E31
+      - E32
+      - E34
+      - E35
+      - E37
+      - E38
+      - E39
+      - E41
+      - E42
+      - E43
+      - E44
+      - E46
+      - E47
+      - E48
+      - E49
+      - E50
+      - E51
+      - E53
+      - E54
+      - E55
+      - E56
+      - E57
+      - E59
+      - E60
+      - E61
+      - E63
+      - E64
+      - E65
+      - E66
+      - E67
+      - E68
+      - E69
+      - E71
+      - E72
+      - E73
+      - E74
+      - E75
+      - E76
+      - E77
+      - E78
+      - E79
+      - E80
+      - E81
+      - E82
+      - E84
+      - E85
+      - E86
+      - E87
+      - E88
+      - E89
+      - E90
+      - E91
+      - E93
+      - E94
+      - E95
+      - E97
+      - E98
+      - E99
+      - E100
+      - E101
+      - E102
+      - E103
+      - E105
+      - E106
+      - E107
+      - E110
+      - E111
+      - E112
+      - E113
+      - E114
+      - E115
+      - E116
+      - E117
+      - E118
+      - E119
+      - E120
+      - E121
+      - E123
+      - E125
+      - E126
+      - E127
+      - E128
+      - Vertex Reference
+    exclude_people:
+      - subj0299
+      - subj0369
+
+
+  spe:
+    name: "SPE"
+    toplevel: Y:/Research/EEG_kdj/EEG_data_mh # Y:\Research\EEG_kdj\EEG_data_mh
+    stride: 15360
+    exclude_people:
+      - subj001
+      - subj002
+      - subj003
+      - subj004
+      - subj005
+      - subj006
+      - subj007
+      - subj008
+      - subj009
+      - subj010
+      - subj011
+      - subj012
+      - subj013
+      - subj014
+      - subj015
+      - subj016
+      - subj017
+      - subj018
+      - subj021
+      - subj022
+      - subj023
+      - subj024
+      - subj025
+      - subj026
+      - subj027
+      - subj028
+      - subj029
+      - subj030
+      - subj031
+    #    - subj032
+    #    - subj033
+    #    - subj034
+    #    - subj035
+
+    extensions: xx.set #xx.set #raw.set
+    lpf: 120
+    picks:
+      - eeg
+    exclude_channels:
+      - E43
+      - E32
+      - E27
+      - E45
+      - E40
+      - E31
+
+  bci_iv_2a:
+    name: "BCI Competition IV 2a"
+    toplevel: ./dataset/pretraining/bcic42a
+    stride: 15360 # 원래는 1536
+    data_max: 100
+    data_min: -100
+    extensions:
+      - T.gdf #.raw.fif
+    picks:
+      - eeg
+    exclude_sessions:
+      - "*E*"

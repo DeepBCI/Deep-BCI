@@ -1,0 +1,18 @@
+Configuratron:
+  use_only:
+#    - behavior
+    - spe
+#    - pmb
+#    - rpe
+#    - mbmf
+
+  preload: True
+  sfreq: 256
+  deep1010:
+    return_mask: False
+
+encoder_weights: ./checkpoints_pretraining_pro/encoder.pt #./encoder.pt # <saved encoder weights>
+context_weights: ./checkpoints_pretraining_pro/contextualizer.pt #./contextualizer.pt # <saved transformer weights>
+
+datasets: !include configs/downstream_datasets_mh.yml
+

@@ -1,0 +1,81 @@
+mmidb:
+  name: "Physionet MMIDB"
+  toplevel: /path/
+  stride: 15360
+  data_max: 0.001
+  data_min: -0.001
+  exclude_people:
+    - S088
+    - S090
+    - S092
+    - S100
+
+bci_iv_2a:
+  name: "BCI Competition IV 2a"
+  toplevel: /path/
+  stride: 15360
+  data_max: 100
+  data_min: -100
+  extensions:
+    - .raw.fif
+  picks:
+    - eeg
+
+ern:
+  name: "Kaggle ERN Competition"
+  toplevel: path
+  stride: 15360
+  data_max: 3500
+  data_min: -4010
+  extensions:
+    - .raw.fif
+  picks:
+    - eeg
+  rename_channels:
+    PO8: P08
+  exclude_channels:
+    - FeedBackEvent
+
+sleep-edf:
+  name: "Sleep EDFx Cassette"
+  filename_format: "SC4{subject:2}{session:1}"
+  annotation_format: "SC4{subject:2}{session:1}*Hypnogram*"
+  toplevel: path
+  stride: 15360
+  data_max: 4460.6
+  data_min: -4465.7
+  extensions:
+    - .edf
+  rename_channels:
+    FPZ: 'EEG Fpz-Cz'
+    PZ: 'EEG Pz-Oz'
+    HEOGL: "EOG horizontal"
+  picks:
+    - eeg
+  exclude_channels:
+    - "Resp oro-nasal"
+    - 'EMG submental'
+    - 'Temp rectal' # Comfiest sleep ever
+    - 'Event marker'
+
+erpbci:
+  data_max: 0.00631
+  data_min: -0.00283
+  toplevel: path
+  samples: 5120
+  stride: 5120
+  # We low-passed offline using this parameter just so it didn't happen over and over.
+  # Uncommenting this and part of LoaderERPBCI in dn3_ext.py should reproduce the same results (it says where)
+#  lpf: 120
+  extensions:
+  # Swap the following for using default dataset
+#    - .edf
+    - .fif
+  picks:
+    - eeg
+  exclude_people:
+    - s08
+    - s12
+    - s10
+    # This strange person shouldn't affect anyone else, if it does just comment them out
+    - BENDR
