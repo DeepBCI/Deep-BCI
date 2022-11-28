@@ -96,7 +96,6 @@ EEG_data = double(EEG_data);
 
 clearvars -except EEG_data mnt mrk nfo dat
 
-
 %% epoching the trials
 
 concat_EEG = [];
@@ -106,5 +105,8 @@ end
 
 FeatVect_EEG = concat_EEG;
 label = mrk.toe';
+
+clearvars -except FeatVect_EEG mnt mrk nfo dat label
+save(['raw_EEG_file_trial.mat'],'-v7.3');
 
 
