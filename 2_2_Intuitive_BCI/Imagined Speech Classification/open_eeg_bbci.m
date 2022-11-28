@@ -86,3 +86,13 @@ eegfile_saveMatlab(cnt.title, cnt, mrk, mnt, ...
     'resolution', NaN);
 
 disp('All EEG Data Converting is Done!');
+
+%% align channel
+for i = 1:length(mnt.clab)
+    EEG_data(:,i) = eval(['ch',num2str(i)]);
+end
+
+EEG_data = double(EEG_data);
+
+clearvars -except EEG_data mnt mrk nfo dat
+
