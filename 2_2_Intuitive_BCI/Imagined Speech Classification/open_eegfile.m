@@ -89,10 +89,6 @@ fs_orig= mrk_orig.fs;
 
 var_list= {'fs_orig',fs_orig, 'mrk_orig',mrk_orig, 'hdr',hdr};
 
-% eegfile_saveMatlab(cnt.title, cnt, mrk, mnt, ...
-%     'channelwise',1, ...
-%     'format','int16', ...
-%     'resolution', NaN);
 
 cnt.title= ['D:\BTS_dataset\day3_word1_eeg_to_mat'];
 
