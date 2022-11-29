@@ -33,8 +33,8 @@ for t=1:3
         for c=1:length(CH)
             x = DATA_2D(c,:)';
             [X1, f] = periodogram(x,rectwin(size(x,1)),size(x,1), fs);
-            for r = 1:size(range,2)
-                Data_PSD(c,r) = 10*log10(bandpower(X1, f, range{r}, 'psd'));
+            for tr = 1:size(range,2)
+                Data_PSD(c,tr) = 10*log10(bandpower(X1, f, range{tr}, 'psd'));
             end
         end
         save([path 'Winter_2023\Analysis\1_PSD_no\sub' num2str(n) '_PSD_' num2str(t)],'Data_PSD')
