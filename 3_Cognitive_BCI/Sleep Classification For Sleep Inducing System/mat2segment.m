@@ -75,9 +75,9 @@ for i=1:length(list)
     
     PVT=[];
     PVTMT=[];
-    for j=1:5
-        PVT{state(j)-1} = DATA(:,MT{int64(idx_pvt(j,1)),1}:MT{int64(idx_pvt(j,2)),1});
-        PVTMT{state(j)-1} = MT(int64(idx_pvt(j,1)):int64(idx_pvt(j,2)),:);
+    for j_2=1:5
+        PVT{state(j_2)-1} = DATA(:,MT{int64(idx_pvt(j_2,1)),1}:MT{int64(idx_pvt(j_2,2)),1});
+        PVTMT{state(j_2)-1} = MT(int64(idx_pvt(j_2,1)):int64(idx_pvt(j_2,2)),:);
     end
     save(['1_segment\',list(i).name], 'AS','ASMT','PVT','PVTMT','NAME','CH');
     fprintf([list(i).name,'\n']);
