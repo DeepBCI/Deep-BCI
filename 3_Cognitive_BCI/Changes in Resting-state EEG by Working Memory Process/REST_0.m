@@ -81,13 +81,13 @@ for n=37
         ICA_EEG = ICA_Weight*EEG_epo.data;    
 
         cnt=0;
-        for k=1:size(EEG_epo.data,1)
-            [r,p]=corr(EOG_seg',ICA_EEG(k,:)');
-            rho(:,k)=r;
-            pval(:,k)=p;
+        for ck=1:size(EEG_epo.data,1)
+            [r,p]=corr(EOG_seg',ICA_EEG(ck,:)');
+            rho(:,ck)=r;
+            pval(:,ck)=p;
             if sum(abs(r)>threshold)>=1
                 cnt=cnt+1;
-                idx(cnt) = k;
+                idx(cnt) = ck;
             end
         end  
 
