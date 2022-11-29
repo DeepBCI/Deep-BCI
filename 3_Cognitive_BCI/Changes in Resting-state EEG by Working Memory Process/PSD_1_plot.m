@@ -26,15 +26,15 @@ region = {[1:4 26:33 56:59], [5:7 21:22 24:25 35:37 52:54],...
     [8 34 38],[23 51 55], [9:13 17:20 39:41 47:50], [14:16 42:46 60]}; % F,C,LT,RT,P,O
 %% load 
 cnt = 0;
-for n=1:37
-    if sum(n == removal) == 1
-        continue;
-    end
-    cnt=cnt+1;
-    
-    for t=1:3
-        load([path 'Winter_2023\Analysis\1_PSD_lap\sub' num2str(n) '_PSD_' num2str(t)]);
-        Data(:,:,t,cnt)=Data_PSD; % chxrangextimexsub
+for t1 = 1:2
+    for t_2 = t1+1:3
+        cnt =cnt+1; 
+        for r = 1:size(range,2)
+            for c = 1:60
+                [h, p(c,r,cnt), ci, stats] = ttest(Data(:,c,r,t1), Data(:,c,r,t_2));
+                stat_s(c,r,cnt) = stats.tstat;            
+            end
+        end
     end
 end
 
