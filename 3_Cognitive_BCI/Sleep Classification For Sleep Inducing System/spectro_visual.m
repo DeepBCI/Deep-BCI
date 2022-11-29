@@ -24,9 +24,9 @@ for i=1:size(sleep,1)
     
     for ch = 1:length(CH)
         ch_name=CH(ch).labels;
-        for k=1:length(chloc)
-            if strcmp(ch_name,chloc{k})
-                chidx(k)=ch;
+        for k_i=1:length(chloc)
+            if strcmp(ch_name,chloc{k_i})
+                chidx(k_i)=ch;
             end
         end
     end
