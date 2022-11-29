@@ -68,9 +68,9 @@ for i=1:length(list)
     
     AS=[];
     ASMT=[];
-    for j=1:5
-        AS{j} = DATA(:,MT{int64(idx(j+1,1)),1}:MT{int64(idx(j+1,2)),1});
-        ASMT{j} = MT(int64(idx(j+1,1)):int64(idx(j+1,2)),:);
+    for j_1=1:5
+        AS{j_1} = DATA(:,MT{int64(idx(j_1+1,1)),1}:MT{int64(idx(j_1+1,2)),1});
+        ASMT{j_1} = MT(int64(idx(j_1+1,1)):int64(idx(j_1+1,2)),:);
     end
     
     PVT=[];
