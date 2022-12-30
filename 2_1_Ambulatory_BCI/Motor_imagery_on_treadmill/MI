@@ -30,9 +30,9 @@ selected_channel= [1:32]; % channel selection
 
 
 %%
-for i = 1:length(filelist)
+for num_list = 1:length(filelist)
    filelist
-    [cnt,mrk,mnt] = eegfile_loadMatlab([dd filelist{i}]);
+    [cnt,mrk,mnt] = eegfile_loadMatlab([dd filelist{num_list}]);
 
    %% band pass filtering, order of 5, range of 8-15Hz
     cnt=proc_filtButter(cnt,2, [8 30]);
@@ -62,10 +62,10 @@ for i = 1:length(filelist)
    %% CLASSIFIER
     
     [C_eeg, loss_eeg_std, out_eeg.out, memo] = xvalidation(epo,'RLDAshrink','proc',proc, 'kfold', 5); % 5-fold cross validation
-    Result(i)=1-C_eeg;
-    Result_Std(i)=loss_eeg_std;
+    Result(num_list)=1-C_eeg;
+    Result_Std(num_list)=loss_eeg_std;
     
-    All_csp_w(:,:,i)=csp_w;
+    All_csp_w(:,:,num_list)=csp_w;
  
    %% Visualization 
 
