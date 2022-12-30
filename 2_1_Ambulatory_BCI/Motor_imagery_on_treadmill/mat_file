@@ -32,9 +32,9 @@ filelist={'khshin_MI_ss1_0_cap', 'khshin_MI_ss1_3_cap', 'khshin_MI_ss1_6_cap', '
 stimDef= {1, 2; 'right','left'};
 
 %%
-for ff= 1:length(filelist),
+for num_list= 1:length(filelist),
 filelist
-file= filelist{ff};
+file= filelist{num_list};
 opt= []; % initialize variable
 
 fprintf('** In processing %s **\n', file); % print the processing progress
