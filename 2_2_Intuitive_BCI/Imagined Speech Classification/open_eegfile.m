@@ -50,7 +50,7 @@ end
 for i =10:99
     tmp{i,1} = ['S ', num2str(i)];
 end
-for i =100:300
+for i =100:400
     tmp{i,1} = ['S', num2str(i)];
 end
 
@@ -58,7 +58,7 @@ end
 
 
 for i = 1: 1:length(mrk_orig.desc)
-    for ii = 1:300
+    for ii = 1:400
         logical_value = strcmp(mrk_orig.desc{1,i}, tmp{ii,1});
         if logical_value == 1
             what_temp(i,1) = ii;
