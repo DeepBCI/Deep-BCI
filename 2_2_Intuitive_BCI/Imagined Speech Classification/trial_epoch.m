@@ -18,10 +18,11 @@ EEG_data = double(EEG_data);
 clearvars -except EEG_data mnt mrk nfo dat
 
 concat_EEG = [];
-
+% day3 --> end point
 for i = 1:length(mrk.pos)
     concat_EEG(:,:,i) = EEG_data(mrk.pos(1,i)-1499:mrk.pos(1,i),:); % time series x channel x trial
 end
+
 
 FeatVect_EEG = concat_EEG;
 label = mrk.toe';
