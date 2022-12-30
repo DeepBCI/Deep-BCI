@@ -69,7 +69,9 @@ for i = 1: length(overt_filelist)
     vec_audio = cat(1, vec_audio,x);
     clear x
 end
-Fs= 22050;
+% Fs= 44100;
+Fs = 22050; % down-smapling
+
 
 
 
