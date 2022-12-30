@@ -29,7 +29,7 @@ filelist={'khshin_MI_ss1_0_cap', 'khshin_MI_ss1_3_cap', 'khshin_MI_ss1_6_cap', '
 
 
 %% version of Scientific Reprot
-stimDef= {1, 2; 'right','left'};
+stimDef= {1, 2; 'right','left'}; % class
 
 %%
 for num_list= 1:length(filelist),
