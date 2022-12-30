@@ -9,7 +9,7 @@ speech_file = dir('D:\BTS_dataset\2022_10_11_BTS_denseNet_waveNet\KSW2_KJW8\2_wo
 speech_file = struct2table(speech_file);
 speech_filename = speech_file.name;
 
-except_trial = ("Weather"|"January"|"Conversation"|" "); % " ": except for sentence
+except_trial = ("Weather"|"January"|"Conversation"|" "); % " ": except for sentence, space(blank)
 delete_trial = strfind(speech_filename,except_trial);
 
 for i =1:length(speech_filename)
