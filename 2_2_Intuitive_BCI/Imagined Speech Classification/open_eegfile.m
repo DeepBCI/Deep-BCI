@@ -97,5 +97,5 @@ eegfile_saveMatlab(cnt.title, cnt, mrk, mnt, ...
     'format','double', ...
     'resolution', NaN);
 
-disp('All EEG Data Converting is Done!');
+disp('All EEG Data Converting is Done!, .eeg to mat');
 
