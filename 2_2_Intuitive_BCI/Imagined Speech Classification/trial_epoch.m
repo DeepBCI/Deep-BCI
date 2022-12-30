@@ -8,7 +8,7 @@ clc
 
 load('D:\BTS_dataset\KJW_word1_eeg_to_mat')
 
-
+% ch = 128
 for i = 1:length(mnt.clab)
     EEG_data(:,i) = eval(['ch',num2str(i)]);
 end
