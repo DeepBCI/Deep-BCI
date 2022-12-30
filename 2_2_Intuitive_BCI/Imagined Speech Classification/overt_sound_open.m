@@ -46,8 +46,8 @@ end
 
 tmp_for_num_O = strcat(tmp_overt_name,overt_filename);
 
-for i = 1:1300
-    num_starting{i,1} = ['xxx',num2str(i),'_'];
+for i_trial = 1:1300
+    num_starting{i_trial,1} = ['xxx',num2str(i_trial),'_'];
 end
 
 list = 1;
