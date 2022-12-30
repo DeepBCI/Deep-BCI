@@ -69,7 +69,8 @@ for i = 1: length(overt_filelist)
     vec_audio = cat(1, vec_audio,x);
     clear x
 end
-Fs= 44100;
+Fs= 22050;
+
 
 
 save(['D:\BTS_dataset\2022_10_11_BTS_denseNet_waveNet\KSW2_KJW8\2_word\sub8\day3\Overt_speech_data.mat'],['speech_signal'],['fs'],['overt_filelist'])
