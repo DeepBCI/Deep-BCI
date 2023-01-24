@@ -180,7 +180,7 @@ loss_recon_val = tf.reduce_mean(tf.squared_difference(dat_val, recon_val))
 
 
 
-""" Collect paramters """
+""" Collect parameters """
 param_ue, bn_ue = md.get_var("Upper_enc")
 param_le, bn_le = md.get_var("Lower_enc")
 param_g, bn_g = md.get_var("DeepInfoMax/global_discriminator")
