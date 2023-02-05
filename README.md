@@ -1,7 +1,9 @@
 # Deep BCI SW ver. 1.0 is released.
 An open software package to develop Brain-Computer Interface (BCI) based brain and cognitive computing technology for recognizing user's intention using deep learning
 
-Web site: http://deepbci.korea.ac.kr/
+
+Website: http://deepbci.korea.ac.kr/
+
 
 We provide detailed information in each forder and every function.
 
@@ -33,4 +35,4 @@ We provide detailed information in each forder and every function.
 - etc
 
 Acknowledgement: This project was supported by Institute for Information & Communications Technology Promotion (IITP) grant
-funded by the Korea government (No. 2017-0-00451, Development of BCI based Brain and Cognitive Computing Technology for Recognizing User’s Intentions using Deep Learning).
+funded by the Korea government(No. 2017-0-00451, Development of BCI based Brain and Cognitive Computing Technology for Recognizing User’s Intentions using Deep Learning).
