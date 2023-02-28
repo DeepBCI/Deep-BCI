@@ -6,7 +6,7 @@ clc
 
 %% open eeg files
 
-
+%% bbci
 opt= [];
 hdr= eegfile_readBVheader(['D:\BTS_dataset\day3_word_1']);
 
