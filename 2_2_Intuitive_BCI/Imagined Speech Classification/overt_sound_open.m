@@ -48,7 +48,7 @@ tmp_for_num_O = strcat(tmp_overt_name,overt_filename);
 
 % task --> imagined, overt, whisper
 for all_task = 1:1300
-    num_starting{all_task,1} = ['xxx',num2str(all_task),'_'];
+    num_starting{all_task,1} = ['xxx',num2str(all_task),'_']; % for classified name
 end
 
 list = 1;
