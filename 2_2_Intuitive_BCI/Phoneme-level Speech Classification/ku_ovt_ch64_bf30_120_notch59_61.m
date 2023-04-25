@@ -7,6 +7,7 @@ for i = 5:k
 	%EEG = pop_resample( EEG, 256);
 	EEG = pop_eegfiltnew(EEG, 'locutoff',29.5,'hicutoff',120.5,'plotfreqz',1);
 	EEG = pop_eegfiltnew(EEG, 'locutoff',59.5,'hicutoff',60.5,'revfilt',1,'plotfreqz',1);
+	EEG = pop_eegfiltnew(EEG, 'locutoff',119.5,'hicutoff',120.5,'revfilt',1,'plotfreqz',1);
 	EEG = pop_chanedit(EEG, 'lookup','D:\eeglab2021.1\plugins\dipfit\standard_BEM\elec\standard_1005.elc');
 	%EEG = pop_runica(EEG, 'icatype', 'runica', 'interrupt','on');
 	%EEG = pop_iclabel(EEG, 'default');
