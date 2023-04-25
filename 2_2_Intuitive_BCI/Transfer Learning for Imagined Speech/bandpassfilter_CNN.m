@@ -42,7 +42,7 @@ options = trainingOptions('adam', ...
 rng('default'); 
 % Divide data into k-folds
 % fold=cvpartition(label,'kfold',kfold);
-kfold=5;
+kfold=10;
 fold=cvpartition(class_word,'kfold',kfold);
 % Pre
 Afold=zeros(kfold,1); confmat=0;
