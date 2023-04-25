@@ -19,7 +19,7 @@ layers = [ ...
     convolution2dLayer([6 80],80,'Padding','same')
     batchNormalizationLayer
     leakyReluLayer
-    dropoutLayer(0.1)
+    dropoutLayer(0.2)
     fullyConnectedLayer(2)
     softmaxLayer
     classificationLayer];
