@@ -35,7 +35,7 @@ for num_list = 1:length(filelist)
     [cnt,mrk,mnt] = eegfile_loadMatlab([dd filelist{num_list}]);
 
    %% band pass filtering, order of 5, range of 8-15Hz
-    cnt=proc_filtButter(cnt,2, [8 30]);
+    cnt=proc_filtButter(cnt,2, [8 30]); % 8-30 Hz filtering
     cnt=proc_selectChannels(cnt,selected_channel);
     
    %% cnt to epoch
