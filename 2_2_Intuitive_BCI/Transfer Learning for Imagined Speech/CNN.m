@@ -73,8 +73,8 @@ for i=1:kfold
 end
 
 % Average accuracy over k-folds 
-Acc=mean(Nfold); 
+Accs=mean(Nfold); 
 
 % Store result
-CNN.fold=Nfold; CNN.acc=Acc; CNN.con=confmat; 
-fprintf('\n Classification Accuracy (CNN_matlab): %g %% \n ',Acc);
+CNN.fold=Nfold; CNN.acc=Accs; CNN.con=confmat; 
+fprintf('\n Classification Accuracy (CNN_matlab): %g %% \n ',Accs);
