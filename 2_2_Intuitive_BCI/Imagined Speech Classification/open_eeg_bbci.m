@@ -63,9 +63,9 @@ numoftask = str2double(numoftask);
 numoftask = sort(numoftask);
 % numoftask = numoftask(2:end,1);
 
-for i = 1:length(numoftask)
-    stimDef{1,i} = numoftask(i,1);
-    stimDef{2,i} = ['task',num2str(numoftask(i,1))];
+for ii = 1:length(numoftask)
+    stimDef{1,ii} = numoftask(ii,1);
+    stimDef{2,ii} = ['task',num2str(numoftask(ii,1))];
 end
 
 mrk= mrk_defineClasses(mrk_orig, stimDef);
