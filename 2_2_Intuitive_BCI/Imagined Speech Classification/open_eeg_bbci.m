@@ -8,9 +8,9 @@ clc
 
 
 opt= [];
-hdr= eegfile_readBVheader(['D:\BTS_dataset\2022_10_11_BTS_denseNet_waveNet\KSW2_KJW8\2_word\sub8\day3\sub3_swkim_day3_word_1']);
+hdr= eegfile_readBVheader(['D:\BTS_dataset\2022_10_11_BTS_denseNet_waveNet\KSW2_KJW8\2_word\sub8\day3\sub2_swkim_day3_word_1']);
 
-[cnt, mrk_orig]= eegfile_loadBV(['D:\BTS_dataset\2022_10_11_BTS_denseNet_waveNet\KSW2_KJW8\2_word\sub8\day3\sub3_swkim_day3_word_1']);
+[cnt, mrk_orig]= eegfile_loadBV(['D:\BTS_dataset\2022_10_11_BTS_denseNet_waveNet\KSW2_KJW8\2_word\sub8\day3\sub2_swkim_day3_word_1']);
 
 chan_idx = [];
 remove = 1;
