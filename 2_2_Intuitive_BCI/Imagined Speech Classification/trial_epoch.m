@@ -6,7 +6,7 @@ clc
 
 %% concat channel
 
-load('D:\BTS_dataset\KJW_word1_eeg_to_mat')
+load('D:\BTS_dataset\swkim_word1_eeg_to_mat')
 
 % ch = 128, etc --> emg
 for i = 1:length(mnt.clab)
