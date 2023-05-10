@@ -46,7 +46,7 @@ options = trainingOptions('adam', ...
 rng('default'); 
 % Divide data into k-folds
 % fold=cvpartition(label,'kfold',kfold);
-kfold=5;
+kfold=10;
 fold=cvpartition(class,'kfold',kfold);
 % Pre
 Nfold=zeros(kfold,1); confmat=0;
