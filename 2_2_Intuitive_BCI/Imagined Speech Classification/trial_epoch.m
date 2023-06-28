@@ -9,8 +9,8 @@ clc
 load('D:\BTS_dataset\swkim_word1_eeg_to_mat')
 
 % ch = 128, etc --> emg
-for i = 1:length(mnt.clab)
-    EEG_data(:,i) = eval(['ch',num2str(i)]);
+for ii = 1:length(mnt.clab)
+    EEG_data(:,ii) = eval(['ch',num2str(ii)]);
 end
 
 EEG_data = double(EEG_data);
