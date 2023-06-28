@@ -28,4 +28,4 @@ FeatVect_EEG = concat_EEG;
 label = mrk.toe';
 
 clearvars -except FeatVect_EEG mnt mrk nfo dat label
-save(['raw_EEG_file_trial.mat'],'-v7.3');
+save(['sub1_raw_EEG_file_trial.mat'],'-v7.3');
