@@ -58,11 +58,11 @@ end
 
 
 
-for i = 1: 1:length(mrk_orig.desc)
-    for ii = 1:400
-        logical_value = strcmp(mrk_orig.desc{1,i}, tmp{ii,1});
+for ii = 1: 1:length(mrk_orig.desc)
+    for iii = 1:400
+        logical_value = strcmp(mrk_orig.desc{1,ii}, tmp{iii,1});
         if logical_value == 1
-            what_temp(i,1) = ii;
+            what_temp(ii,1) = iii;
         end
     end
 end
