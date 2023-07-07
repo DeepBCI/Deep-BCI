@@ -17,9 +17,9 @@ remove = 1;
 
 % remove_occipital_channel = [75,76,77,82,83,84] % PO9, O9, OI1h, OI2h, O10, PO10
 
-for ii = 1:127
-    if (ii ~= 75)&&(ii ~= 76)&&(ii ~= 77)&&(ii ~= 82)&&(ii ~= 83)&&(ii ~= 84)
-        chan_idx(1,remove) = ii;
+for ch = 1:127
+    if (ch ~= 75)&&(ch ~= 76)&&(ch ~= 77)&&(ch ~= 82)&&(ch ~= 83)&&(ch ~= 84)
+        chan_idx(1,remove) = ch;
         remove = remove+1;
     end
 end
