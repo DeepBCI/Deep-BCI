@@ -13,9 +13,9 @@ hdr= eegfile_readBVheader(['D:\BTS_dataset\2022_10_11_BTS_denseNet_waveNet\KSW2_
 [cnt, mrk_orig]= eegfile_loadBV(['D:\BTS_dataset\2022_10_11_BTS_denseNet_waveNet\KSW2_KJW8\2_word\sub8\day3\sub2_swkim_day3_word_1']);
 
 chan_idx = [];
-remove = 1;
 
 % remove_occipital_channel = [75,76,77,82,83,84] % PO9, O9, OI1h, OI2h, O10, PO10
+remove = 1;
 
 for ch = 1:127
     if (ch ~= 75)&&(ch ~= 76)&&(ch ~= 77)&&(ch ~= 82)&&(ch ~= 83)&&(ch ~= 84)
