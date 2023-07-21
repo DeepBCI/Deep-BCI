@@ -64,9 +64,9 @@ end
 
 vec_audio = [];
 speech_signal = [];
-for i = 1: length(overt_filelist)
-    x = audioread(overt_filelist{i,1});
-    speech_signal(:,i) = x;
+for ii = 1: length(overt_filelist)
+    x = audioread(overt_filelist{ii,1});
+    speech_signal(:,ii) = x;
     vec_audio = cat(1, vec_audio,x);
     clear x
 end
