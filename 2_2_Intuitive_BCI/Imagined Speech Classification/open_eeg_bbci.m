@@ -99,8 +99,8 @@ clearvars -except EEG_data mnt mrk nfo dat
 %% epoching the trials
 
 concat_EEG = [];
-for i = 1:length(mrk.pos)
-    concat_EEG(:,:,i) = EEG_data(mrk.pos(1,i)-2300:mrk.pos(1,i),:); % time series x channel x trial %% lengh of speech 2000ms but 500ms for bl
+for ii = 1:length(mrk.pos)
+    concat_EEG(:,:,ii) = EEG_data(mrk.pos(1,ii)-2300:mrk.pos(1,ii),:); % time series x channel x trial %% lengh of speech 2000ms but 500ms for bl
 end
 
 FeatVect_EEG = concat_EEG;
