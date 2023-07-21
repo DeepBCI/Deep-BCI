@@ -40,7 +40,7 @@ epo = cntToEpo(cnt, mrk, ival);
 epo2 = cntToEpo(cnt2, mrk2, ival);
 
 %% baseline correction
-base = [-200 -1];
+base = [-200 0];
 epo = proc_baseline(epo, base); 
 epo2 = proc_baseline(epo2, base);
 
