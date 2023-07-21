@@ -32,7 +32,7 @@ for ex_o = 1:length(speech_filename)
 end
 
 
-wordlist = {'Hello','Yes','No'};
+wordlist = {'Hello','Yes','No', 'Help'};
 for i = 1:length(wordlist)
    overt_index = strfind(overt_filename,wordlist{1,i});
    w_array = cell2mat(overt_index);
