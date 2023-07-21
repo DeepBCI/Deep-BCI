@@ -11,7 +11,7 @@ filelist2 = 'filename_VISUALimagery';
 [cnt2, mrk2, mnt2]=eegfile_loadMatlab([dd2 filelist2]);
 
 % Parameter setting 
-filtBank = [0.5 40];
+filtBank = [0.9 40];
 ival = [-200 2000];
 
 % subchannel setting for the channel selection
