@@ -1,7 +1,7 @@
 ## bandpass filter range
 
 for ch=1:size(eeg,3)
-    e_eeg(:,:,1,ch) = bandpass(eeg(:,:,ch),[1 55], 1024); %gamma
+    e_eeg(:,:,1,ch) = bandpass(eeg(:,:,ch),[30 55], 1024); %gamma
 end
 
 %for i=1:size(eeg,3)
