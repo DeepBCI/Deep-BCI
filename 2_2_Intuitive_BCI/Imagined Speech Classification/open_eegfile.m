@@ -36,7 +36,7 @@ cnt = proc_selectChannels(cnt,chan_idx);
 
 
 
-cnt = proc_filtButter(cnt, 5, [7.5 125]);
+cnt = proc_filtButter(cnt, 5, [0.5 125]);
 cnt = proc_filtnotch(cnt, cnt.fs, 60);
 cnt = proc_filtnotch(cnt, cnt.fs, 120);
 
