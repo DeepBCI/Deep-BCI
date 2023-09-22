@@ -9,8 +9,8 @@ clc
 load('D:\BTS_dataset\sub1')
 
 % ch = 127, without ref == 127, etc --> emg
-for ii = 1:length(mnt.clab)
-    EEG_data(:,ii) = eval(['ch',num2str(ii)]);
+for i = 1:length(mnt.clab)
+    EEG_data(:,i) = eval(['ch',num2str(i)]);
 end
 
 EEG_data = double(EEG_data);
