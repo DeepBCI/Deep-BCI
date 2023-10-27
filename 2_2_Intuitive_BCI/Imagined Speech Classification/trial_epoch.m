@@ -6,7 +6,7 @@ clc
 
 %% concat channel
 
-load('D:\BTS_dataset\sub1')
+load('dir')
 
 % ch = 127, without ref == 127, etc --> emg
 for ch = 1:length(mnt.clab)
