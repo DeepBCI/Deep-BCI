@@ -12,9 +12,9 @@ speech_filename = speech_file.name;
 except_trial = ("Weather"|"is"|"it"|"How"|" "|"time"); % " ": except for sentence, space(blank)
 delete_trial = strfind(speech_filename,except_trial);
 
-for num_audio_list =1:length(speech_filename)
-    if any(delete_trial{num_audio_list,1}) == 1
-        speech_filename{num_audio_list,1} = [];
+for num_audio =1:length(speech_filename)
+    if any(delete_trial{num_audio,1}) == 1
+        speech_filename{num_audio,1} = [];
     end
 end
 
