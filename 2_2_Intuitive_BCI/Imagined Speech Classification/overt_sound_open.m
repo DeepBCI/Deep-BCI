@@ -24,9 +24,9 @@ speech_filename{2,1} = [];
 speech_filename{end,1} = [];
 
 O_n =1;
-for ex_os = 1:length(speech_filename)
-    if any(speech_filename{ex_os,1}) == 1
-        overt_filename{O_n,1} = speech_filename{ex_os,1};
+for ex_ovs = 1:length(speech_filename)
+    if any(speech_filename{ex_ovs,1}) == 1
+        overt_filename{O_n,1} = speech_filename{ex_ovs,1};
         O_n = O_n+1;
     end
 end
