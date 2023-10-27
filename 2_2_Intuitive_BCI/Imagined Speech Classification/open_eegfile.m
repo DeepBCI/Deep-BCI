@@ -10,7 +10,7 @@ clc
 opt= [];
 hdr= eegfile_readBVheader(['dir']);
 
-[cnt, mrk_orig]= eegfile_loadBV(['D:\BTS_dataset\day3_word_1']);
+[cnt, mrk_orig]= eegfile_loadBV(['dir']);
 
 
 
