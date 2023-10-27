@@ -19,8 +19,8 @@ clearvars -except EEG_data mnt mrk nfo dat
 
 concat_EEG = [];
 % day3 --> end point
-for ii = 1:length(mrk.pos)
-    concat_EEG(:,:,ii) = EEG_data(mrk.pos(1,ii)-2500:mrk.pos(1,ii),:); % time series x channel x trial, -500ms for baseline-correction
+for i_time = 1:length(mrk.pos)
+    concat_EEG(:,:,i_time) = EEG_data(mrk.pos(1,i_time)-2500:mrk.pos(1,i_time),:); % time series x channel x trial, -500ms for baseline-correction
 end
 % bl: -500ms ~ -200ms
 
