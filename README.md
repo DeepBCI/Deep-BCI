@@ -21,9 +21,9 @@ We provide detailed information in each forder and every function.
 - SSVEP decoding in ambulatory envieonment using CNN: functions related to decoding scalp- and ear-EEG in ambulatory environment
 - etc
 
-3. 'Cognitive_BCI': contains cognitive state-related function that enable to estimaate the cognitive states from multi-modality and user-custermized BCI
+3. 'Cognitive_BCI': contains cognitive state-related function that enable to estimaate the cognitive states from multi-modality and user-customized BCI
 
-- multi-threshold graph metrics using a range of critiera: functions related to entrain brainwaves based on a combined auditory stimulus with a binaural beat
+- multi-threshold graph metrics using a range of criteria: functions related to entrain brainwaves based on a combined auditory stimulus with a binaural beat
 - EEG_Authentication_Program: identifying individuals based on resting-state EEG
 - Ear_EEG_Drowsiness_Detection: identifying individuals based on resting-state EEG using convolutional neural network
 - etc
