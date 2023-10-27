@@ -4,7 +4,7 @@ clc
 
 %% overt_soundfile
 
-cd('D:\BTS_dataset\2022_10_11_BTS_denseNet_waveNet\KSW2_KJW8\2_word\sub8\day3\sub8_jwkim_word_1');
+cd('dir');
 speech_file = dir('D:\BTS_dataset\2022_10_11_BTS_denseNet_waveNet\KSW2_KJW8\2_word\sub8\day3\sub8_jwkim_word_1\');
 speech_file = struct2table(speech_file);
 speech_filename = speech_file.name;
