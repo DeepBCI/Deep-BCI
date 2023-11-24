@@ -78,7 +78,7 @@ fs_orig= mrk_orig.fs;
 
 var_list= {'fs_orig',fs_orig, 'mrk_orig',mrk_orig, 'hdr',hdr};
 
-cnt.title= ['D:\BTS_dataset\2022_10_11_BTS_denseNet_waveNet\KSW2_KJW8\2_word\sub8\day3\KJW_word1_eeg_to_mat'];
+cnt.title= ['dir\_word1_eeg_to_mat'];
 
 eegfile_saveMatlab(cnt.title, cnt, mrk, mnt, ...
     'channelwise',1, ...
