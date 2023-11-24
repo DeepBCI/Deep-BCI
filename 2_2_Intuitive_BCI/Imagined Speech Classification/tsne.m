@@ -33,9 +33,9 @@ ival = [-200 2000]; % epoch setting considering the sampling rate
 [cnt3, mrk3] =proc_resample(cnt3, 256, 'mrk',mrk3,'N',0);
 
 % Band-pass filtering (IIR Filter)
- cnt = proc_filtButter(cnt, 3, filtBank); 
- cnt2 = proc_filtButter(cnt2, 3, filtBank);
- cnt3 = proc_filtButter(cnt3, 3, filtBank);
+ cnt = proc_filtButter(cnt, 5, filtBank); 
+ cnt2 = proc_filtButter(cnt2, 5, filtBank);
+ cnt3 = proc_filtButter(cnt3, 5, filtBank);
   
 % Channel Selection
 cnt = proc_selectChannels(cnt, subChannel);
