@@ -18,7 +18,7 @@ filelist3 = 'filename_OVERTspeech';
 [cnt3, mrk3, mnt3]=eegfile_loadMatlab([dd3 filelist3]);
 
 % Parameter setting 
-filtBank = [0.5 40];  % band pass filtering
+filtBank = [0.5 55];  % band pass filtering
 %filtBank = [70 500];  % band pass filtering (High frequency)
 ival = [-200 2000]; % epoch setting considering the sampling rate
 
