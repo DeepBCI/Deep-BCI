@@ -9,19 +9,19 @@ We provide detailed information in each forder and every function.
 
 1. 'Intelligent_BCI': contains deep learning-based intelligent brain-computer interface-related function that enables high-performance intent recognition.
 
-- Domain Adversarial NN for BCI: functions related to domaon adversarial neural networks
+- Domain Adversarial NN for BCI: functions related to domain adversarial neural networks
 - EEG based Meta RL Classifier: functions related to model-based reinforcement learning
-- GRU based Large Size EEG Classifier: data and functions relaated to gated recurrent unit
+- GRU based Large Size EEG Classifier: data and functions related to gated recurrent unit
 - etc
 
 2. 'Ambulatory_BCI': contains general brain-computer interface-related functions that enable high-performance intent recognition in ambulatory environment
 
 - Channel Selection Method based on Relevance Score: functions related to electrode selection method by evaluating electrode's contribution to motor imagery based on relevance score and CNNs
 - Correlation optimized using rotation matrix: functions related to cognitive imagery analysis using correlation feature
-- SSVEP decoding in ambulatory envieonment using CNN: functions related to decoding scalp- and ear-EEG in ambulatory environment
+- SSVEP decoding in ambulatory environment using CNN: functions related to decoding scalp- and ear-EEG in ambulatory environment
 - etc
 
-3. 'Cognitive_BCI': contains cognitive state-related function that enable to estimaate the cognitive states from multi-modality and user-custermized BCI
+3. 'Cognitive_BCI': contains cognitive state-related function that enable to estimate the cognitive states from multi-modality and user-custermized BCI
 
 - multi-threshold graph metrics using a range of critiera: functions related to entrain brainwaves based on a combined auditory stimulus with a binaural beat
 - EEG_Authentication_Program: identifying individuals based on resting-state EEG
