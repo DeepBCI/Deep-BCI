@@ -1,6 +1,6 @@
 clear all
 close all
-clc
+clc;
 
 %% overt_soundfile
 
